@@ -1,0 +1,2 @@
+import { InstitutionalPlaceholder } from "@/components/InstitutionalPlaceholder";
+export default function Page(){ return <InstitutionalPlaceholder eyebrow="14 dias grátis" title="Coloque o trabalho em ordem antes de decidir." text="Esta rota está pronta para receber o formulário real de trial. O período de 14 dias e a condição sem cartão devem ser confirmados antes do lançamento." primaryLabel="Criar conta" primaryHref="/cadastro"/> }

@@ -1,0 +1,347 @@
+/* Dr. Tasks v17 — global alignment, spacing and responsive rhythm */
+:root{
+  --site-max:1320px;
+  --site-gutter:32px;
+  --section-space:104px;
+  --section-space-compact:88px;
+  --section-head-gap:48px;
+}
+
+/* One horizontal system for the whole site */
+.container{
+  width:min(calc(100% - (var(--site-gutter) * 2)),var(--site-max));
+  margin-inline:auto;
+}
+
+.section{
+  padding-block:var(--section-space);
+}
+
+.nav-shell,
+.footer-grid,
+.footer-bottom,
+.hero-inner,
+.product-showcase-shell,
+.flux-surface,
+.features-surface,
+.pricing-surface,
+.final-cta{
+  margin-inline:auto;
+}
+
+/* Header follows the same visual axis as all content */
+.nav-shell{
+  width:min(calc(100% - (var(--site-gutter) * 2)),var(--site-max));
+}
+
+/* Hero aligned to the site shell instead of using a separate extra-wide grid */
+.hero{
+  padding-top:154px;
+  padding-bottom:72px;
+}
+.hero .container.hero-inner{
+  width:min(calc(100% - (var(--site-gutter) * 2)),var(--site-max));
+}
+.hero-main{
+  grid-template-columns:minmax(0,470px) minmax(0,1fr);
+  gap:50px;
+  align-items:center;
+}
+.hero-copy{
+  min-width:0;
+}
+.hero-product{
+  min-width:0;
+  width:100%;
+  max-width:none;
+}
+.hero-product-stage{
+  width:100%;
+  max-width:none;
+  margin-left:0;
+}
+
+/* The animated capability band breathes after the hero */
+.hero-band-section{
+  padding-top:56px;
+  padding-bottom:92px;
+}
+.hero-band-intro{
+  width:min(calc(100% - (var(--site-gutter) * 2)),var(--site-max));
+  margin-bottom:30px;
+}
+
+/* Common section heading rhythm */
+.section-head,
+.product-showcase-heading,
+.flux-header,
+.pricing-head{
+  margin-bottom:var(--section-head-gap);
+}
+.section-head-narrow{
+  max-width:820px;
+}
+.section-head-wide{
+  max-width:980px;
+}
+
+/* Remove the different ad-hoc vertical offsets between sections */
+.clarity-section,
+.product-showcase-section,
+.flux-section,
+.compare-section,
+.features-section,
+.segments-section,
+.social-section,
+.pricing-section,
+.faq-section,
+.final-section{
+  padding-top:var(--section-space);
+  padding-bottom:var(--section-space);
+}
+
+/* Consistent split-heading geometry */
+.split-head,
+.product-showcase-heading,
+.flux-header{
+  grid-template-columns:minmax(0,1fr) minmax(320px,.72fr);
+  gap:64px;
+  align-items:end;
+}
+.product-showcase-heading h2,
+.flux-header h2,
+.split-head h2{
+  max-width:760px;
+}
+.product-showcase-heading p,
+.flux-header p,
+.split-head p{
+  max-width:520px;
+  justify-self:end;
+}
+
+/* Product showcase follows the same outer edges as the rest of the page */
+.product-view-tabs{
+  width:100%;
+}
+.product-orbit-stage{
+  width:100%;
+}
+
+/* Surfaces use one padding language */
+.flux-surface,
+.features-surface,
+.pricing-surface{
+  padding:64px;
+}
+.surface{
+  border-radius:28px;
+}
+
+/* Shared grids */
+.features-grid,
+.segments-grid,
+.pricing-grid{
+  gap:18px;
+}
+
+/* Before/after uses the whole shell without looking squeezed */
+.compare-grid{
+  grid-template-columns:minmax(0,.78fr) 64px minmax(0,1.22fr);
+  gap:24px;
+}
+
+/* Social proof, pricing and FAQ share the same column logic */
+.social-grid{
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+  gap:72px;
+}
+.pricing-head{
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:56px;
+  align-items:start;
+}
+.faq-grid{
+  grid-template-columns:minmax(280px,.62fr) minmax(0,1.38fr);
+  gap:72px;
+}
+
+/* Final CTA/footer lock to the same horizontal rhythm */
+.final-cta{
+  padding:60px 64px;
+  grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);
+  gap:64px;
+}
+.site-footer{
+  padding-top:64px;
+}
+.footer-grid{
+  grid-template-columns:1.55fr repeat(4,1fr);
+  gap:48px;
+}
+.footer-bottom{
+  margin-top:44px;
+}
+
+@media (min-width:1201px){
+  /* Override the isolated v16 hero width so it joins the global grid */
+  .hero .container.hero-inner{
+    width:min(calc(100% - (var(--site-gutter) * 2)),var(--site-max));
+  }
+  .hero-main{
+    grid-template-columns:minmax(0,470px) minmax(0,800px);
+    justify-content:space-between;
+    gap:50px;
+  }
+  .hero-copy{
+    min-height:500px;
+  }
+  .hero-product{
+    max-width:800px;
+    min-height:500px;
+  }
+  .hero-product-stage{
+    max-width:800px;
+    height:372px;
+    min-height:372px;
+  }
+  .product-window-hero,
+  .product-window-image-wrap{
+    height:372px;
+    min-height:372px;
+  }
+}
+
+@media (max-width:1200px){
+  :root{
+    --site-gutter:24px;
+    --section-space:88px;
+    --section-head-gap:42px;
+  }
+  .hero{
+    padding-top:138px;
+    padding-bottom:64px;
+  }
+  .hero-main{
+    grid-template-columns:minmax(0,440px) minmax(0,1fr);
+    gap:36px;
+  }
+  .split-head,
+  .product-showcase-heading,
+  .flux-header,
+  .social-grid,
+  .faq-grid{
+    gap:40px;
+  }
+  .flux-surface,
+  .features-surface,
+  .pricing-surface{
+    padding:52px 44px;
+  }
+  .final-cta{
+    padding:52px 48px;
+  }
+}
+
+@media (max-width:1000px){
+  :root{
+    --site-gutter:22px;
+    --section-space:82px;
+  }
+  .hero-main,
+  .split-head,
+  .product-showcase-heading,
+  .flux-header,
+  .social-grid,
+  .faq-grid,
+  .pricing-head{
+    grid-template-columns:1fr;
+  }
+  .hero-copy,
+  .hero-product{
+    width:100%;
+    max-width:860px;
+    margin-inline:auto;
+  }
+  .product-showcase-heading p,
+  .flux-header p,
+  .split-head p{
+    justify-self:start;
+    max-width:720px;
+  }
+  .features-grid,
+  .segments-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .compare-grid{
+    grid-template-columns:minmax(0,1fr) 44px minmax(0,1.15fr);
+  }
+  .footer-grid{
+    grid-template-columns:1.4fr repeat(2,1fr);
+    row-gap:40px;
+  }
+}
+
+@media (max-width:720px){
+  :root{
+    --site-gutter:16px;
+    --section-space:68px;
+    --section-head-gap:34px;
+  }
+  .container,
+  .nav-shell,
+  .hero .container.hero-inner,
+  .hero-band-intro{
+    width:min(calc(100% - 32px),var(--site-max));
+  }
+  .hero{
+    padding-top:118px;
+    padding-bottom:42px;
+  }
+  .hero-band-section{
+    padding-top:46px;
+    padding-bottom:68px;
+  }
+  .clarity-section,
+  .product-showcase-section,
+  .flux-section,
+  .compare-section,
+  .features-section,
+  .segments-section,
+  .social-section,
+  .pricing-section,
+  .faq-section,
+  .final-section{
+    padding-top:68px;
+    padding-bottom:68px;
+  }
+  .flux-surface,
+  .features-surface,
+  .pricing-surface{
+    padding:36px 18px;
+    border-radius:22px;
+  }
+  .features-grid,
+  .segments-grid,
+  .pricing-grid{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .compare-grid{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .compare-arrow{
+    height:34px;
+    transform:rotate(90deg);
+  }
+  .final-cta{
+    padding:40px 24px;
+    grid-template-columns:1fr;
+    gap:36px;
+  }
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+    gap:34px 24px;
+  }
+}
