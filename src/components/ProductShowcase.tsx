@@ -54,7 +54,6 @@ const productViews = [
   },
 ];
 
-const AUTO_ADVANCE_DELAY_MS = 2000;
 
 export function ProductShowcase() {
   const [active, setActive] = useState(0);
@@ -91,14 +90,12 @@ export function ProductShowcase() {
   };
 
   useEffect(() => {
-    if (reducedMotion || isOrbitMoving) return;
 
     const timeout = window.setTimeout(() => {
       triggerFocus(nextProductView(active, productViews.length));
     }, AUTO_ADVANCE_DELAY_MS);
 
     return () => window.clearTimeout(timeout);
-  }, [active, isOrbitMoving, reducedMotion, triggerFocus]);
 
   return (
     <section className="section product-showcase-section" id="produto">
@@ -109,7 +106,6 @@ export function ProductShowcase() {
             <h2>Uma plataforma. Diferentes formas de enxergar sua operação.</h2>
           </div>
           <p>
-            Explore o Dr. Tasks em movimento. Veja cada tela em destaque, entenda seu papel na operação e navegue pela experiência com profundidade.
           </p>
         </div>
 
@@ -132,7 +128,6 @@ export function ProductShowcase() {
           ))}
         </div>
 
-        <div className="product-orbit-stage" id={`product-${current.id}`}>
           <div className="product-orbit-canvas">
             <div className="product-orbit-aura" aria-hidden="true" />
             <div className="product-orbit-hint"><span /> Arraste para explorar em 3D</div>
@@ -185,14 +180,11 @@ export function ProductShowcase() {
                     <li key={bullet}><span />{bullet}</li>
                   ))}
                 </ul>
-                <a href="#funcionalidades" className="text-link product-detail-link">Explorar possibilidades <ArrowRightIcon /></a>
               </motion.div>
             </AnimatePresence>
 
-            <div className="product-orbit-status" aria-hidden="true">
               <span>{current.number}</span>
               <i />
-              <small>{isOrbitMoving ? "transição em andamento" : "pausa para leitura · troca automática"}</small>
             </div>
           </aside>
         </div>

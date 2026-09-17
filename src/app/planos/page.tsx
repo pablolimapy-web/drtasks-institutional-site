@@ -1,2 +1,1 @@
 import { InstitutionalPlaceholder } from "@/components/InstitutionalPlaceholder";
-export default function Page(){ return <InstitutionalPlaceholder eyebrow="Planos" title="Escolha a estrutura certa para sua operação." text="A Home já possui o comparativo. Esta rota pode evoluir para uma página detalhada com limites, recursos, add-ons e checkout." primaryLabel="Ver planos na Home" primaryHref="/#planos"/> }

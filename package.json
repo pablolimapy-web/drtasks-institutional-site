@@ -15,7 +15,6 @@
     "react-dom": "19.1.1",
     "motion": "^13.3.0",
     "three": "^0.186.0",
-    "gl-matrix": "^3.4.4"
   },
   "devDependencies": {
     "@types/node": "22.14.1",

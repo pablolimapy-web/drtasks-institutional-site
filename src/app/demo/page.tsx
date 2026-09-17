@@ -1,0 +1,5 @@
+import Link from "next/link";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+
+export default function DemoPage(){return <><Header/><main className="demo-page"><section className="section"><div className="container demo-shell"><span className="eyebrow">Demonstração</span><h1>Veja o Dr. Tasks aplicado à sua operação.</h1><p>A demonstração parte do seu processo atual: como vocês acompanham OS, projetos, estágios, responsáveis, prazos e bloqueios. Depois mostramos o FluxOS dentro desse contexto.</p><div className="demo-points"><span>Mapa de estágios</span><span>OS em risco ou bloqueadas</span><span>Próxima ação e responsável</span><span>Histórico e contexto</span></div><div className="hero-actions"><Link className="button button-primary" href="/contato">Solicitar demonstração</Link><Link className="button button-secondary" href="/#fluxos">Ver o FluxOS primeiro</Link></div><small>O envio comercial ainda utiliza o canal de contato atual. Não há promessa de teste ou condição de preço nesta etapa.</small></div></section></main><Footer/></>}
