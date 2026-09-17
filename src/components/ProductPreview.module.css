@@ -680,3 +680,388 @@
 @media (prefers-reduced-motion: reduce) {
   .drop { animation: none; }
 }
+
+/* v7 — dynamic brand entrance + denser progressive FluxOS build */
+.screenTexture {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .42;
+  background-image:
+    linear-gradient(rgba(52, 84, 132, .018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(52, 84, 132, .018) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,.75), transparent 72%);
+}
+
+.sidebarLogo {
+  display: block;
+  width: min(72%, 110px);
+  height: auto;
+  object-fit: contain;
+}
+
+.tableScaffold {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 28%;
+  overflow: hidden;
+  transform-origin: left center;
+}
+
+.stageRail {
+  height: 10%;
+  min-height: 18px;
+  display: grid;
+  grid-template-columns: 7% repeat(7, minmax(0, 1fr));
+  align-items: stretch;
+  border-bottom: 1px solid #dfe7f1;
+  background: linear-gradient(180deg, #fbfcfe, #f6f9fc);
+  color: #687991;
+  font-size: clamp(3px, .35vw, 5.8px);
+  font-weight: 700;
+  letter-spacing: .015em;
+}
+
+.stageRailLabel,
+.stageRailItem {
+  position: relative;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding-inline: 2px;
+  border-right: 1px solid rgba(220, 229, 240, .7);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stageRailLabel {
+  color: #8a98aa;
+  background: #f8fafc;
+  letter-spacing: .06em;
+}
+
+.stageRailItem i {
+  flex: none;
+  width: clamp(3px, .38vw, 6px);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: var(--stage);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--stage) 12%, transparent);
+}
+
+.stageRailItem::after {
+  content: "";
+  position: absolute;
+  inset: auto 7% 0;
+  height: 2px;
+  border-radius: 999px 999px 0 0;
+  background: var(--stage);
+  opacity: .48;
+  transform: scaleX(.72);
+}
+
+.tableCard {
+  top: 24.5%;
+  background: rgba(255,255,255,.99);
+  box-shadow: 0 10px 28px rgba(30, 50, 82, .05);
+}
+
+.groupBar {
+  height: 7%;
+  min-height: 13px;
+}
+
+.tableHeader,
+.tableRow {
+  grid-template-columns: 5% 24% 12.5% 7.5% 13% 6% 10% 14% 8%;
+}
+
+.tableHeader {
+  height: 11%;
+  min-height: 20px;
+  padding-inline: 1.1%;
+}
+
+.rows {
+  inset: 28% 0 0;
+  overflow: hidden;
+}
+
+.tableRow {
+  height: 12.5%;
+  padding-inline: 1.1%;
+  transition: background .25s ease, box-shadow .25s ease;
+}
+
+.tableRow:nth-child(even) {
+  background: linear-gradient(90deg, #fcfdff, #fbfcfe);
+}
+
+.progressCell {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+
+.progressCell > i {
+  position: relative;
+  flex: 1;
+  height: clamp(2px, .36vw, 5px);
+  overflow: hidden;
+  border-radius: 999px;
+  background: #edf1f6;
+}
+
+.progressCell > i > b {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #3d72c8, #39a88a);
+}
+
+.progressCell > strong {
+  flex: none;
+  color: #50617a;
+  font-size: 90%;
+  font-weight: 650;
+}
+
+.brandIntro {
+  background:
+    radial-gradient(circle at 18% 16%, rgba(122, 183, 255, .42), transparent 25%),
+    radial-gradient(circle at 82% 78%, rgba(50, 129, 255, .35), transparent 31%),
+    linear-gradient(135deg, #06377f 0%, #0f55b9 42%, #1769d4 70%, #0d4da6 100%);
+}
+
+.brandGrid {
+  position: absolute;
+  inset: -20%;
+  opacity: .18;
+  transform: perspective(650px) rotateX(61deg) translateY(14%);
+  transform-origin: center 55%;
+  background-image:
+    linear-gradient(rgba(255,255,255,.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.16) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: radial-gradient(ellipse at center, #000 0 38%, transparent 72%);
+  animation: brandGridDrift 7s linear infinite;
+}
+
+@keyframes brandGridDrift {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 0 54px, 54px 0; }
+}
+
+.brandOrb {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  width: 28%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(28px);
+  opacity: .28;
+  pointer-events: none;
+}
+
+.brandOrbOne {
+  left: 5%;
+  top: 8%;
+  background: #6cb8ff;
+  animation: orbOne 5.8s ease-in-out infinite alternate;
+}
+
+.brandOrbTwo {
+  right: 2%;
+  bottom: -10%;
+  background: #0c3f98;
+  animation: orbTwo 6.4s ease-in-out infinite alternate;
+}
+
+@keyframes orbOne {
+  to { transform: translate3d(60px, 44px, 0) scale(1.18); }
+}
+
+@keyframes orbTwo {
+  to { transform: translate3d(-74px, -38px, 0) scale(.88); }
+}
+
+.drop {
+  mix-blend-mode: screen;
+  opacity: .7;
+}
+
+.brandWordmark {
+  position: relative;
+  z-index: 5;
+  width: min(62%, 550px);
+  display: grid;
+  justify-items: center;
+  gap: clamp(7px, 1.2vw, 18px);
+  color: #fff;
+  text-shadow: none;
+}
+
+.brandLogoShell {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  filter: drop-shadow(0 20px 38px rgba(1, 24, 72, .32));
+}
+
+.brandLogoImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1) drop-shadow(0 1px 0 rgba(255,255,255,.15));
+  opacity: .98;
+}
+
+.brandSweep {
+  position: absolute;
+  inset: -30% auto -30% -35%;
+  width: 28%;
+  transform: skewX(-18deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.86), transparent);
+  filter: blur(4px);
+  mix-blend-mode: screen;
+}
+
+.brandUnderline {
+  width: 42%;
+  height: 2px;
+  transform-origin: center;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.92), transparent);
+  box-shadow: 0 0 18px rgba(255,255,255,.55);
+}
+
+.brandWordmark small {
+  position: static;
+  top: auto;
+  left: auto;
+  font-size: clamp(6px, .78vw, 12px);
+  color: rgba(255,255,255,.78);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.brandLaunchLine {
+  position: absolute;
+  z-index: 4;
+  left: 10%;
+  right: 10%;
+  bottom: 17%;
+  height: 1px;
+  transform-origin: center;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.36), transparent);
+  box-shadow: 0 0 22px rgba(255,255,255,.18);
+}
+
+.spotlightRow {
+  left: 3.4%;
+  right: 3.4%;
+  top: 31.5%;
+  padding: 2.7% 2.8% 2.3%;
+  border-radius: 20px;
+  box-shadow: 0 34px 84px rgba(9, 27, 58, .4), 0 10px 26px rgba(9, 27, 58, .17);
+  transform-origin: center center;
+}
+
+.spotlightTop > strong {
+  font-size: clamp(8px, 1.36vw, 21px);
+}
+
+.spotlightGrid {
+  gap: 1.8%;
+  padding-top: 2%;
+}
+
+.spotlightGrid small {
+  font-size: clamp(4.3px, .54vw, 8.6px);
+}
+
+.spotlightGrid b {
+  font-size: clamp(5.6px, .75vw, 11.5px);
+}
+
+.spotlightProgress {
+  display: flex;
+  align-items: center;
+  gap: 1.2%;
+  margin-top: 2%;
+}
+
+.spotlightProgress > span {
+  position: relative;
+  flex: 1;
+  height: clamp(3px, .48vw, 7px);
+  overflow: hidden;
+  border-radius: 999px;
+  background: #edf1f6;
+}
+
+.spotlightProgress > span i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #356bc3, #28a8c7);
+  box-shadow: 0 0 16px rgba(40,168,199,.22);
+}
+
+.spotlightProgress > b {
+  flex: none;
+  color: #49617f;
+  font-size: clamp(5px, .64vw, 10px);
+}
+
+.overlay {
+  background:
+    radial-gradient(circle at 49% 48%, rgba(25, 48, 84, .2), rgba(9, 22, 42, .76) 68%),
+    rgba(9, 22, 42, .52);
+  backdrop-filter: blur(3px) saturate(.84);
+}
+
+.rowCallout {
+  right: 5%;
+  top: 67%;
+}
+
+@media (min-width: 1001px) {
+  .showcase { width: 114%; margin-left: -7%; }
+}
+
+@media (max-width: 720px) {
+  .stageRail { grid-template-columns: 8% repeat(7, minmax(0, 1fr)); }
+  .stageRailItem { font-size: 3px; }
+  .sidebarLogo { width: 68%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brandGrid,
+  .brandOrbOne,
+  .brandOrbTwo { animation: none; }
+}
+
+/* Preserve the supplied blue wordmark on a luminous glass plate. */
+.brandLogoShell {
+  padding: 5.2% 6.5%;
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: clamp(14px, 2vw, 28px);
+  background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(244,249,255,.9));
+  box-shadow:
+    0 26px 70px rgba(0, 27, 77, .3),
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 0 0 8px rgba(255,255,255,.055);
+}
+
+.brandLogoImage {
+  filter: drop-shadow(0 7px 16px rgba(24, 72, 151, .2));
+}

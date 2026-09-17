@@ -13,13 +13,13 @@ export type FluxosHeroScene = {
 };
 
 export const FLUXOS_HERO_SCENES: readonly FluxosHeroScene[] = [
-  { id: "brandIntro", durationMs: 3200 },
-  { id: "shellBuild", durationMs: 3200 },
-  { id: "kpiFocus", durationMs: 3200 },
-  { id: "tableBuild", durationMs: 3800 },
-  { id: "rowSpotlight", durationMs: 4600 },
-  { id: "drawer", durationMs: 3600 },
-  { id: "drawerCallouts", durationMs: 5000 },
+  { id: "brandIntro", durationMs: 4500 },
+  { id: "shellBuild", durationMs: 3600 },
+  { id: "kpiFocus", durationMs: 3800 },
+  { id: "tableBuild", durationMs: 4300 },
+  { id: "rowSpotlight", durationMs: 5400 },
+  { id: "drawer", durationMs: 4200 },
+  { id: "drawerCallouts", durationMs: 5200 },
 ] as const;
 
 function normalizeIndex(index: number) {

@@ -1,5 +1,5 @@
 export const heroRotatingCopy = {
-  staticTitle: "Saiba o processo em cada projeto.",
+  staticTitle: "Saiba o processo em cada projeto",
   phrases: [
     "Veja a próxima ação.",
     "Saiba quem precisa agir.",

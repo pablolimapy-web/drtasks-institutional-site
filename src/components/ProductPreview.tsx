@@ -17,6 +17,8 @@ type FluxRow = {
   schedule: string;
   stage: string;
   health: number;
+  progress: number;
+  priority: "M" | "A";
   tag?: string;
   value?: string;
 };
@@ -29,21 +31,32 @@ const KPI = [
   { value: "57", label: "Faturam. At.", tone: "red" },
 ] as const;
 
+const STAGES = [
+  { label: "ORÇAMENTO", color: "#5B6FE8" },
+  { label: "ENVIADA", color: "#4E7BF2" },
+  { label: "APROVADO", color: "#3C88E8" },
+  { label: "CONTRATO", color: "#2C97D8" },
+  { label: "AG.PGTO", color: "#2D9FCF" },
+  { label: "EM ANDAM.", color: "#28A8C7" },
+  { label: "ELAB.REL.", color: "#27AEC0" },
+] as const;
+
 const ROWS: FluxRow[] = [
-  { os: "10", project: "130 - N° 09/2025 - MANUTENÇÃO EM SUBESTAÇÃO", institution: "130 - ANATEL SC", type: "Serviço", responsible: "Ryan Lucca", days: "57d", schedule: "Definido", stage: "EM ANDAM.", health: 54, tag: "compras", value: "46.355,95" },
-  { os: "11", project: "130 - N° 06/2025 - IMPLANTAÇÃO DE SHP", institution: "130 - ANATEL SC", type: "Serviço", responsible: "Ryan Lucca", days: "52d", schedule: "Definido", stage: "EM ANDAM.", health: 87, value: "139.000,00" },
-  { os: "13", project: "102 - LT14 - OS 663/1130 - MANUTENÇÃO DE COBERTURA", institution: "102 - SESA PR", type: "Serviço", responsible: "Kaiky Silva Oliveira", days: "50d", schedule: "Datas", stage: "AG.PGTO", health: 76, value: "3.650,28" },
-  { os: "14", project: "102 - LT14 - OS 1790 - PROTEÇÃO CONTRA SINANTRÓPICOS", institution: "102 - SESA PR", type: "Serviço", responsible: "Kaiky Silva Oliveira", days: "50d", schedule: "Datas", stage: "AG.PGTO", health: 76, value: "3.459,53" },
-  { os: "15", project: "102 - LT14 - OS 1770 - REPARO ESTRUTURAL EM CONCRETO", institution: "102 - SESA PR", type: "Serviço", responsible: "Kaiky Silva Oliveira", days: "50d", schedule: "Datas", stage: "AG.PGTO", health: 76, value: "4.098,45" },
-  { os: "16", project: "102 - LT14 - OS 1771 - INSPEÇÃO E REPARO ESTRUTURAL", institution: "102 - SESA PR", type: "Serviço", responsible: "Kaiky Silva Oliveira", days: "50d", schedule: "Datas", stage: "AG.PGTO", health: 76, value: "5.298,74" },
-  { os: "20", project: "102 - LT16 - OS 362 - REVESTIMENTO DE BANHEIRO", institution: "102 - SESA PR", type: "Serviço", responsible: "Kaiky Silva Oliveira", days: "78d", schedule: "Datas", stage: "CONTRATO", health: 87, value: "894,24" },
-  { os: "22", project: "102 - LT16 - OS 1583 - INFRAESTRUTURA DE PROJEÇÃO", institution: "102 - SESA PR", type: "Serviço", responsible: "Kaiky Silva Oliveira", days: "64d", schedule: "Datas", stage: "APROVADO", health: 79, value: "2.234,55" },
+  { os: "10", project: "130 - N° 09/2025 - MANUTENÇÃO EM SUBESTAÇÃO", institution: "130 - ANATEL SC", type: "Serviço", responsible: "Ryan Lucca", days: "57d", schedule: "Definido", stage: "EM ANDAM.", health: 54, progress: 45, priority: "M", tag: "compras", value: "46.355,95" },
+  { os: "11", project: "130 - N° 06/2025 - IMPLANTAÇÃO DE SHP", institution: "130 - ANATEL SC", type: "Serviço", responsible: "Ryan Lucca", days: "52d", schedule: "Definido", stage: "EM ANDAM.", health: 87, progress: 13, priority: "M", value: "139.000,00" },
+  { os: "13", project: "102 - LT14 - OS 663/1130 - MANUTENÇÃO DE COBERTURA", institution: "102 - SESA PR", type: "Serviço", responsible: "Kaiky Silva Oliveira", days: "50d", schedule: "Datas", stage: "AG.PGTO", health: 76, progress: 31, priority: "A", value: "3.650,28" },
+  { os: "14", project: "102 - LT14 - OS 1790 - PROTEÇÃO CONTRA SINANTRÓPICOS", institution: "102 - SESA PR", type: "Serviço", responsible: "Kaiky Silva Oliveira", days: "50d", schedule: "Datas", stage: "AG.PGTO", health: 76, progress: 28, priority: "A", value: "3.459,53" },
+  { os: "15", project: "102 - LT14 - OS 1770 - REPARO ESTRUTURAL EM CONCRETO", institution: "102 - SESA PR", type: "Serviço", responsible: "Kaiky Silva Oliveira", days: "50d", schedule: "Datas", stage: "AG.PGTO", health: 76, progress: 34, priority: "A", value: "4.098,45" },
+  { os: "16", project: "102 - LT14 - OS 1771 - INSPEÇÃO E REPARO ESTRUTURAL", institution: "102 - SESA PR", type: "Serviço", responsible: "Kaiky Silva Oliveira", days: "50d", schedule: "Datas", stage: "AG.PGTO", health: 76, progress: 29, priority: "A", value: "5.298,74" },
+  { os: "20", project: "102 - LT16 - OS 362 - REVESTIMENTO DE BANHEIRO", institution: "102 - SESA PR", type: "Serviço", responsible: "Kaiky Silva Oliveira", days: "78d", schedule: "Datas", stage: "CONTRATO", health: 87, progress: 61, priority: "A", value: "894,24" },
+  { os: "22", project: "102 - LT16 - OS 1583 - INFRAESTRUTURA DE PROJEÇÃO", institution: "102 - SESA PR", type: "Serviço", responsible: "Kaiky Silva Oliveira", days: "64d", schedule: "Datas", stage: "APROVADO", health: 79, progress: 42, priority: "A", value: "2.234,55" },
 ];
 
 const NAV = ["Dashboard", "Instituições", "Projetos", "Tarefas", "FluxOS", "Arquivos", "Localização", "Financeiro", "Chat", "Usuários"];
+const NAV_ICONS = ["◉", "⌘", "▦", "□", "ϟ", "▱", "⌖", "◇", "▢", "◌"];
 
 function Drop({ index }: { index: number }) {
-  return <span className={styles.drop} style={{ "--i": index } as any} />;
+  return <span className={styles.drop} style={{ "--i": index } as React.CSSProperties} />;
 }
 
 export function ProductPreview({ phaseIndex: _phaseIndex = 0 }: ProductPreviewProps) {
@@ -63,7 +76,8 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0 }: ProductPreviewPr
   const intro = scene.id === "brandIntro";
   const shellBuilt = sceneIndex >= 1;
   const kpiFocus = scene.id === "kpiFocus";
-  const tableBuilt = sceneIndex >= 3;
+  const tableScaffold = sceneIndex >= 2;
+  const tableRowsReady = sceneIndex >= 3;
   const rowSpotlight = scene.id === "rowSpotlight";
   const drawerOpen = sceneIndex >= 5;
   const drawerCallouts = scene.id === "drawerCallouts";
@@ -73,28 +87,33 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0 }: ProductPreviewPr
     <div className={styles.showcase} role="img" aria-label="Apresentação animada do FluxOS">
       <motion.div
         className={styles.frame}
-        initial={reducedMotion ? false : { opacity: 0, y: 14, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: drawerOpen ? 1.005 : 1 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        initial={reducedMotion ? false : { opacity: 0, y: 18, scale: 0.975, rotateX: 1.5 }}
+        animate={{ opacity: 1, y: 0, scale: drawerOpen ? 1.008 : 1, rotateX: 0 }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className={styles.screen}>
+          <div className={styles.screenTexture} />
+
           <motion.aside
             className={styles.sidebar}
             initial={false}
-            animate={{ opacity: shellBuilt ? 1 : 0, x: shellBuilt ? 0 : -46 }}
-            transition={{ duration: 0.8, delay: shellBuilt ? 0.05 : 0, ease: [0.16, 1, 0.3, 1] }}
+            animate={{ opacity: shellBuilt ? 1 : 0, x: shellBuilt ? 0 : -56, filter: shellBuilt ? "blur(0px)" : "blur(7px)" }}
+            transition={{ duration: 0.9, delay: shellBuilt ? 0.04 : 0, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className={styles.logoRow}><span className={styles.menuGlyph}>☰</span><strong>DR TASKS</strong></div>
+            <div className={styles.logoRow}>
+              <span className={styles.menuGlyph}>☰</span>
+              <img src="/hero/drtasks-wordmark.png" alt="DR TASKS" className={styles.sidebarLogo} />
+            </div>
             <div className={styles.sideNav}>
               {NAV.map((item, index) => (
                 <motion.div
                   key={item}
                   className={`${styles.navItem} ${item === "FluxOS" ? styles.navActive : ""}`}
                   initial={false}
-                  animate={{ opacity: shellBuilt ? 1 : 0, x: shellBuilt ? 0 : -18 }}
-                  transition={{ duration: 0.42, delay: shellBuilt ? 0.18 + index * 0.045 : 0 }}
+                  animate={{ opacity: shellBuilt ? 1 : 0, x: shellBuilt ? 0 : -20 }}
+                  transition={{ duration: 0.44, delay: shellBuilt ? 0.22 + index * 0.052 : 0, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <span>{["◉", "⌘", "▦", "□", "ϟ", "▱", "⌖", "◇", "▢", "◌"][index]}</span>{item}
+                  <span>{NAV_ICONS[index]}</span>{item}
                 </motion.div>
               ))}
             </div>
@@ -103,8 +122,8 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0 }: ProductPreviewPr
           <motion.header
             className={styles.topbar}
             initial={false}
-            animate={{ opacity: shellBuilt ? 1 : 0, y: shellBuilt ? 0 : -34 }}
-            transition={{ duration: 0.72, delay: shellBuilt ? 0.12 : 0, ease: [0.16, 1, 0.3, 1] }}
+            animate={{ opacity: shellBuilt ? 1 : 0, y: shellBuilt ? 0 : -42, filter: shellBuilt ? "blur(0px)" : "blur(7px)" }}
+            transition={{ duration: 0.82, delay: shellBuilt ? 0.12 : 0, ease: [0.16, 1, 0.3, 1] }}
           >
             <span className={styles.toggle}></span>
             <div className={styles.search}><span>⌕</span><span>Pesquise aqui</span></div>
@@ -114,14 +133,14 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0 }: ProductPreviewPr
           <motion.main
             className={styles.appMain}
             initial={false}
-            animate={{ opacity: shellBuilt ? 1 : 0, y: shellBuilt ? 0 : 22 }}
-            transition={{ duration: 0.82, delay: shellBuilt ? 0.2 : 0, ease: [0.16, 1, 0.3, 1] }}
+            animate={{ opacity: shellBuilt ? 1 : 0, y: shellBuilt ? 0 : 28 }}
+            transition={{ duration: 0.9, delay: shellBuilt ? 0.18 : 0, ease: [0.16, 1, 0.3, 1] }}
           >
             <motion.div
               className={styles.titleBar}
               initial={false}
-              animate={{ opacity: shellBuilt ? 1 : 0, x: shellBuilt ? 0 : 28 }}
-              transition={{ duration: 0.66, delay: shellBuilt ? 0.38 : 0 }}
+              animate={{ opacity: shellBuilt ? 1 : 0, x: shellBuilt ? 0 : 34 }}
+              transition={{ duration: 0.7, delay: shellBuilt ? 0.42 : 0 }}
             >
               <div><h3><span>Flux</span>OS</h3><p>Visão clara da operação, do andamento aos resultados.</p></div>
               <div className={styles.titleActions}><button>Confortável</button><button>⌄</button><button>☷</button><strong>+ Nova OS</strong></div>
@@ -135,10 +154,11 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0 }: ProductPreviewPr
                   initial={false}
                   animate={{
                     opacity: shellBuilt ? 1 : 0,
-                    y: shellBuilt ? (kpiFocus ? -8 : 0) : 22,
-                    scale: kpiFocus ? 1.035 : 1,
+                    y: shellBuilt ? (kpiFocus ? -7 - (index % 2) * 2 : 0) : 24,
+                    scale: kpiFocus ? 1.04 : 1,
+                    boxShadow: kpiFocus ? "0 14px 34px rgba(38, 61, 103, 0.11)" : "0 4px 12px rgba(34, 49, 77, 0.025)",
                   }}
-                  transition={{ duration: 0.62, delay: shellBuilt ? 0.55 + index * 0.13 : 0, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.66, delay: shellBuilt ? 0.58 + index * 0.14 : 0, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div><i></i><strong>{item.value}</strong></div><span>{item.label}</span>
                 </motion.article>
@@ -147,8 +167,8 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0 }: ProductPreviewPr
 
             <AnimatePresence>
               {kpiFocus && (
-                <motion.div className={`${styles.callout} ${styles.kpiCallout}`} initial={{ opacity: 0, y: 18, scale: 0.94 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.5, delay: 0.55 }}>
-                  <small>Visão operacional</small><strong>Indicadores essenciais aparecem antes de você procurar.</strong>
+                <motion.div className={`${styles.callout} ${styles.kpiCallout}`} initial={{ opacity: 0, y: 18, scale: 0.94 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.55, delay: 0.75 }}>
+                  <small>Visão operacional</small><strong>267 OS e R$ 3,1M organizados antes de qualquer clique.</strong>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -156,21 +176,44 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0 }: ProductPreviewPr
             <motion.section
               className={styles.tableCard}
               initial={false}
-              animate={{ opacity: tableBuilt ? 1 : 0, y: tableBuilt ? 0 : 34, scale: tableBuilt ? 1 : 0.985 }}
-              transition={{ duration: 0.85, delay: tableBuilt ? 0.12 : 0, ease: [0.16, 1, 0.3, 1] }}
+              animate={{ opacity: tableScaffold ? 1 : 0, y: tableScaffold ? 0 : 38, scale: tableScaffold ? 1 : 0.982 }}
+              transition={{ duration: 0.92, delay: tableScaffold ? 0.3 : 0, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className={styles.groupBar}><span>FIXO · IDENTIFICAÇÃO</span><span>GRUPO 1 · PROJETO</span></div>
-              <div className={styles.tableHeader}>
-                <span>OS</span><span>PROJETO</span><span>SECRETARIA / INST.</span><span>TIPO</span><span>RESPONSÁVEL</span><span>DIAS</span><span>CRONOGRAMA</span><span>ESTÁGIO ATUAL</span>
-              </div>
+              <motion.div
+                className={styles.tableScaffold}
+                initial={false}
+                animate={{ opacity: tableScaffold ? 1 : 0, clipPath: tableScaffold ? "inset(0% 0% 0% 0%)" : "inset(0% 100% 0% 0%)" }}
+                transition={{ duration: 1.1, delay: tableScaffold ? 0.42 : 0, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className={styles.groupBar}><span>FIXO · IDENTIFICAÇÃO</span><span>GRUPO 1 · PROJETO</span></div>
+                <div className={styles.stageRail}>
+                  <span className={styles.stageRailLabel}>FLUXO</span>
+                  {STAGES.map((stage, index) => (
+                    <motion.span
+                      key={stage.label}
+                      className={styles.stageRailItem}
+                      style={{ "--stage": stage.color } as React.CSSProperties}
+                      initial={false}
+                      animate={{ opacity: tableScaffold ? 1 : 0, y: tableScaffold ? 0 : -8 }}
+                      transition={{ duration: 0.38, delay: tableScaffold ? 0.68 + index * 0.07 : 0 }}
+                    >
+                      <i />{stage.label}
+                    </motion.span>
+                  ))}
+                </div>
+                <div className={styles.tableHeader}>
+                  <span>OS</span><span>PROJETO</span><span>SECRETARIA / INST.</span><span>TIPO</span><span>RESPONSÁVEL</span><span>DIAS</span><span>CRONOGRAMA</span><span>ESTÁGIO ATUAL</span><span>% HOJE</span>
+                </div>
+              </motion.div>
+
               <div className={styles.rows}>
                 {ROWS.map((row, index) => (
                   <motion.div
                     key={row.os}
                     className={`${styles.tableRow} ${index === 0 && rowSpotlight ? styles.rowSourceHidden : ""}`}
                     initial={false}
-                    animate={{ opacity: tableBuilt ? 1 : 0, x: tableBuilt ? 0 : -58, y: tableBuilt ? 0 : 6 }}
-                    transition={{ duration: 0.62, delay: tableBuilt ? 0.48 + index * 0.13 : 0, ease: [0.16, 1, 0.3, 1] }}
+                    animate={{ opacity: tableRowsReady ? 1 : 0, x: tableRowsReady ? 0 : -78, y: tableRowsReady ? 0 : 7 }}
+                    transition={{ duration: 0.68, delay: tableRowsReady ? 0.42 + index * 0.16 : 0, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <span className={styles.osCell}>{row.os}</span>
                     <span className={styles.projectCell}>{row.project}</span>
@@ -180,6 +223,7 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0 }: ProductPreviewPr
                     <span className={styles.days}>{row.days}</span>
                     <span><em className={`${styles.schedule} ${row.schedule === "Datas" ? styles.warn : ""}`}>{row.schedule}</em></span>
                     <span><em className={styles.stagePill}><b>{row.health}</b>{row.stage}</em></span>
+                    <span className={styles.progressCell}><i><b style={{ width: `${row.progress}%` }} /></i><strong>{row.progress}%</strong></span>
                   </motion.div>
                 ))}
               </div>
@@ -189,9 +233,9 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0 }: ProductPreviewPr
           <AnimatePresence>
             {rowSpotlight && (
               <>
-                <motion.div className={styles.overlay} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.48 }} />
-                <motion.div className={styles.spotlightRow} initial={{ opacity: 0, y: 42, scale: 0.76 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -18, scale: 0.94 }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}>
-                  <div className={styles.spotlightTop}><span className={styles.osBadge}>OS #{selected.os}</span><strong>{selected.project}</strong><span className={styles.healthBadge}>{selected.health}/100</span></div>
+                <motion.div className={styles.overlay} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.55 }} />
+                <motion.div className={styles.spotlightRow} initial={{ opacity: 0, y: 64, scale: 0.68, rotateX: -5 }} animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }} exit={{ opacity: 0, y: -20, scale: 0.94 }} transition={{ duration: 1.02, ease: [0.16, 1, 0.3, 1] }}>
+                  <div className={styles.spotlightTop}><span className={styles.osBadge}>OS #{selected.os}</span><strong>{selected.project}</strong><span className={styles.healthBadge}>Saúde {selected.health}/100</span></div>
                   <div className={styles.spotlightGrid}>
                     <div><small>Instituição</small><b>{selected.institution}</b></div>
                     <div><small>Responsável</small><b>{selected.responsible}</b></div>
@@ -200,53 +244,63 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0 }: ProductPreviewPr
                     <div><small>Estágio atual</small><b>{selected.stage}</b></div>
                     <div><small>Valor planejado</small><b>R$ {selected.value}</b></div>
                   </div>
+                  <div className={styles.spotlightProgress}><span><i style={{ width: `${selected.progress}%` }} /></span><b>{selected.progress}% concluído</b></div>
                 </motion.div>
-                <motion.div className={`${styles.callout} ${styles.rowCallout}`} initial={{ opacity: 0, x: 30, scale: 0.94 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={{ opacity: 0, x: 12 }} transition={{ duration: 0.55, delay: 0.72 }}>
-                  <small>Cada OS em contexto</small><strong>Abra uma linha e veja o que realmente precisa de atenção.</strong>
+                <motion.div className={`${styles.callout} ${styles.rowCallout}`} initial={{ opacity: 0, x: 38, scale: 0.92 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={{ opacity: 0, x: 12 }} transition={{ duration: 0.62, delay: 0.95 }}>
+                  <small>Uma OS, sem ruído</small><strong>A linha sai do quadro e vira contexto: prazo, estágio, valor e responsável.</strong>
                 </motion.div>
               </>
             )}
           </AnimatePresence>
 
-          <motion.div className={styles.drawerBackdrop} initial={false} animate={{ opacity: drawerOpen ? 1 : 0 }} transition={{ duration: 0.45 }} />
-          <motion.aside className={styles.drawer} initial={false} animate={{ x: drawerOpen ? "0%" : "104%", opacity: drawerOpen ? 1 : 0 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
+          <motion.div className={styles.drawerBackdrop} initial={false} animate={{ opacity: drawerOpen ? 1 : 0 }} transition={{ duration: 0.52 }} />
+          <motion.aside className={styles.drawer} initial={false} animate={{ x: drawerOpen ? "0%" : "106%", opacity: drawerOpen ? 1 : 0 }} transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1] }}>
             <div className={styles.drawerHeader}>
               <div><span className={styles.drawerIcon}>✓</span><div><strong>OS #10</strong><p>130 - N° 09/2025 - MANUTENÇÃO EM SUBESTAÇÃO</p></div></div><button>×</button>
             </div>
             <div className={styles.drawerTabs}><b>Resumo</b><span>Tarefas</span><span>Registros</span><span>Comentários</span></div>
             <section className={styles.drawerSection}>
               <h4>Estágio atual</h4>
-              <div className={styles.stageCard}>
+              <motion.div className={styles.stageCard} initial={false} animate={{ y: drawerOpen ? 0 : 18, opacity: drawerOpen ? 1 : 0 }} transition={{ duration: 0.62, delay: drawerOpen ? 0.52 : 0 }}>
                 <div className={styles.stageCardTop}><small>ETAPA</small><em>FORA DO SLA</em></div>
                 <h3>EM ANDAM.</h3>
                 <div className={styles.stageMetrics}><div><small>Dias no estágio</small><strong>57<em>/30</em></strong></div><div><small>Saldo SLA</small><strong>+27</strong></div><div><small>Regressões</small><strong>1</strong></div></div>
                 <p>⊙ <b>Sugestão: avançar para ELAB.REL.</b></p>
                 <button className={styles.primaryAction}>→ Avançar para próximo estágio</button>
                 <button className={styles.secondaryAction}>📎 Arquivos desta OS</button>
-              </div>
+              </motion.div>
             </section>
             <section className={styles.drawerSection}>
               <h4>Saúde da OS</h4>
-              <div className={styles.healthCard}><div><small>SAÚDE</small><em>⚠ ATENÇÃO</em></div><div className={styles.healthScore}><strong>54<small>/100</small></strong><b>4,1×</b></div><span><i></i></span><p>Momentum estagnado · 0 dias sem evolução</p></div>
+              <motion.div className={styles.healthCard} initial={false} animate={{ y: drawerOpen ? 0 : 18, opacity: drawerOpen ? 1 : 0 }} transition={{ duration: 0.62, delay: drawerOpen ? 0.74 : 0 }}><div><small>SAÚDE</small><em>⚠ ATENÇÃO</em></div><div className={styles.healthScore}><strong>54<small>/100</small></strong><b>4,1×</b></div><span><motion.i initial={false} animate={{ width: drawerOpen ? "54%" : "0%" }} transition={{ duration: 1, delay: drawerOpen ? 1.0 : 0 }} /></span><p>Momentum estagnado · 0 dias sem evolução</p></motion.div>
             </section>
           </motion.aside>
 
           <AnimatePresence>
             {drawerCallouts && (
               <>
-                <motion.div className={`${styles.callout} ${styles.stageCallout}`} initial={{ opacity: 0, x: -24, scale: 0.94 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.55, delay: 0.35 }}><small>Próximo passo claro</small><strong>Estágio, SLA e ação recomendada no mesmo contexto.</strong></motion.div>
-                <motion.div className={`${styles.callout} ${styles.healthCallout}`} initial={{ opacity: 0, x: -24, scale: 0.94 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.55, delay: 1.0 }}><small>Saúde da OS</small><strong>Risco e progresso ficam visíveis sem trocar de tela.</strong></motion.div>
+                <motion.div className={`${styles.callout} ${styles.stageCallout}`} initial={{ opacity: 0, x: -28, scale: 0.92 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.62, delay: 0.55 }}><small>Próximo passo claro</small><strong>Estágio, SLA e ação recomendada no mesmo contexto.</strong></motion.div>
+                <motion.div className={`${styles.callout} ${styles.healthCallout}`} initial={{ opacity: 0, x: -28, scale: 0.92 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.62, delay: 1.35 }}><small>Saúde da OS</small><strong>Risco e progresso ficam visíveis sem trocar de tela.</strong></motion.div>
               </>
             )}
           </AnimatePresence>
 
           <AnimatePresence>
             {intro && !reducedMotion && (
-              <motion.div className={styles.brandIntro} initial={{ opacity: 1 }} exit={{ opacity: 0, scale: 1.035 }} transition={{ duration: 0.72 }}>
-                <div className={styles.dropField}>{Array.from({ length: 14 }, (_, index) => <Drop key={index} index={index} />)}</div>
-                <motion.div className={styles.brandWordmark} initial={{ opacity: 0, y: 18, scale: 0.92 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.85, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}>
-                  <span className={styles.brandMark}>DR</span><strong>TASKS</strong><small>Operação clara. Próxima ação visível.</small>
+              <motion.div className={styles.brandIntro} initial={{ opacity: 1 }} exit={{ opacity: 0, scale: 1.08, filter: "blur(8px)" }} transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}>
+                <div className={styles.brandGrid} />
+                <div className={styles.dropField}>{Array.from({ length: 18 }, (_, index) => <Drop key={index} index={index} />)}</div>
+                <span className={`${styles.brandOrb} ${styles.brandOrbOne}`} />
+                <span className={`${styles.brandOrb} ${styles.brandOrbTwo}`} />
+                <motion.div className={styles.brandWordmark} initial={{ opacity: 0, y: 26, scale: 0.84 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 1.05, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}>
+                  <motion.div className={styles.brandLogoShell} initial={{ clipPath: "inset(0 100% 0 0)" }} animate={{ clipPath: "inset(0 0% 0 0)" }} transition={{ duration: 1.1, delay: 0.72, ease: [0.16, 1, 0.3, 1] }}>
+                    <img src="/hero/drtasks-wordmark.png" alt="DR TASKS" className={styles.brandLogoImage} />
+                    <motion.span className={styles.brandSweep} initial={{ x: "-150%" }} animate={{ x: "190%" }} transition={{ duration: 1.45, delay: 1.0, ease: "easeInOut" }} />
+                  </motion.div>
+                  <motion.span className={styles.brandUnderline} initial={{ scaleX: 0, opacity: 0 }} animate={{ scaleX: 1, opacity: 1 }} transition={{ duration: 0.8, delay: 1.45, ease: [0.16, 1, 0.3, 1] }} />
+                  <motion.small initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65, delay: 1.65 }}>Operação clara. Próxima ação visível.</motion.small>
                 </motion.div>
+                <motion.div className={styles.brandLaunchLine} initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 1.3, delay: 2.0, ease: [0.16, 1, 0.3, 1] }} />
               </motion.div>
             )}
           </AnimatePresence>
