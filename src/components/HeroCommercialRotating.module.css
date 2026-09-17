@@ -30,7 +30,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   overflow: hidden;
-  color: var(--brand);
+  color: #1c55c9;
   line-height: 1.05;
   white-space: normal;
 }

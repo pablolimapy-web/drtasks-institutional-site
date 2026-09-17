@@ -2,21 +2,25 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./hero-v16.css";
 import "./alignment-v17.css";
+import "./home-commercial-v18.css";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
+    default: "Dr. Tasks — Gestão operacional por estágios",
     template: "%s | Dr. Tasks",
   },
   description: site.description,
   applicationName: "Dr. Tasks",
   alternates: { canonical: "/" },
+  keywords: ["gestão de ordens de serviço","gestão operacional por estágios","FluxOS","gestão de projetos","construção civil","manutenção","serviços técnicos","Dr. Tasks"],
   openGraph: {
     type: "website",
     locale: "pt_BR",
     url: site.url,
     siteName: "Dr. Tasks",
+    title: "Dr. Tasks — Saiba o que está acontecendo em cada OS",
     description: site.description,
   },
   twitter: { card: "summary_large_image", title: "Dr. Tasks", description: site.description },

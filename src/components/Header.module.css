@@ -1,0 +1,50 @@
+.shell {
+  gap: 28px;
+}
+
+.wordmarkLink {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  text-decoration: none;
+}
+
+.wordmark {
+  display: block;
+  width: 132px;
+  max-width: 132px;
+  height: auto;
+  max-height: 27px;
+  object-fit: contain;
+}
+
+.actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.demoButton {
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .shell {
+    gap: 14px;
+  }
+
+  .wordmark {
+    width: 128px;
+    max-width: 154px;
+    max-height: 28px;
+  }
+
+  .actions {
+    gap: 8px;
+  }
+
+  .demoButton {
+    display: none !important;
+  }
+}
