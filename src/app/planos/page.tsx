@@ -1,1 +1,2 @@
 import { InstitutionalPlaceholder } from "@/components/InstitutionalPlaceholder";
+export default function Page(){ return <InstitutionalPlaceholder eyebrow="Condição comercial" title="Os primeiros planos ainda estão em validação." text="Valores, limites, implantação e condições serão publicados quando estiverem formalmente definidos. Por enquanto, conheça o produto em uma demonstração orientada ao seu cenário." primaryLabel="Agendar demonstração" primaryHref="/demo"/> }

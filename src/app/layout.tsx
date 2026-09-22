@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "./hero-v16.css";
-import "./alignment-v17.css";
-import "./home-commercial-v18.css";
+import "./site-shell.css";
+import "./home.css";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -13,7 +12,6 @@ export const metadata: Metadata = {
   },
   description: site.description,
   applicationName: "Dr. Tasks",
-  alternates: { canonical: "/" },
   keywords: ["gestão de ordens de serviço","gestão operacional por estágios","FluxOS","gestão de projetos","construção civil","manutenção","serviços técnicos","Dr. Tasks"],
   openGraph: {
     type: "website",

@@ -22,6 +22,6 @@ test("header keeps the demo CTA beside the mega-menu trigger", () => {
 });
 
 test("header constrains the DR TASKS wordmark to navigation-sized intrinsic dimensions", () => {
-  assert.match(header, /width=\{190\}/);
-  assert.match(header, /height=\{34\}/);
+  assert.match(header, /width=\{150\}/);
+  assert.match(header, /height=\{27\}/);
 });

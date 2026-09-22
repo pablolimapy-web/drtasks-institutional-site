@@ -9,6 +9,7 @@ import { megaMenuActions, megaMenuItems } from "@/lib/megaMenu";
 import styles from "./StaggeredMegaMenu.module.css";
 
 const PANEL_ID = "drtasks-staggered-mega-menu";
+const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export function StaggeredMegaMenu() {
   const [open, setOpen] = useState(false);
@@ -19,7 +20,12 @@ export function StaggeredMegaMenu() {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
-  const closeMenu = useCallback(() => setOpen(false), []);
+  const closeMenu = useCallback((restoreFocus = true) => {
+    setOpen(false);
+    if (restoreFocus) {
+      window.requestAnimationFrame(() => triggerRef.current?.focus());
+    }
+  }, []);
 
   useLayoutEffect(() => {
     const panel = panelRef.current;
@@ -107,13 +113,46 @@ export function StaggeredMegaMenu() {
   useEffect(() => {
     if (!open) return;
 
+    const panel = panelRef.current;
+    if (!panel) return;
+
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
+    const getFocusable = () => Array.from(panel.querySelectorAll<HTMLElement>(focusableSelector))
+      .filter((element) => !element.hasAttribute("disabled") && element.getAttribute("aria-hidden") !== "true");
+
+    window.requestAnimationFrame(() => {
+      getFocusable()[0]?.focus();
+    });
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        event.preventDefault();
         closeMenu();
         triggerRef.current?.focus();
+        return;
+      }
+
+      if (event.key === "Tab") {
+        const focusable = getFocusable();
+        if (!focusable.length) {
+          event.preventDefault();
+          panel.focus();
+          return;
+        }
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        const active = document.activeElement;
+
+        if (event.shiftKey && (active === first || active === panel)) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && active === last) {
+          event.preventDefault();
+          first.focus();
+        }
       }
     };
 
@@ -125,7 +164,7 @@ export function StaggeredMegaMenu() {
   }, [closeMenu, open]);
 
   const handleNavigate = () => {
-    closeMenu();
+    closeMenu(false);
   };
 
   return (
@@ -155,8 +194,8 @@ export function StaggeredMegaMenu() {
           className={styles.backdrop}
           data-mega-backdrop
           aria-label="Fechar menu"
-          tabIndex={open ? 0 : -1}
-          onClick={closeMenu}
+          tabIndex={-1}
+          onClick={() => closeMenu()}
         />
 
         <div ref={(node) => { layerRefs.current[0] = node; }} className={`${styles.layer} ${styles.layerSoft}`} aria-hidden="true" />
@@ -170,6 +209,7 @@ export function StaggeredMegaMenu() {
           role="dialog"
           aria-modal="true"
           aria-label="Menu completo do Dr. Tasks"
+          tabIndex={-1}
         >
           <div className={styles.panelTop}>
             <Image

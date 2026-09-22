@@ -54,12 +54,14 @@ const productViews = [
   },
 ];
 
+const AUTO_ADVANCE_DELAY_MS = 5200;
 
 export function ProductShowcase() {
   const [active, setActive] = useState(0);
   const [focusIndex, setFocusIndex] = useState(0);
   const [focusToken, setFocusToken] = useState(0);
   const [isOrbitMoving, setIsOrbitMoving] = useState(false);
+  const [paused, setPaused] = useState(false);
   const reducedMotion = useReducedMotion();
   const current = productViews[active];
 
@@ -90,12 +92,14 @@ export function ProductShowcase() {
   };
 
   useEffect(() => {
+    if (reducedMotion || isOrbitMoving || paused) return;
 
     const timeout = window.setTimeout(() => {
       triggerFocus(nextProductView(active, productViews.length));
     }, AUTO_ADVANCE_DELAY_MS);
 
     return () => window.clearTimeout(timeout);
+  }, [active, isOrbitMoving, paused, reducedMotion, triggerFocus]);
 
   return (
     <section className="section product-showcase-section" id="produto">
@@ -106,6 +110,7 @@ export function ProductShowcase() {
             <h2>Uma plataforma. Diferentes formas de enxergar sua operação.</h2>
           </div>
           <p>
+            Veja a interface real em diferentes leituras da operação. A animação ajuda a explorar as telas sem substituir a informação principal.
           </p>
         </div>
 
@@ -128,6 +133,7 @@ export function ProductShowcase() {
           ))}
         </div>
 
+        <div className="product-orbit-stage" id={`product-${current.id}`} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
           <div className="product-orbit-canvas">
             <div className="product-orbit-aura" aria-hidden="true" />
             <div className="product-orbit-hint"><span /> Arraste para explorar em 3D</div>
@@ -180,11 +186,15 @@ export function ProductShowcase() {
                     <li key={bullet}><span />{bullet}</li>
                   ))}
                 </ul>
+                <a href="#recursos" className="text-link product-detail-link">Explorar possibilidades <ArrowRightIcon /></a>
               </motion.div>
             </AnimatePresence>
 
+            <div className="product-orbit-status">
               <span>{current.number}</span>
               <i />
+              <small>{isOrbitMoving ? "transição em andamento" : paused ? "exploração pausada" : "pausa para leitura · troca automática"}</small>
+              <button type="button" className="product-pause-button" onClick={() => setPaused(value => !value)}>{paused ? "Retomar" : "Pausar"}</button>
             </div>
           </aside>
         </div>

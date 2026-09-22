@@ -8,6 +8,7 @@ import {
   diagnosticStages,
   operationalCase,
 } from "@/lib/operationalDiagnostic";
+import { getNextTabIndex } from "@/lib/accessibility";
 import styles from "./PainBand.module.css";
 
 const questionIcons = [WorkflowIcon, UsersIcon, HistoryIcon] as const;
@@ -17,26 +18,36 @@ export function PainBand() {
   const reducedMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isInteracting, setIsInteracting] = useState(false);
+  const [manualPaused, setManualPaused] = useState(false);
   const activeQuestion = diagnosticQuestions[activeIndex];
   const ActiveIcon = questionIcons[activeIndex];
   const activeStageIndex = diagnosticStages.indexOf(operationalCase.currentStage);
+  const paused = manualPaused || isInteracting;
+
+  const handleTabKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+    const nextIndex = getNextTabIndex(index, diagnosticQuestions.length, event.key);
+    if (nextIndex === null) return;
+    event.preventDefault();
+    setActiveIndex(nextIndex);
+    const tabs = event.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>('[role="tab"]');
+    tabs?.[nextIndex]?.focus();
+  };
 
   useEffect(() => {
-    if (reducedMotion || isInteracting) return;
+    if (reducedMotion || paused) return;
 
     const interval = window.setInterval(() => {
       setActiveIndex(current => (current + 1) % diagnosticQuestions.length);
     }, AUTOPLAY_MS);
 
     return () => window.clearInterval(interval);
-  }, [reducedMotion, isInteracting]);
+  }, [reducedMotion, paused]);
 
   return (
     <section className={`pain-band section ${styles.section}`} id="dor">
       <div className="container">
         <div className={styles.heading}>
           <div>
-            <span className="eyebrow">Clareza operacional</span>
             <h2>Feito para quem já perdeu tempo perguntando pelo status.</h2>
           </div>
           <p>
@@ -69,9 +80,11 @@ export function PainBand() {
                   <button
                     key={item.id}
                     type="button"
+                    id={`diagnostic-tab-${item.id}`}
                     role="tab"
                     aria-selected={isActive}
                     aria-controls="operational-diagnostic-panel"
+                    tabIndex={isActive ? 0 : -1}
                     className={`${styles.questionButton} ${isActive ? styles.questionButtonActive : ""}`}
                     onClick={() => setActiveIndex(index)}
                     onMouseEnter={() => setActiveIndex(index)}
@@ -80,6 +93,7 @@ export function PainBand() {
                       setIsInteracting(true);
                     }}
                     onBlur={() => setIsInteracting(false)}
+                    onKeyDown={(event) => handleTabKeyDown(event, index)}
                   >
                     <span className={styles.questionNumber}>{item.number}</span>
                     <span className={styles.questionIcon}><Icon /></span>
@@ -94,10 +108,21 @@ export function PainBand() {
             </div>
 
             <div className={styles.railFooter}>
+              <span className={styles.liveDot} aria-hidden="true" />
+              <span>{reducedMotion ? "Movimento reduzido" : paused ? "Rotação pausada" : "Rotação automática"}</span>
+              <button
+                type="button"
+                className={styles.railPauseButton}
+                aria-pressed={manualPaused}
+                disabled={Boolean(reducedMotion)}
+                onClick={() => setManualPaused((value) => !value)}
+              >
+                {reducedMotion ? "Estático" : manualPaused ? "Retomar" : "Pausar"}
+              </button>
             </div>
           </div>
 
-          <div className={styles.casePanel} id="operational-diagnostic-panel" role="tabpanel">
+          <div className={styles.casePanel} id="operational-diagnostic-panel" role="tabpanel" aria-labelledby={`diagnostic-tab-${activeQuestion.id}`}>
             <div className={styles.caseHeader}>
               <div>
                 <span className={styles.caseCode}>{operationalCase.code}</span>

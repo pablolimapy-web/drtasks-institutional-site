@@ -509,3 +509,49 @@ p{color:var(--muted);line-height:1.7}
   .hero-copy,.hero-product,.hero-product-stage,.product-window-hero,.product-window-image-wrap{min-height:510px}
   .hero-product,.hero-product-stage{max-width:610px}
 }
+
+/* v31 — progressive WebGL loading */
+.product-webgl-loading{
+  position:absolute;
+  inset:14% 8%;
+  z-index:2;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:22px;
+  background:linear-gradient(145deg,rgba(23,39,65,.94),rgba(8,20,39,.98));
+}
+.product-webgl-loading span{
+  width:28px;
+  height:28px;
+  border:2px solid rgba(143,176,255,.22);
+  border-top-color:#8fb0ff;
+  border-radius:50%;
+  animation:productWebglSpin .8s linear infinite;
+}
+.product-pause-button{
+  grid-column:1/-1;
+  justify-self:start;
+  border:1px solid rgba(143,176,255,.28);
+  border-radius:999px;
+  background:rgba(255,255,255,.05);
+  color:#dbe6f7;
+  padding:7px 10px;
+  font-size:9px;
+  font-weight:750;
+  cursor:pointer;
+}
+.product-pause-button:focus-visible{outline:2px solid #8fb0ff;outline-offset:3px}
+.product-pause-button:disabled{cursor:default;opacity:.66}
+@keyframes productWebglSpin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.product-webgl-loading span{animation:none}}
+
+/* v31 — visible keyboard focus across interactive controls */
+:where(a, button, input, select, textarea, [role="tab"]):focus-visible {
+  outline: 3px solid rgba(28, 85, 201, .28);
+  outline-offset: 3px;
+}
+
+:where([role="tab"])[aria-selected="true"]:focus-visible {
+  outline-color: rgba(28, 85, 201, .42);
+}

@@ -1,2 +1,22 @@
+import type { Metadata } from "next";
 import { InstitutionalPlaceholder } from "@/components/InstitutionalPlaceholder";
-export default function Page(){ return <InstitutionalPlaceholder eyebrow="Aplicação" title="O sistema autenticado fica separado do site institucional." text="Em produção, a recomendação é usar app.drtasks.com.br para o produto e drtasks.com.br para o institucional."/> }
+
+export const metadata: Metadata = {
+  title: "Aplicação — Dr. Tasks",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
+export default function Page() {
+  return (
+    <InstitutionalPlaceholder
+      eyebrow="Aplicação"
+      title="O produto autenticado fica separado do site institucional."
+      text="Esta rota permanece reservada e não faz parte da navegação pública do site."
+      primaryLabel="Entrar"
+      primaryHref="/login"
+    />
+  );
+}

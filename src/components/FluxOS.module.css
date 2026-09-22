@@ -706,3 +706,18 @@
     transform: none;
   }
 }
+
+.pauseButton:disabled {
+  cursor: default;
+  opacity: .68;
+  transform: none;
+}
+
+.pauseButton:focus-visible {
+  outline: 3px solid rgba(28, 85, 201, .18);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pauseButton { display: none; }
+}

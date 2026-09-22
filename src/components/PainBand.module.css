@@ -820,3 +820,23 @@
     transition: none !important;
   }
 }
+
+.railPauseButton {
+  margin-left: auto;
+  border: 1px solid #d6e1f4;
+  border-radius: 999px;
+  background: #fff;
+  color: #5f6f85;
+  padding: 6px 9px;
+  font: inherit;
+  font-size: 9px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.railPauseButton:hover:not(:disabled) { color: var(--brand); border-color: #b8caef; }
+.railPauseButton:focus-visible { outline: 3px solid rgba(28,85,201,.18); outline-offset: 2px; }
+.railPauseButton:disabled { cursor: default; opacity: .65; }
+
+@media (prefers-reduced-motion: reduce) {
+  .railPauseButton { display: none; }
+}

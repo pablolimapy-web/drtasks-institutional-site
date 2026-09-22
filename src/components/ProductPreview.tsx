@@ -80,7 +80,9 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0 }: ProductPreviewPr
   const tableRowsReady = sceneIndex >= 3;
   const rowSpotlight = scene.id === "rowSpotlight";
   const drawerOpen = sceneIndex >= 5;
-  const drawerCallouts = scene.id === "drawerCallouts";
+  const showKpiAnnotations = scene.id === "kpiFocus";
+  const showTableAnnotation = scene.id === "tableBuild" || scene.id === "rowSpotlight";
+  const showDrawerAnnotation = scene.id === "drawer" || scene.id === "drawerCallouts";
   const selected = ROWS[0];
 
   return (
@@ -165,14 +167,6 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0 }: ProductPreviewPr
               ))}
             </div>
 
-            <AnimatePresence>
-              {kpiFocus && (
-                <motion.div className={`${styles.callout} ${styles.kpiCallout}`} initial={{ opacity: 0, y: 18, scale: 0.94 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.55, delay: 0.75 }}>
-                  <small>Visão operacional</small><strong>267 OS e R$ 3,1M organizados antes de qualquer clique.</strong>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
             <motion.section
               className={styles.tableCard}
               initial={false}
@@ -246,9 +240,6 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0 }: ProductPreviewPr
                   </div>
                   <div className={styles.spotlightProgress}><span><i style={{ width: `${selected.progress}%` }} /></span><b>{selected.progress}% concluído</b></div>
                 </motion.div>
-                <motion.div className={`${styles.callout} ${styles.rowCallout}`} initial={{ opacity: 0, x: 38, scale: 0.92 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={{ opacity: 0, x: 12 }} transition={{ duration: 0.62, delay: 0.95 }}>
-                  <small>Uma OS, sem ruído</small><strong>A linha sai do quadro e vira contexto: prazo, estágio, valor e responsável.</strong>
-                </motion.div>
               </>
             )}
           </AnimatePresence>
@@ -277,17 +268,8 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0 }: ProductPreviewPr
           </motion.aside>
 
           <AnimatePresence>
-            {drawerCallouts && (
-              <>
-                <motion.div className={`${styles.callout} ${styles.stageCallout}`} initial={{ opacity: 0, x: -28, scale: 0.92 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.62, delay: 0.55 }}><small>Próximo passo claro</small><strong>Estágio, SLA e ação recomendada no mesmo contexto.</strong></motion.div>
-                <motion.div className={`${styles.callout} ${styles.healthCallout}`} initial={{ opacity: 0, x: -28, scale: 0.92 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.62, delay: 1.35 }}><small>Saúde da OS</small><strong>Risco e progresso ficam visíveis sem trocar de tela.</strong></motion.div>
-              </>
-            )}
-          </AnimatePresence>
-
-          <AnimatePresence>
             {intro && !reducedMotion && (
-              <motion.div className={styles.brandIntro} initial={{ opacity: 1 }} exit={{ opacity: 0, scale: 1.08, filter: "blur(8px)" }} transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}>
+              <motion.div className={styles.brandIntro} initial={{ opacity: 1 }} exit={{ opacity: 0, scale: 1.035, filter: "blur(2px)" }} transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}>
                 <div className={styles.brandGrid} />
                 <div className={styles.dropField}>{Array.from({ length: 18 }, (_, index) => <Drop key={index} index={index} />)}</div>
                 <span className={`${styles.brandOrb} ${styles.brandOrbOne}`} />
@@ -306,6 +288,75 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0 }: ProductPreviewPr
           </AnimatePresence>
         </div>
       </motion.div>
+
+      <div className={styles.externalAnnotations} aria-hidden="true">
+        <AnimatePresence mode="sync">
+          {showKpiAnnotations && (
+            <>
+              <motion.div
+                key="kpi-metric"
+                className={`${styles.externalAnnotation} ${styles.annotationTop} ${styles.annotationTopLeft}`}
+                initial={{ opacity: 0, x: -28, y: 10, scale: 0.94 }}
+                animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+                exit={{ opacity: 0, x: -14, y: -4, scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 180, damping: 22, mass: 0.78 }}
+              >
+                <div className={`${styles.externalPill} ${styles.externalDriftOne}`}>
+                  <i />
+                  <span>R$ 3,1M organizados no FluxOS</span>
+                </div>
+              </motion.div>
+              <motion.div
+                key="kpi-context"
+                className={`${styles.externalAnnotation} ${styles.annotationTop} ${styles.annotationTopRight}`}
+                initial={{ opacity: 0, x: 30, y: 12, scale: 0.92 }}
+                animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+                exit={{ opacity: 0, x: 14, y: -4, scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 170, damping: 21, mass: 0.8, delay: 0.18 }}
+              >
+                <div className={`${styles.externalCard} ${styles.externalDriftTwo}`}>
+                  <span className={styles.externalEyebrow}>Operação ao vivo</span>
+                  <strong>267 OS ativas em um só fluxo.</strong>
+                  <small>Indicadores operacionais entram antes da leitura detalhada da tabela.</small>
+                </div>
+              </motion.div>
+            </>
+          )}
+
+          {showTableAnnotation && (
+            <motion.div
+              key="table-context"
+              className={`${styles.externalAnnotation} ${styles.annotationBottom} ${styles.annotationBottomLeft}`}
+              initial={{ opacity: 0, x: -24, y: -10, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+              exit={{ opacity: 0, x: -12, y: 4, scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 175, damping: 23, mass: 0.78 }}
+            >
+              <div className={`${styles.externalPill} ${styles.externalDriftThree}`}>
+                <i />
+                <span>Timeline, responsáveis e próximos passos.</span>
+              </div>
+            </motion.div>
+          )}
+
+          {showDrawerAnnotation && (
+            <motion.div
+              key="drawer-context"
+              className={`${styles.externalAnnotation} ${styles.annotationBottom} ${styles.annotationBottomRight}`}
+              initial={{ opacity: 0, x: 28, y: -12, scale: 0.93 }}
+              animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
+              exit={{ opacity: 0, x: 14, y: 5, scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 168, damping: 22, mass: 0.8 }}
+            >
+              <div className={`${styles.externalCard} ${styles.externalDriftFour}`}>
+                <span className={styles.externalEyebrow}>Próxima ação</span>
+                <strong>Drawer, SLA e saúde da OS.</strong>
+                <small>O contexto detalhado aparece só quando a apresentação chega à OS.</small>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
