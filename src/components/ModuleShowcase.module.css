@@ -1,0 +1,441 @@
+.section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: var(--section-space) 0;
+  --ambient-primary: rgba(28, 85, 201, .095);
+  --ambient-secondary: rgba(91, 139, 221, .055);
+  background: #fff;
+  color: var(--text);
+}
+
+.section[data-active-module="projects"] {
+  --ambient-primary: rgba(38, 91, 199, .09);
+  --ambient-secondary: rgba(115, 151, 218, .05);
+}
+
+.section[data-active-module="finance"] {
+  --ambient-primary: rgba(23, 98, 184, .088);
+  --ambient-secondary: rgba(77, 137, 206, .05);
+}
+
+.section[data-active-module="team"] {
+  --ambient-primary: rgba(52, 86, 184, .085);
+  --ambient-secondary: rgba(102, 129, 208, .05);
+}
+
+.section[data-active-module="resources"] {
+  --ambient-primary: rgba(31, 108, 176, .082);
+  --ambient-secondary: rgba(91, 151, 204, .048);
+}
+
+.ambient {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(248, 251, 255, .62), rgba(255, 255, 255, 0) 44%);
+  pointer-events: none;
+}
+
+.ambient::before,
+.ambient::after {
+  position: absolute;
+  content: "";
+  pointer-events: none;
+}
+
+.ambient::before {
+  width: min(760px, 52vw);
+  aspect-ratio: 1.18;
+  right: 4%;
+  top: 14%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, var(--ambient-primary), transparent 68%);
+  filter: blur(14px);
+  opacity: .72;
+  animation: ambientBreath 9s cubic-bezier(.45, 0, .35, 1) infinite alternate;
+}
+
+.ambient::after {
+  width: min(920px, 62vw);
+  height: 240px;
+  right: -8%;
+  bottom: 9%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, var(--ambient-secondary), transparent 72%);
+  filter: blur(10px);
+  opacity: .58;
+  transform: rotate(-5deg);
+  animation: ambientDrift 13s cubic-bezier(.45, 0, .35, 1) infinite alternate;
+}
+
+.inner {
+  margin-inline: auto;
+}
+
+.showcaseGrid {
+  display: grid;
+  grid-template-columns: minmax(360px, .72fr) minmax(0, 1.28fr);
+  gap: clamp(18px, 2vw, 32px);
+  align-items: center;
+  min-height: 680px;
+}
+
+.copyColumn {
+  display: flex;
+  min-width: 0;
+  min-height: 540px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 18px 0 12px;
+}
+
+.liveRegion {
+  position: relative;
+  min-height: 455px;
+}
+
+.copyMotion {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: min(100%, 560px);
+  transform-origin: left center;
+  will-change: opacity, transform, filter;
+}
+
+.moduleLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 720;
+  line-height: 1;
+  letter-spacing: -.018em;
+}
+
+.moduleLabel::before {
+  width: 22px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--brand);
+  content: "";
+  transform-origin: left center;
+  animation: signalPulse 3.8s ease-in-out infinite;
+}
+
+.copyMotion h2 {
+  margin: 22px 0 0;
+  max-width: 590px;
+  color: var(--text);
+  font-size: clamp(46px, 4.2vw, 62px);
+  font-weight: 620;
+  line-height: 1.01;
+  letter-spacing: -.052em;
+  text-wrap: balance;
+}
+
+.description {
+  margin: 24px 0 0;
+  max-width: 510px;
+  color: var(--muted);
+  font-size: clamp(17px, 1.25vw, 19px);
+  line-height: 1.56;
+  letter-spacing: -.012em;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px 22px;
+  align-items: center;
+  margin-top: 34px;
+}
+
+.nextButton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 48px;
+  border: 1px solid var(--brand);
+  border-radius: 10px;
+  background: var(--brand);
+  padding: 0 20px;
+  color: #fff;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 720;
+  overflow: hidden;
+  cursor: pointer;
+  isolation: isolate;
+  box-shadow: 0 12px 26px rgba(28, 85, 201, .16);
+  transition: transform .22s cubic-bezier(.22, 1, .36, 1), box-shadow .22s ease, background .22s ease;
+}
+
+.nextButton::after {
+  position: absolute;
+  top: -40%;
+  bottom: -40%;
+  left: -28%;
+  width: 22%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .34), transparent);
+  content: "";
+  opacity: 0;
+  transform: translateX(-190%) skewX(-18deg);
+  transition: transform .62s cubic-bezier(.22, 1, .36, 1), opacity .18s ease;
+  pointer-events: none;
+}
+
+.nextButton span {
+  font-size: 17px;
+  transition: transform .22s cubic-bezier(.22, 1, .36, 1);
+}
+
+.nextButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 17px 34px rgba(28, 85, 201, .22);
+}
+
+.nextButton:hover::after {
+  opacity: .62;
+  transform: translateX(660%) skewX(-18deg);
+}
+
+.nextButton:hover span {
+  transform: translateX(4px);
+}
+
+.nextButton:active {
+  transform: translateY(0) scale(.985);
+  box-shadow: 0 8px 18px rgba(28, 85, 201, .17);
+}
+
+.nextButton:focus-visible,
+.productLink:focus-visible {
+  outline: 2px solid rgba(28, 85, 201, .5);
+  outline-offset: 4px;
+}
+
+.productLink {
+  position: relative;
+  color: #505c6b;
+  font-size: 13px;
+  font-weight: 680;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+
+.productLink::after {
+  position: absolute;
+  right: 0;
+  bottom: -5px;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  content: "";
+  opacity: .25;
+  transform: scaleX(.35);
+  transform-origin: left;
+  transition: opacity .2s ease, transform .24s cubic-bezier(.22, 1, .36, 1);
+}
+
+.productLink:hover {
+  color: var(--brand);
+}
+
+.productLink:hover::after {
+  opacity: .65;
+  transform: scaleX(1);
+}
+
+.deckColumn {
+  position: relative;
+  min-width: 0;
+  min-height: 680px;
+  transform-origin: center center;
+  perspective: 1400px;
+  will-change: opacity, transform;
+}
+
+.deckFloat,
+.deckParallax {
+  position: absolute;
+  inset: 0;
+}
+
+.deckFloat {
+  transform-origin: 58% 58%;
+  animation: deckFloat 8s cubic-bezier(.45, 0, .35, 1) infinite alternate;
+}
+
+.deckParallax {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.swapStage {
+  position: absolute;
+  inset: 0;
+  min-height: 680px;
+}
+
+.demoViewport {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+  background: #f7f9fc;
+}
+
+.demoViewport > * {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+}
+
+@keyframes ambientBreath {
+  0% {
+    opacity: .55;
+    transform: translate3d(-1.5%, 1%, 0) scale(.96);
+  }
+  100% {
+    opacity: .82;
+    transform: translate3d(2%, -1.5%, 0) scale(1.045);
+  }
+}
+
+@keyframes ambientDrift {
+  0% {
+    opacity: .42;
+    transform: translate3d(-2%, 0, 0) rotate(-5deg) scale(.98);
+  }
+  100% {
+    opacity: .66;
+    transform: translate3d(2.5%, -3%, 0) rotate(-2deg) scale(1.03);
+  }
+}
+
+@keyframes deckFloat {
+  0% {
+    transform: translate3d(0, 2px, 0) rotateZ(-.08deg);
+  }
+  100% {
+    transform: translate3d(0, -5px, 0) rotateZ(.08deg);
+  }
+}
+
+@keyframes signalPulse {
+  0%, 100% {
+    opacity: .72;
+    transform: scaleX(.78);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 1180px) {
+  .showcaseGrid {
+    grid-template-columns: minmax(330px, .78fr) minmax(0, 1.22fr);
+    gap: 18px;
+  }
+
+  .copyMotion h2 {
+    font-size: clamp(42px, 4.5vw, 54px);
+  }
+}
+
+@media (max-width: 1040px) {
+  .showcaseGrid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    min-height: 0;
+  }
+
+  .copyColumn {
+    min-height: 0;
+  }
+
+  .liveRegion {
+    min-height: 480px;
+  }
+
+  .copyMotion {
+    width: min(100%, 720px);
+  }
+
+  .deckColumn,
+  .swapStage {
+    min-height: 580px;
+  }
+}
+
+@media (max-width: 720px) {
+  .showcaseGrid {
+    gap: 18px;
+  }
+
+  .liveRegion {
+    min-height: 510px;
+  }
+
+  .copyMotion h2 {
+    margin-top: 18px;
+    font-size: clamp(38px, 10vw, 48px);
+  }
+
+  .description {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+
+  .actions {
+    margin-top: 28px;
+  }
+
+
+  .deckColumn,
+  .swapStage {
+    min-height: 430px;
+  }
+}
+
+@media (max-width: 480px) {
+  .liveRegion {
+    min-height: 540px;
+  }
+
+
+  .deckColumn,
+  .swapStage {
+    min-height: 360px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .copyMotion,
+  .deckColumn,
+  .deckParallax {
+    will-change: auto;
+  }
+
+  .ambient::before,
+  .ambient::after,
+  .deckFloat,
+  .moduleLabel::before {
+    animation: none;
+  }
+
+  .nextButton,
+  .nextButton::after,
+  .nextButton span,
+  .productLink,
+  .productLink::after {
+    transition: none;
+  }
+}

@@ -1,0 +1,191 @@
+.formShell {
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.09);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 34px 100px rgba(18, 38, 72, 0.11);
+}
+
+.formHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 30px 32px 24px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.formHead span {
+  color: var(--brand);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.formHead h2 {
+  max-width: 560px;
+  margin: 10px 0 0;
+  color: var(--ink);
+  font-size: clamp(27px, 2.4vw, 38px);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+}
+
+.formHead p {
+  max-width: 320px;
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.validationNotice {
+  margin: 24px 32px 0;
+  padding: 15px 17px;
+  border: 1px solid rgba(28, 85, 201, 0.16);
+  border-radius: 16px;
+  background: rgba(28, 85, 201, 0.055);
+  color: #33445f;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.validationNotice strong {
+  color: var(--brand);
+}
+
+.form {
+  display: grid;
+  gap: 18px;
+  padding: 28px 32px 32px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.fieldFull {
+  grid-column: 1 / -1;
+}
+
+.field label {
+  color: #33445f;
+  font-size: 12px;
+  font-weight: 760;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  border: 1px solid rgba(15, 23, 42, 0.13);
+  border-radius: 14px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.field input,
+.field select {
+  min-height: 48px;
+  padding: 0 14px;
+}
+
+.field textarea {
+  min-height: 122px;
+  resize: vertical;
+  padding: 13px 14px;
+  line-height: 1.55;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: rgba(28, 85, 201, 0.5);
+  box-shadow: 0 0 0 4px rgba(28, 85, 201, 0.09);
+}
+
+.field input[aria-invalid="true"],
+.field select[aria-invalid="true"],
+.field textarea[aria-invalid="true"] {
+  border-color: rgba(197, 54, 54, 0.45);
+  background: rgba(197, 54, 54, 0.025);
+}
+
+.error {
+  margin: 0;
+  color: #b23c3c;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-top: 4px;
+}
+
+.footer p {
+  max-width: 440px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.submit {
+  min-width: 188px;
+}
+
+.submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+  box-shadow: none;
+}
+
+.status {
+  padding: 13px 15px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.success {
+  border: 1px solid rgba(23, 128, 91, 0.2);
+  background: rgba(23, 128, 91, 0.07);
+  color: #176b50;
+}
+
+.failure {
+  border: 1px solid rgba(178, 60, 60, 0.2);
+  background: rgba(178, 60, 60, 0.06);
+  color: #953535;
+}
+
+@media (max-width: 760px) {
+  .formHead {
+    display: grid;
+    padding: 24px 22px 20px;
+  }
+
+  .formHead p { max-width: none; }
+  .validationNotice { margin: 20px 22px 0; }
+  .form { padding: 24px 22px 26px; }
+  .grid { grid-template-columns: 1fr; }
+  .fieldFull { grid-column: auto; }
+  .footer { align-items: stretch; flex-direction: column; }
+  .submit { width: 100%; }
+}

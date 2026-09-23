@@ -1,0 +1,377 @@
+.background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 72% 25%, rgba(218, 233, 255, 0.56), transparent 31%),
+    radial-gradient(circle at 28% 80%, rgba(227, 238, 255, 0.54), transparent 34%),
+    linear-gradient(180deg, #fff 0%, #fbfdff 51%, #fff 100%);
+}
+
+.baseWash {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 58% 52% at 50% 44%, rgba(255,255,255,.98) 0%, rgba(255,255,255,.8) 42%, transparent 74%),
+    linear-gradient(90deg, rgba(255,255,255,.86) 0%, rgba(255,255,255,.24) 26%, transparent 50%, rgba(255,255,255,.12) 74%, rgba(255,255,255,.66) 100%);
+}
+
+.ambientSweep {
+  position: absolute;
+  inset: -15% -25%;
+  opacity: .42;
+  background:
+    radial-gradient(circle at 72% 15%, rgba(92, 154, 255, .16) 0 5%, transparent 17%),
+    radial-gradient(circle at 32% 84%, rgba(75, 139, 255, .12) 0 4%, transparent 18%);
+  filter: blur(18px);
+  animation: ambientSweep 14s ease-in-out infinite alternate;
+}
+
+.ribbonSvg {
+  position: absolute;
+  inset: -2.5% -2%;
+  width: 104%;
+  height: 105%;
+  overflow: visible;
+}
+
+.topRibbonSoft {
+  transform-origin: 70% 10%;
+  animation: topRibbonDrift 15s ease-in-out infinite alternate;
+}
+
+.topRibbonFine {
+  transform-origin: 66% 12%;
+  animation: topFineDrift 11.5s ease-in-out infinite alternate-reverse;
+}
+
+.middleRibbon {
+  transform-origin: 50% 50%;
+  animation: middleRibbonDrift 18s ease-in-out infinite alternate;
+}
+
+.middleRibbonFine {
+  transform-origin: 50% 48%;
+  animation: middleFineDrift 13.6s ease-in-out infinite alternate-reverse;
+}
+
+.bottomRibbon {
+  transform-origin: 32% 82%;
+  animation: bottomRibbonDrift 17s ease-in-out infinite alternate;
+}
+
+.bottomRibbonFine {
+  transform-origin: 34% 80%;
+  animation: bottomFineDrift 12.8s ease-in-out infinite alternate-reverse;
+}
+
+.shimmerTop path {
+  animation: shimmerTop 7.8s linear infinite;
+}
+
+.shimmerTopAlt path {
+  animation: shimmerTopAlt 5.9s linear infinite -1.4s;
+}
+
+.shimmerMiddle path {
+  animation: shimmerMiddle 9.4s linear infinite -4.1s;
+}
+
+.shimmerBottom path {
+  animation: shimmerBottom 8.7s linear infinite -2.1s;
+}
+
+.shimmerBottomAlt path {
+  animation: shimmerBottomAlt 6.7s linear infinite -3.2s;
+}
+
+.dotField {
+  position: absolute;
+  width: 280px;
+  height: 150px;
+  opacity: 0.34;
+  background-image: radial-gradient(circle, rgba(61, 124, 236, 0.62) 1.15px, transparent 1.4px);
+  background-size: 13px 13px;
+  mask-image: radial-gradient(ellipse at center, #000 10%, rgba(0,0,0,.7) 43%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 10%, rgba(0,0,0,.7) 43%, transparent 78%);
+  animation: dotBreathe 8s ease-in-out infinite;
+}
+
+.dotFieldTop {
+  right: 5.5%;
+  top: 10%;
+  transform: rotate(5deg);
+}
+
+.dotFieldBottom {
+  left: -1%;
+  bottom: 3.5%;
+  transform: rotate(-4deg);
+  animation-delay: -3.3s;
+}
+
+.dotFieldRight {
+  width: 210px;
+  height: 120px;
+  right: 15%;
+  bottom: 11%;
+  opacity: .2;
+  transform: rotate(8deg) scale(.88);
+  animation-delay: -5.2s;
+}
+
+.glint {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow:
+    0 0 5px 2px rgba(255,255,255,.98),
+    0 0 14px 4px rgba(122,190,255,.74),
+    0 0 32px 8px rgba(52,116,235,.28);
+  animation: glintPulse 4.2s ease-in-out infinite;
+  will-change: opacity, transform, filter;
+}
+
+.glint::before,
+.glint::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.glint::before {
+  width: 76px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.96), transparent);
+}
+
+.glint::after {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,.9), transparent);
+}
+
+.glintOne { left: 56.2%; top: 3.6%; animation-delay: -.8s; }
+.glintTwo { right: 4.8%; top: 33.5%; animation-delay: -2.4s; }
+.glintThree { left: 8.5%; bottom: 19.5%; animation-delay: -1.7s; }
+.glintFour { left: 36%; bottom: 7.5%; animation-delay: -3.2s; }
+.glintFive { left: 68%; top: 19.5%; animation-delay: -1.2s; transform: scale(.78); }
+.glintSix { right: 18%; bottom: 24%; animation-delay: -3.7s; transform: scale(.72); }
+.glintSeven { left: 18.5%; bottom: 12.5%; animation-delay: -5.1s; transform: scale(.66); }
+.glintEight { right: 34%; top: 29%; animation-delay: -4.4s; transform: scale(.58); }
+
+.glintBlinkA { animation-name: glintPulse, lightBlinkA; animation-duration: 4.2s, 7.1s; animation-timing-function: ease-in-out, linear; animation-iteration-count: infinite, infinite; }
+.glintBlinkB { animation-name: glintPulse, lightBlinkB; animation-duration: 4.7s, 8.3s; animation-timing-function: ease-in-out, linear; animation-iteration-count: infinite, infinite; }
+.glintBlinkC { animation-name: glintPulse, lightBlinkC; animation-duration: 3.8s, 6.4s; animation-timing-function: ease-in-out, linear; animation-iteration-count: infinite, infinite; }
+
+.microFlash {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: .18;
+  box-shadow: 0 0 10px 3px rgba(127, 191, 255, .54), 0 0 22px 5px rgba(43, 111, 236, .18);
+  animation: microFlash 5.6s linear infinite;
+}
+
+.microFlash::before,
+.microFlash::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: .88;
+}
+
+.microFlash::before {
+  width: 34px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #fff, transparent);
+}
+
+.microFlash::after {
+  width: 1px;
+  height: 22px;
+  background: linear-gradient(180deg, transparent, #fff, transparent);
+}
+
+.microFlashOne { left: 74%; top: 13%; animation-delay: -1.7s; }
+.microFlashTwo { right: 8%; top: 31%; animation-delay: -4.2s; }
+.microFlashThree { left: 30%; bottom: 10%; animation-delay: -2.9s; }
+.microFlashFour { right: 27%; bottom: 17%; animation-delay: -5.1s; }
+
+.centerWash {
+  position: absolute;
+  left: 3%;
+  top: 15%;
+  width: 41%;
+  height: 61%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,.91) 0%, rgba(255,255,255,.72) 45%, transparent 76%);
+  filter: blur(14px);
+}
+
+.edgeWash {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.42) 0%, transparent 12%, transparent 83%, rgba(255,255,255,.5) 100%),
+    linear-gradient(90deg, rgba(255,255,255,.26), transparent 8%, transparent 92%, rgba(255,255,255,.22));
+}
+
+.paused *,
+.paused *::before,
+.paused *::after {
+  animation-play-state: paused !important;
+}
+
+@keyframes ambientSweep {
+  0% { transform: translate3d(-2.5%, -1%, 0) scale(1); opacity: .28; }
+  50% { opacity: .5; }
+  100% { transform: translate3d(3.5%, 1.8%, 0) scale(1.055); opacity: .36; }
+}
+
+@keyframes topRibbonDrift {
+  0% { transform: translate3d(-12px, -8px, 0) rotate(-.35deg) scale(1.01); }
+  100% { transform: translate3d(18px, 12px, 0) rotate(.3deg) scale(1.028); }
+}
+
+@keyframes topFineDrift {
+  0% { transform: translate3d(18px, -4px, 0) rotate(.18deg) scale(1.005); opacity: .72; }
+  100% { transform: translate3d(-22px, 12px, 0) rotate(-.26deg) scale(1.022); opacity: 1; }
+}
+
+@keyframes middleRibbonDrift {
+  0% { transform: translate3d(-10px, 3px, 0) scaleX(1.01); opacity: .8; }
+  100% { transform: translate3d(15px, -8px, 0) scaleX(1.025); opacity: 1; }
+}
+
+@keyframes middleFineDrift {
+  0% { transform: translate3d(16px, -6px, 0) scaleX(1.014); opacity: .65; }
+  100% { transform: translate3d(-13px, 9px, 0) scaleX(1.028); opacity: .96; }
+}
+
+@keyframes bottomRibbonDrift {
+  0% { transform: translate3d(-15px, 10px, 0) rotate(.2deg) scale(1.012); }
+  100% { transform: translate3d(20px, -12px, 0) rotate(-.35deg) scale(1.03); }
+}
+
+@keyframes bottomFineDrift {
+  0% { transform: translate3d(20px, 7px, 0) rotate(-.12deg) scale(1.006); opacity: .7; }
+  100% { transform: translate3d(-18px, -9px, 0) rotate(.2deg) scale(1.024); opacity: 1; }
+}
+
+@keyframes shimmerTop {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: -1; }
+}
+
+@keyframes shimmerTopAlt {
+  from { stroke-dashoffset: 1.2; }
+  to { stroke-dashoffset: -.8; }
+}
+
+@keyframes shimmerMiddle {
+  from { stroke-dashoffset: -.4; }
+  to { stroke-dashoffset: 1.6; }
+}
+
+@keyframes shimmerBottom {
+  from { stroke-dashoffset: -1; }
+  to { stroke-dashoffset: 1; }
+}
+
+@keyframes shimmerBottomAlt {
+  from { stroke-dashoffset: -1.25; }
+  to { stroke-dashoffset: .75; }
+}
+
+@keyframes glintPulse {
+  0%, 100% { opacity: .46; transform: scale(.72); filter: brightness(.92); }
+  50% { opacity: 1; transform: scale(1.2); filter: brightness(1.25); }
+}
+
+@keyframes lightBlinkA {
+  0%, 57%, 64%, 100% { filter: brightness(1); }
+  58% { filter: brightness(2.5); }
+  59% { filter: brightness(.95); }
+  60.5% { filter: brightness(3.1); }
+  62% { filter: brightness(1.1); }
+}
+
+@keyframes lightBlinkB {
+  0%, 31%, 37%, 78%, 100% { opacity: .62; }
+  32% { opacity: 1; }
+  33% { opacity: .34; }
+  34% { opacity: 1; }
+  35.5% { opacity: .48; }
+  80% { opacity: 1; }
+  81% { opacity: .42; }
+  82% { opacity: .9; }
+}
+
+@keyframes lightBlinkC {
+  0%, 46%, 52%, 100% { box-shadow: 0 0 5px 2px rgba(255,255,255,.98), 0 0 14px 4px rgba(122,190,255,.74), 0 0 32px 8px rgba(52,116,235,.28); }
+  47% { box-shadow: 0 0 9px 4px #fff, 0 0 24px 9px rgba(139,207,255,.95), 0 0 52px 17px rgba(52,116,235,.4); }
+  48.5% { box-shadow: 0 0 4px 1px #fff, 0 0 11px 3px rgba(122,190,255,.62), 0 0 24px 6px rgba(52,116,235,.2); }
+  50% { box-shadow: 0 0 10px 4px #fff, 0 0 28px 10px rgba(139,207,255,.95), 0 0 58px 18px rgba(52,116,235,.43); }
+}
+
+@keyframes microFlash {
+  0%, 70%, 73%, 100% { opacity: .12; transform: scale(.55) rotate(0deg); }
+  71% { opacity: 1; transform: scale(1.75) rotate(10deg); }
+  71.8% { opacity: .2; transform: scale(.75) rotate(-7deg); }
+  72.3% { opacity: .88; transform: scale(1.28) rotate(4deg); }
+}
+
+@keyframes dotBreathe {
+  0%, 100% { opacity: .22; filter: blur(0); background-position: 0 0; }
+  50% { opacity: .42; filter: blur(.15px); background-position: 5px -4px; }
+}
+
+@media (max-width: 1000px) {
+  .ribbonSvg {
+    left: -24%;
+    width: 148%;
+  }
+
+  .centerWash {
+    left: -18%;
+    top: 12%;
+    width: 95%;
+    height: 58%;
+  }
+
+  .dotFieldTop { right: -8%; }
+  .dotFieldBottom { left: -12%; }
+  .dotFieldRight { right: -6%; }
+  .glintSeven,
+  .glintEight,
+  .microFlashThree,
+  .microFlashFour { display: none; }
+}
+
+@media (max-width: 720px) {
+  .background { opacity: .84; }
+  .dotField { opacity: .2; }
+  .glint { transform: scale(.7); }
+  .microFlash { opacity: .12; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .background *,
+  .background *::before,
+  .background *::after {
+    animation: none !important;
+  }
+}

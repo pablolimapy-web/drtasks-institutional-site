@@ -1,0 +1,10 @@
+/* Dr. Tasks — canonical institutional layout tokens.
+   Keep global brand primitives in globals.css for backwards compatibility;
+   this file defines the shared canvas used by current and future pages. */
+:root {
+  --site-max-width: 1520px;
+  --site-gutter-wide: 56px;
+  --site-gutter-medium: 40px;
+  --site-gutter-tablet: 24px;
+  --site-gutter-mobile: 16px;
+}

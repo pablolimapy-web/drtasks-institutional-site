@@ -7,7 +7,7 @@ import { useInView, useReducedMotion } from "motion/react";
 import { ArrowRightIcon } from "./Icons";
 import { ProductPreview } from "./ProductPreview";
 import RotatingText from "./motion/RotatingText";
-import Beams from "./motion/Beams";
+import { HeroLightRibbons } from "./HeroLightRibbons";
 import {
   commercialPositioning,
   primaryCta,
@@ -23,37 +23,14 @@ export function HeroCommercial() {
   const reducedMotion = useReducedMotion();
   const productStageRef = useRef<HTMLDivElement>(null);
   const productInView = useInView(productStageRef, { amount: 0.12 });
-  const showStaticProduct = Boolean(reducedMotion) || motionPaused || !productInView;
+  const showStaticProduct = Boolean(reducedMotion) || !productInView;
 
   return (
       <section
           className={`hero section hero-commercial ${styles.heroSection}`}
           id="inicio"
       >
-        <div className={styles.heroBackdrop} aria-hidden="true">
-          <span className={`${styles.backdropOrb} ${styles.backdropOrbOne}`} />
-          <span className={`${styles.backdropOrb} ${styles.backdropOrbTwo}`} />
-        </div>
-        <div className="hero-glow hero-glow-one" />
-        <div className="hero-glow hero-glow-two" />
-
-        <div className="hero-beams-reactbits" aria-hidden="true">
-          {!motionPaused && !reducedMotion && productInView ? (
-            <Beams
-              beamWidth={1.05}
-              beamHeight={18}
-              beamNumber={8}
-              lightColor="#b9d0ff"
-              beamColor="#dce8ff"
-              backgroundColor="#f9fbff"
-              speed={1.35}
-              noiseIntensity={0.78}
-              scale={0.14}
-              rotation={-24}
-            />
-          ) : null}
-        </div>
-        <div className="hero-beams-shade" aria-hidden="true" />
+        <HeroLightRibbons paused={motionPaused || !productInView} />
 
         <div className="container hero-inner">
           <div className="hero-main">
@@ -138,7 +115,7 @@ export function HeroCommercial() {
                     />
                   </div>
                 ) : (
-                  <ProductPreview phaseIndex={activePhrase} />
+                  <ProductPreview phaseIndex={activePhrase} paused={motionPaused} />
                 )}
               </div>
             </div>

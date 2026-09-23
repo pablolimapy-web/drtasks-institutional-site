@@ -1,0 +1,86 @@
+.shell {
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-radius: 30px;
+  background: #fff;
+  box-shadow: 0 26px 80px rgba(15, 35, 70, .08);
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  padding: 14px;
+  border-bottom: 1px solid #edf1f5;
+  background: #f8fafc;
+}
+
+.tab,
+.activeTab {
+  border: 0;
+  border-radius: 999px;
+  padding: 11px 18px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 760;
+}
+
+.tab { color: #64748b; background: transparent; }
+.activeTab { color: #fff; background: var(--brand); box-shadow: 0 10px 28px rgba(28, 85, 201, .22); }
+
+.content {
+  display: grid;
+  grid-template-columns: minmax(300px, .72fr) minmax(0, 1.28fr);
+  min-height: 520px;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px;
+}
+
+.copy > span {
+  color: var(--brand);
+  font-size: 10px;
+  font-weight: 820;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.copy h3 {
+  margin: 18px 0 16px;
+  font-size: clamp(30px, 3vw, 46px);
+  line-height: 1.02;
+  letter-spacing: -.045em;
+}
+
+.copy p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
+.copy ul { display: grid; gap: 10px; margin: 26px 0 0; padding: 0; list-style: none; }
+.copy li { position: relative; padding-left: 22px; color: #334155; font-size: 13px; font-weight: 680; }
+.copy li::before { content: ""; position: absolute; left: 0; top: .55em; width: 7px; height: 7px; border-radius: 50%; background: var(--brand); }
+.copy small { margin-top: 28px; color: #94a3b8; font-size: 10px; font-weight: 720; }
+
+.visual {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  padding: 30px;
+  background: radial-gradient(circle at 70% 20%, rgba(28,85,201,.11), transparent 34%), #f5f8fc;
+}
+
+.visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(15,23,42,.09);
+  border-radius: 20px;
+  box-shadow: 0 24px 55px rgba(20, 42, 78, .14);
+}
+
+@media (max-width: 900px) {
+  .content { grid-template-columns: 1fr; }
+  .copy { padding: 34px 28px; }
+  .visual { padding: 22px; }
+}

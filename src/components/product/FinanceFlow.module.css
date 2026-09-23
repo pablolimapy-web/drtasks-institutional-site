@@ -1,0 +1,192 @@
+.shell {
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.09);
+  border-radius: 32px;
+  background: #fff;
+  box-shadow: 0 28px 82px rgba(19, 40, 75, 0.10);
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  padding: 10px;
+  background: #edf2f8;
+}
+
+.tab {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 10px;
+  align-items: center;
+  min-height: 68px;
+  padding: 13px 16px;
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+  color: #66758a;
+  text-align: left;
+  cursor: pointer;
+  transition: background 200ms ease, color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+}
+
+.tab:hover { transform: translateY(-1px); }
+
+.tab > span {
+  color: #8da0b8;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .1em;
+}
+
+.tab strong {
+  font-size: 16px;
+  letter-spacing: -.02em;
+}
+
+.activeTab {
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 9px 24px rgba(15, 23, 42, 0.08);
+}
+
+.activeTab > span { color: var(--brand); }
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.72fr) minmax(300px, .72fr);
+  min-height: 590px;
+}
+
+.visual {
+  position: relative;
+  min-width: 0;
+  min-height: 590px;
+  overflow: hidden;
+  background: #edf2f7;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.realBadge {
+  position: absolute;
+  left: 20px;
+  bottom: 18px;
+  padding: 8px 11px;
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: 999px;
+  background: rgba(255,255,255,.88);
+  color: #56657b;
+  font-size: 11px;
+  font-weight: 750;
+  backdrop-filter: blur(10px);
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(28px, 3vw, 46px);
+  border-left: 1px solid rgba(15, 23, 42, 0.08);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(28,85,201,.08), transparent 30%),
+    linear-gradient(160deg, #f8fbff 0%, #fff 66%);
+}
+
+.eyebrow {
+  margin-bottom: 17px;
+  color: var(--brand);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.detail h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(30px, 2.55vw, 45px);
+  line-height: 1.01;
+  letter-spacing: -.045em;
+}
+
+.detail p {
+  margin: 22px 0 24px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.67;
+}
+
+.moduleList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.moduleList span {
+  padding: 8px 10px;
+  border: 1px solid rgba(28,85,201,.13);
+  border-radius: 999px;
+  background: rgba(28,85,201,.055);
+  color: #315b9f;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+@media (max-width: 960px) {
+  .tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stage { grid-template-columns: 1fr; }
+  .visual { min-height: 420px; }
+  .detail { min-height: 330px; border-left: 0; border-top: 1px solid rgba(15,23,42,.08); }
+}
+
+@media (max-width: 640px) {
+  .shell { border-radius: 24px; }
+  .tabs { grid-template-columns: 1fr; }
+  .tab { min-height: 58px; }
+  .visual { min-height: 280px; }
+  .detail { min-height: 0; padding: 26px 22px 30px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab { transition: none; }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 14px 0;
+  background: #edf2f8;
+  color: #708096;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.controls button {
+  border: 1px solid rgba(28,85,201,.16);
+  border-radius: 999px;
+  background: rgba(255,255,255,.78);
+  color: #53657e;
+  padding: 7px 10px;
+  font: inherit;
+  font-size: 10px;
+  letter-spacing: 0;
+  text-transform: none;
+  cursor: pointer;
+}
+.controls button:hover:not(:disabled) { color: var(--brand); }
+.controls button:focus-visible { outline: 3px solid rgba(28,85,201,.18); outline-offset: 2px; }
+.controls button:disabled { cursor: default; opacity: .7; }
+
+@media (prefers-reduced-motion: reduce) {
+  .controls button { display: none; }
+}

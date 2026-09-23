@@ -1,0 +1,1995 @@
+/* Dr. Tasks Home — consolidated approved visual state (v26 foundation). */
+/* Source layers were merged in the same cascade order to preserve parity. */
+
+/* --- consolidated from hero-v16.css --- */
+/* Hero v16 — wider rectangular video, isolated override */
+@media(min-width:1201px){
+  .hero .container.hero-inner{
+    width:min(100% - 48px,1400px);
+  }
+  .hero-main{
+    grid-template-columns:minmax(0,500px) minmax(0,850px);
+    gap:50px;
+    align-items:center;
+  }
+  .hero-copy{
+    min-height:500px;
+  }
+  .hero-product{
+    max-width:850px;
+    min-height:500px;
+    display:flex;
+    align-items:center;
+  }
+  .hero-product-stage{
+    width:100%;
+    max-width:850px;
+    height:395px;
+    min-height:395px;
+    margin-left:auto;
+  }
+  .product-window-hero,
+  .product-window-image-wrap{
+    width:100%;
+    height:395px;
+    min-height:395px;
+    aspect-ratio:auto;
+    border-radius:24px;
+  }
+  .product-window-video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:50% center;
+    transform:none;
+  }
+  .hero-overlay-left{left:-14px;bottom:11%}
+  .hero-overlay-right{right:-12px;top:15%}
+  .hero-overlay-top{right:20px;top:3%}
+}
+
+@media(min-width:1001px) and (max-width:1200px){
+  .hero-main{
+    grid-template-columns:minmax(0,440px) minmax(0,1fr);
+    gap:34px;
+    align-items:center;
+  }
+  .hero-product{
+    min-height:450px;
+    max-width:700px;
+    display:flex;
+    align-items:center;
+  }
+  .hero-product-stage{
+    max-width:700px;
+    height:340px;
+    min-height:340px;
+  }
+  .product-window-hero,
+  .product-window-image-wrap{
+    height:340px;
+    min-height:340px;
+    aspect-ratio:auto;
+  }
+  .product-window-video{
+    object-fit:cover;
+    object-position:50% center;
+    transform:none;
+  }
+}
+
+/* --- consolidated from alignment-v17.css --- */
+/* Dr. Tasks v17 — global alignment, spacing and responsive rhythm */
+:root{
+  --site-max:1320px;
+  --site-gutter:32px;
+  --section-space:104px;
+  --section-space-compact:88px;
+  --section-head-gap:48px;
+}
+
+/* One horizontal system for the whole site */
+.container{
+  width:min(calc(100% - (var(--site-gutter) * 2)),var(--site-max));
+  margin-inline:auto;
+}
+
+.section{
+  padding-block:var(--section-space);
+}
+
+.nav-shell,
+.footer-grid,
+.footer-bottom,
+.hero-inner,
+.product-showcase-shell,
+.flux-surface,
+.features-surface,
+.pricing-surface,
+.final-cta{
+  margin-inline:auto;
+}
+
+/* Header follows the same visual axis as all content */
+.nav-shell{
+  width:min(calc(100% - (var(--site-gutter) * 2)),var(--site-max));
+}
+
+/* Hero aligned to the site shell instead of using a separate extra-wide grid */
+.hero{
+  padding-top:154px;
+  padding-bottom:72px;
+}
+.hero .container.hero-inner{
+  width:min(calc(100% - (var(--site-gutter) * 2)),var(--site-max));
+}
+.hero-main{
+  grid-template-columns:minmax(0,470px) minmax(0,1fr);
+  gap:50px;
+  align-items:center;
+}
+.hero-copy{
+  min-width:0;
+}
+.hero-product{
+  min-width:0;
+  width:100%;
+  max-width:none;
+}
+.hero-product-stage{
+  width:100%;
+  max-width:none;
+  margin-left:0;
+}
+
+/* The animated capability band breathes after the hero */
+.hero-band-section{
+  padding-top:56px;
+  padding-bottom:92px;
+}
+.hero-band-intro{
+  width:min(calc(100% - (var(--site-gutter) * 2)),var(--site-max));
+  margin-bottom:30px;
+}
+
+/* Common section heading rhythm */
+.section-head,
+.product-showcase-heading,
+.flux-header,
+.pricing-head{
+  margin-bottom:var(--section-head-gap);
+}
+.section-head-narrow{
+  max-width:820px;
+}
+.section-head-wide{
+  max-width:980px;
+}
+
+/* Remove the different ad-hoc vertical offsets between sections */
+.clarity-section,
+.product-showcase-section,
+.flux-section,
+.compare-section,
+.features-section,
+.segments-section,
+.social-section,
+.pricing-section,
+.faq-section,
+.final-section{
+  padding-top:var(--section-space);
+  padding-bottom:var(--section-space);
+}
+
+/* Consistent split-heading geometry */
+.split-head,
+.product-showcase-heading,
+.flux-header{
+  grid-template-columns:minmax(0,1fr) minmax(320px,.72fr);
+  gap:64px;
+  align-items:end;
+}
+.product-showcase-heading h2,
+.flux-header h2,
+.split-head h2{
+  max-width:760px;
+}
+.product-showcase-heading p,
+.flux-header p,
+.split-head p{
+  max-width:520px;
+  justify-self:end;
+}
+
+/* Product showcase follows the same outer edges as the rest of the page */
+.product-view-tabs{
+  width:100%;
+}
+.product-orbit-stage{
+  width:100%;
+}
+
+/* Surfaces use one padding language */
+.flux-surface,
+.features-surface,
+.pricing-surface{
+  padding:64px;
+}
+.surface{
+  border-radius:28px;
+}
+
+/* Shared grids */
+.features-grid,
+.segments-grid,
+.pricing-grid{
+  gap:18px;
+}
+
+/* Before/after uses the whole shell without looking squeezed */
+.compare-grid{
+  grid-template-columns:minmax(0,.78fr) 64px minmax(0,1.22fr);
+  gap:24px;
+}
+
+/* Social proof, pricing and FAQ share the same column logic */
+.social-grid{
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+  gap:72px;
+}
+.pricing-head{
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:56px;
+  align-items:start;
+}
+.faq-grid{
+  grid-template-columns:minmax(280px,.62fr) minmax(0,1.38fr);
+  gap:72px;
+}
+
+/* Final CTA/footer lock to the same horizontal rhythm */
+.final-cta{
+  padding:60px 64px;
+  grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);
+  gap:64px;
+}
+.site-footer{
+  padding-top:64px;
+}
+.footer-grid{
+  grid-template-columns:1.55fr repeat(4,1fr);
+  gap:48px;
+}
+.footer-bottom{
+  margin-top:44px;
+}
+
+@media (min-width:1201px){
+  /* Override the isolated v16 hero width so it joins the global grid */
+  .hero .container.hero-inner{
+    width:min(calc(100% - (var(--site-gutter) * 2)),var(--site-max));
+  }
+  .hero-main{
+    grid-template-columns:minmax(0,470px) minmax(0,800px);
+    justify-content:space-between;
+    gap:50px;
+  }
+  .hero-copy{
+    min-height:500px;
+  }
+  .hero-product{
+    max-width:800px;
+    min-height:500px;
+  }
+  .hero-product-stage{
+    max-width:800px;
+    height:372px;
+    min-height:372px;
+  }
+  .product-window-hero,
+  .product-window-image-wrap{
+    height:372px;
+    min-height:372px;
+  }
+}
+
+@media (max-width:1200px){
+  :root{
+    --site-gutter:24px;
+    --section-space:88px;
+    --section-head-gap:42px;
+  }
+  .hero{
+    padding-top:138px;
+    padding-bottom:64px;
+  }
+  .hero-main{
+    grid-template-columns:minmax(0,440px) minmax(0,1fr);
+    gap:36px;
+  }
+  .split-head,
+  .product-showcase-heading,
+  .flux-header,
+  .social-grid,
+  .faq-grid{
+    gap:40px;
+  }
+  .flux-surface,
+  .features-surface,
+  .pricing-surface{
+    padding:52px 44px;
+  }
+  .final-cta{
+    padding:52px 48px;
+  }
+}
+
+@media (max-width:1000px){
+  :root{
+    --site-gutter:22px;
+    --section-space:82px;
+  }
+  .hero-main,
+  .split-head,
+  .product-showcase-heading,
+  .flux-header,
+  .social-grid,
+  .faq-grid,
+  .pricing-head{
+    grid-template-columns:1fr;
+  }
+  .hero-copy,
+  .hero-product{
+    width:100%;
+    max-width:860px;
+    margin-inline:auto;
+  }
+  .product-showcase-heading p,
+  .flux-header p,
+  .split-head p{
+    justify-self:start;
+    max-width:720px;
+  }
+  .features-grid,
+  .segments-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .compare-grid{
+    grid-template-columns:minmax(0,1fr) 44px minmax(0,1.15fr);
+  }
+  .footer-grid{
+    grid-template-columns:1.4fr repeat(2,1fr);
+    row-gap:40px;
+  }
+}
+
+@media (max-width:720px){
+  :root{
+    --site-gutter:16px;
+    --section-space:68px;
+    --section-head-gap:34px;
+  }
+  .container,
+  .nav-shell,
+  .hero .container.hero-inner,
+  .hero-band-intro{
+    width:min(calc(100% - 32px),var(--site-max));
+  }
+  .hero{
+    padding-top:118px;
+    padding-bottom:42px;
+  }
+  .hero-band-section{
+    padding-top:46px;
+    padding-bottom:68px;
+  }
+  .clarity-section,
+  .product-showcase-section,
+  .flux-section,
+  .compare-section,
+  .features-section,
+  .segments-section,
+  .social-section,
+  .pricing-section,
+  .faq-section,
+  .final-section{
+    padding-top:68px;
+    padding-bottom:68px;
+  }
+  .flux-surface,
+  .features-surface,
+  .pricing-surface{
+    padding:36px 18px;
+    border-radius:22px;
+  }
+  .features-grid,
+  .segments-grid,
+  .pricing-grid{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .compare-grid{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .compare-arrow{
+    height:34px;
+    transform:rotate(90deg);
+  }
+  .final-cta{
+    padding:40px 24px;
+    grid-template-columns:1fr;
+    gap:36px;
+  }
+  .footer-grid{
+    grid-template-columns:1fr 1fr;
+    gap:34px 24px;
+  }
+}
+
+/* --- consolidated from home-commercial-v18.css --- */
+/* Dr. Tasks v18 — commercial repositioning while preserving the v17 visual system */
+
+.hero-commercial .hero-copy{min-height:auto}.hero-commercial-title{font-size:clamp(52px,5.15vw,76px);line-height:.98;letter-spacing:-.055em;margin:0 0 24px;max-width:700px}.hero-commercial .hero-copy p{max-width:640px}.hero-demo-label{position:absolute;left:16px;bottom:-34px;display:inline-flex;align-items:center;gap:7px;color:#7b8492;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}.hero-demo-label:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px rgba(47,99,255,.09)}
+
+.pain-band{padding-top:70px;padding-bottom:86px}.pain-band-head{max-width:880px;margin-bottom:28px}.pain-band-head h2{font-size:clamp(32px,3.3vw,48px);line-height:1.02;letter-spacing:-.045em;margin:14px 0 0}.pain-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.pain-card{min-height:146px;padding:22px;border:1px solid #e0e6ef;border-radius:22px;background:linear-gradient(180deg,#fff,#f8fbff);display:flex;align-items:center;gap:16px;box-shadow:0 14px 36px rgba(31,47,82,.06)}.pain-card strong{font-size:17px;line-height:1.3}.pain-icon{width:52px;height:52px;flex:0 0 52px;border-radius:17px;display:grid;place-items:center;background:#eef4ff;color:var(--brand);border:1px solid #d8e5ff}.pain-icon svg{width:22px;height:22px}
+
+.flux-commercial .flux-header h2{max-width:780px}.flux-portfolio{border:1px solid #dfe5ee;border-radius:24px;background:linear-gradient(180deg,#fff,#f7f9fd);padding:20px;box-shadow:0 24px 70px rgba(30,45,80,.07)}.flux-portfolio-topline{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px;color:#89919e;font-size:9px;text-transform:uppercase;letter-spacing:.08em;font-weight:750}.flux-portfolio-topline button,.product-pause-button{border:1px solid #dce4ef;border-radius:999px;background:#fff;color:#687180;padding:7px 10px;font:inherit;cursor:pointer}.flux-stage-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.flux-stage-card{position:relative;padding:16px;border:1px solid #e4e9f1;border-radius:16px;background:#fbfcfe;text-align:left;color:var(--text);cursor:pointer;transition:.25s ease}.flux-stage-card:hover{transform:translateY(-2px);border-color:#bdcef9}.flux-stage-card.is-active{border-color:#9cb6ff;background:linear-gradient(180deg,#fff,#f2f6ff);box-shadow:0 12px 30px rgba(47,99,255,.1)}.flux-stage-number{display:block;font-size:9px;color:#9aa2ae;font-weight:800;margin-bottom:9px}.flux-stage-card strong{display:block;font-size:13px;margin-bottom:4px}.flux-stage-card small{color:#8a929e}.flux-stage-metrics{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.flux-stage-metrics span{font-size:8px;padding:5px 7px;border-radius:999px;background:#eef2f7;color:#758090;font-weight:700}.flux-stage-metrics .has-risk{background:#fff3da;color:#9a6713}.flux-detail-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.45fr);gap:14px;margin-top:14px}.flux-os-card,.flux-context-panel{border:1px solid #e1e7ef;border-radius:18px;background:#fff;padding:22px}.flux-os-head{display:flex;justify-content:space-between;gap:18px;align-items:start}.flux-os-head h3{font-size:20px;margin:4px 0 0}.risk-badge{padding:7px 9px;border-radius:999px;background:#fff4dd;color:#9a6713;font-size:9px;font-weight:800}.flux-os-fields{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0}.flux-os-fields>div{padding:12px;border-radius:12px;background:#f7f9fc}.flux-os-fields small,.next-action-box span,.blocker-box span,.flux-history-line span{display:block;color:#9299a4;font-size:8px;text-transform:uppercase;letter-spacing:.08em;font-weight:750;margin-bottom:5px}.flux-os-fields strong{font-size:11px}.next-action-box,.blocker-box{padding:14px 16px;border-radius:13px;margin-top:10px}.next-action-box{background:#eef5ff;border:1px solid #d9e6ff}.blocker-box{background:#fff8e8;border:1px solid #f4dfae}.next-action-box strong,.blocker-box strong{font-size:12px}.flux-history-line{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding-top:14px;border-top:1px solid #edf0f4}.flux-history-line span{margin:0}.flux-history-line strong{font-size:10px}.flux-context-panel{background:#0d213e;color:#fff;border-color:#163457}.flux-context-panel h3{font-size:24px;margin:6px 0 20px}.flux-context-panel .context-label{color:#7fa6ff}.flux-context-stat{display:flex;align-items:baseline;gap:8px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.1)}.flux-context-stat strong{font-size:24px}.flux-context-stat span{font-size:10px;color:#9eb0c8}.flux-context-panel p{font-size:11px;color:#aab8ca;line-height:1.6;margin:16px 0 0}
+
+.how-section{overflow:hidden}.how-head{margin-bottom:40px}.hierarchy-visual{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:12px;padding:26px;border:1px solid #dfe5ee;border-radius:24px;background:linear-gradient(145deg,#fbfdff,#f6f9fd);overflow:hidden}.hierarchy-node{position:relative;z-index:2;padding:16px;border-radius:15px;border:1px solid #e2e8f1;background:#fff;box-shadow:0 9px 24px rgba(30,43,74,.05)}.hierarchy-node span{display:block;color:#97a0ad;font-size:8px;font-weight:800;margin-bottom:7px}.hierarchy-node strong{font-size:12px}.hierarchy-line{position:absolute;left:7%;right:7%;top:50%;height:2px;background:linear-gradient(90deg,#b9c9ef,var(--brand),#b9c9ef);transform-origin:left center;z-index:1}.hierarchy-flux{position:absolute;z-index:4;right:30%;bottom:6px;display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;background:#0d213e;color:#fff;font-size:9px;box-shadow:0 10px 26px rgba(13,33,62,.15)}.hierarchy-flux small{color:#aab8ca}.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}.how-card{padding:24px;border:1px solid #e0e6ef;border-radius:20px;background:#fff}.how-card>span{display:inline-flex;width:34px;height:34px;border-radius:11px;background:#eef4ff;color:var(--brand);align-items:center;justify-content:center;font-size:9px;font-weight:800}.how-card h3{font-size:18px;margin:18px 0 8px}.how-card p{font-size:13px;margin:0}
+
+.features-grid-four{grid-template-columns:repeat(4,minmax(0,1fr))}.module-card{min-height:330px}.module-card-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.availability-badge{font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:6px 8px;border-radius:999px}.availability-badge.is-available{background:#e9f8ef;color:#278252}.availability-badge.is-validation{background:#fff4dd;color:#9a6713}.availability-badge.is-development{background:#eef1f5;color:#6f7885}.segments-grid-three{grid-template-columns:repeat(3,minmax(0,1fr))}.segment-card-v18{min-height:300px}.segment-example{margin-top:20px;padding:11px 12px;border-radius:12px;background:#f6f8fb;color:#5f6874;font-size:10px}.segment-card-v18 small{display:block;margin-top:10px;color:#8a929e;font-size:9px}
+
+.origin-shell{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:72px;align-items:start;padding:58px 62px;border-radius:28px;background:#0e213d;color:#fff;overflow:hidden}.origin-shell h2{font-size:clamp(36px,3.8vw,54px);line-height:1.02;letter-spacing:-.045em;color:#fff;margin:16px 0 0}.origin-copy p{color:#aebbd0;font-size:15px;line-height:1.75}.origin-copy p+p{margin-top:18px}.beta-shell{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.7fr);gap:56px;align-items:center}.beta-shell h2{font-size:clamp(34px,3.5vw,50px);margin:14px 0 12px}.beta-card{padding:26px;border:1px solid #dfe5ee;border-radius:22px;background:linear-gradient(180deg,#fff,#f8fbff);box-shadow:0 16px 40px rgba(31,46,80,.06)}.beta-card strong{display:block;margin:10px 0 8px}.beta-card p{font-size:12px}.beta-dot{display:block;width:10px;height:10px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 7px rgba(47,99,255,.08)}
+
+.pricing-beta{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(320px,.8fr);gap:64px;align-items:center}.pricing-beta h2{font-size:clamp(36px,3.8vw,54px);margin:14px 0}.pricing-beta>div>p{max-width:720px}.pricing-beta-side{display:flex;flex-direction:column;gap:10px;padding:24px;border-radius:20px;background:#0e213d;color:#fff}.pricing-beta-side>span{font-size:11px;color:#b8c4d6;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.08)}.pricing-beta-side .button{margin-top:8px}.final-cta-v18{min-height:430px}.final-cta-v18 h2{max-width:770px}.final-cta-v18 p{max-width:660px}.demo-page{padding-top:70px}.demo-shell{max-width:900px;padding-top:90px;padding-bottom:110px}.demo-shell h1{font-size:clamp(48px,6vw,76px);line-height:.98;letter-spacing:-.055em;max-width:820px;margin:18px 0 24px}.demo-shell>p{font-size:18px;max-width:720px}.demo-points{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0}.demo-points span{padding:9px 12px;border:1px solid #dfe5ee;border-radius:999px;background:#fff;font-size:11px}.demo-shell>small{display:block;margin-top:20px;color:#8a929e}.product-pause-button{grid-column:1/-1;justify-self:start;margin-top:2px}
+
+@media(max-width:1100px){.features-grid-four{grid-template-columns:repeat(2,1fr)}.flux-stage-row{grid-template-columns:repeat(5,minmax(130px,1fr));overflow-x:auto;padding-bottom:4px}.flux-detail-grid,.pricing-beta,.origin-shell,.beta-shell{grid-template-columns:1fr}.origin-shell{gap:28px}.hierarchy-visual{grid-template-columns:repeat(5,minmax(140px,1fr));overflow-x:auto}.hierarchy-line,.hierarchy-flux{display:none}}
+@media(max-width:800px){.pain-grid,.how-grid,.segments-grid-three{grid-template-columns:1fr}.flux-os-fields{grid-template-columns:repeat(2,1fr)}.hero-commercial-title{font-size:clamp(44px,11vw,58px)}.hero-demo-label{position:static;margin-top:12px}.features-grid-four{grid-template-columns:1fr}.origin-shell{padding:38px 24px}.pricing-beta{gap:28px}}
+@media(max-width:560px){.flux-portfolio{padding:12px}.flux-detail-grid{grid-template-columns:1fr}.flux-os-head{flex-direction:column}.flux-os-fields{grid-template-columns:1fr 1fr}.flux-history-line{align-items:flex-start;flex-direction:column}.pricing-beta-side{padding:18px}.pain-band{padding-top:54px}.hero-commercial .hero-actions{margin-top:4px}}
+@media(prefers-reduced-motion:reduce){.pain-card,.hierarchy-line{transform:none!important}.flux-stage-card:hover{transform:none}}
+
+/* --- consolidated from hero-composition-v22.css --- */
+/* Hero composition polish v22
+   Keeps the approved visual language while improving hierarchy and spacing. */
+
+@media (min-width: 1201px) {
+  .hero-commercial {
+    min-height: calc(100svh - 72px);
+    display: flex;
+    align-items: center;
+
+    padding-top: 140px !important;
+    padding-bottom: 150px !important;
+  }
+
+  .hero-commercial .container.hero-inner {
+    width: min(100% - 64px, 1340px);
+  }
+
+  .hero-commercial .hero-main {
+    grid-template-columns: minmax(0, 500px) minmax(0, 760px) !important;
+    gap: 84px !important;
+    align-items: center !important;
+    justify-content: space-between;
+  }
+
+  .hero-commercial .hero-copy {
+    width: 100%;
+    max-width: 500px !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .hero-commercial .hero-copy h1 {
+    width: 100%;
+    max-width: 500px !important;
+    margin-bottom: 22px !important;
+    font-size: clamp(48px, 3.25vw, 60px) !important;
+    line-height: .99 !important;
+    letter-spacing: -.048em !important;
+  }
+
+  .hero-commercial .hero-copy p {
+    max-width: 490px !important;
+    margin: 0 0 26px !important;
+    font-size: 15.5px !important;
+    line-height: 1.58 !important;
+  }
+
+  .hero-commercial .hero-actions {
+    justify-content: flex-start !important;
+  }
+
+  .hero-commercial .hero-product {
+    width: 100%;
+    max-width: 760px !important;
+    min-height: 0 !important;
+    justify-self: end;
+    align-self: center;
+    transform: translateX(24px);
+  }
+
+  .hero-commercial .hero-product-stage {
+    width: 100%;
+    max-width: 760px !important;
+    margin-left: auto;
+  }
+
+  /* Reserve a stable two-line viewport for the animated phrase. */
+  .hero-commercial .hero-copy h1 > .text-rotate {
+    position: relative !important;
+    display: block !important;
+    width: 100%;
+    height: 2.08em !important;
+    min-height: 2.08em !important;
+    overflow: hidden !important;
+    contain: paint;
+  }
+
+  /* Animate inside the reserved viewport instead of changing layout height. */
+  .hero-commercial .hero-copy h1 > .text-rotate > .text-rotate {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100%;
+    align-content: flex-start;
+    transform-origin: 0 0;
+  }
+
+  .hero-commercial .hero-copy h1 .text-rotate-element {
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@media (min-width: 1001px) and (max-width: 1200px) {
+  .hero-commercial {
+    padding-top: 138px !important;
+    padding-bottom: 96px !important;
+  }
+
+  .hero-commercial .hero-main {
+    grid-template-columns: minmax(0, 450px) minmax(0, 1fr) !important;
+    gap: 54px !important;
+    align-items: center !important;
+  }
+
+  .hero-commercial .hero-copy {
+    max-width: 450px !important;
+    min-height: 0 !important;
+  }
+
+  .hero-commercial .hero-copy h1 {
+    font-size: clamp(43px, 4vw, 54px) !important;
+  }
+
+  .hero-commercial .hero-product {
+    min-height: 0 !important;
+    transform: none;
+  }
+
+  .hero-commercial .hero-copy h1 > .text-rotate {
+    position: relative !important;
+    display: block !important;
+    height: 2.08em !important;
+    min-height: 2.08em !important;
+    overflow: hidden !important;
+    contain: paint;
+  }
+
+  .hero-commercial .hero-copy h1 > .text-rotate > .text-rotate {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .hero-commercial .hero-copy h1 > .text-rotate {
+    position: relative !important;
+    display: block !important;
+    width: 100%;
+    min-height: 2.08em !important;
+    overflow: hidden !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-commercial {
+    padding-bottom: 78px !important;
+  }
+
+  .hero-commercial .hero-copy h1 > .text-rotate {
+    min-height: 2.12em !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-commercial .hero-product {
+    transform: none !important;
+  }
+}
+
+/* --- consolidated from hero-composition-v23.css --- */
+/* Hero scale & canvas expansion v23
+   Uses more of the first fold while keeping generous lateral and vertical breathing room. */
+
+@media (min-width: 1400px) {
+  .hero-commercial {
+    min-height: calc(100svh - 72px);
+    display: flex;
+    align-items: center;
+    padding-top: 132px !important;
+    padding-bottom: 148px !important;
+  }
+
+  .hero-commercial .container.hero-inner {
+    width: min(calc(100% - 112px), 1520px) !important;
+    max-width: 1520px !important;
+  }
+
+  .hero-commercial .hero-main {
+    grid-template-columns: minmax(0, 560px) minmax(0, 880px) !important;
+    gap: 80px !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .hero-commercial .hero-copy {
+    width: 100%;
+    max-width: 560px !important;
+  }
+
+  .hero-commercial .hero-copy h1 {
+    width: 100%;
+    max-width: 560px !important;
+    margin-bottom: 24px !important;
+    font-size: clamp(58px, 4vw, 72px) !important;
+    line-height: .98 !important;
+    letter-spacing: -.05em !important;
+  }
+
+  .hero-commercial .hero-copy p {
+    max-width: 550px !important;
+    margin-bottom: 30px !important;
+    font-size: 17px !important;
+    line-height: 1.62 !important;
+  }
+
+  .hero-commercial .hero-product,
+  .hero-commercial .hero-product-stage {
+    width: 100%;
+    max-width: 880px !important;
+  }
+
+  .hero-commercial .hero-product {
+    justify-self: end;
+    transform: translateX(18px);
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1399px) {
+  .hero-commercial {
+    min-height: calc(100svh - 72px);
+    display: flex;
+    align-items: center;
+    padding-top: 124px !important;
+    padding-bottom: 136px !important;
+  }
+
+  .hero-commercial .container.hero-inner {
+    width: min(calc(100% - 80px), 1280px) !important;
+  }
+
+  .hero-commercial .hero-main {
+    grid-template-columns: minmax(0, 510px) minmax(0, 1fr) !important;
+    gap: 68px !important;
+  }
+
+  .hero-commercial .hero-copy {
+    max-width: 510px !important;
+  }
+
+  .hero-commercial .hero-copy h1 {
+    max-width: 510px !important;
+    font-size: clamp(52px, 4vw, 64px) !important;
+  }
+
+  .hero-commercial .hero-copy p {
+    max-width: 500px !important;
+    font-size: 16px !important;
+  }
+
+  .hero-commercial .hero-product,
+  .hero-commercial .hero-product-stage {
+    max-width: 760px !important;
+  }
+}
+
+@media (min-width: 1001px) and (max-width: 1200px) {
+  .hero-commercial {
+    min-height: calc(100svh - 72px);
+    padding-top: 112px !important;
+    padding-bottom: 122px !important;
+  }
+
+  .hero-commercial .hero-main {
+    gap: 58px !important;
+  }
+
+  .hero-commercial .hero-copy h1 {
+    font-size: clamp(46px, 4.15vw, 56px) !important;
+  }
+
+  .hero-commercial .hero-copy p {
+    font-size: 15.5px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-commercial .hero-product {
+    transform: none !important;
+  }
+}
+
+/* --- consolidated from hero-rotating-clip-v24.css --- */
+/* Hero rotating title clipping fix v24
+   The rotating phrase can occupy two lines at the larger v23 desktop scale.
+   Keep the phrase clipped to its own viewport, but reserve enough vertical room
+   for line-height, glyph descenders and the animated character padding. */
+
+.hero-commercial .hero-copy h1 > .text-rotate {
+  box-sizing: content-box !important;
+  height: auto !important;
+  min-height: 2.32em !important;
+  padding-bottom: 0.12em !important;
+  overflow: hidden !important;
+  contain: paint;
+}
+
+.hero-commercial .hero-copy h1 > .text-rotate > .text-rotate {
+  top: 0 !important;
+  bottom: auto !important;
+  min-height: 2.18em;
+  align-content: flex-start;
+}
+
+.hero-commercial .hero-copy h1 .text-rotate-word {
+  padding-bottom: 0.10em;
+}
+
+/* Give the title a little more breathing room before the paragraph without
+   making the hero noticeably taller. */
+.hero-commercial .hero-copy h1 {
+  margin-bottom: 28px !important;
+}
+
+@media (min-width: 1001px) and (max-width: 1399px) {
+  .hero-commercial .hero-copy h1 > .text-rotate {
+    min-height: 2.34em !important;
+    padding-bottom: 0.12em !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  .hero-commercial .hero-copy h1 > .text-rotate {
+    min-height: 2.36em !important;
+    padding-bottom: 0.14em !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-commercial .hero-copy h1 > .text-rotate {
+    min-height: 2.42em !important;
+    padding-bottom: 0.16em !important;
+  }
+}
+
+/* --- consolidated from hero-alignment-v24-1.css --- */
+/* v24.1 — align the header, hero and the first section to one visual canvas.
+   This layer intentionally loads last so it only corrects geometry, not content. */
+
+@media (min-width: 1400px) {
+  .site-header .container.nav-shell,
+  .hero-commercial .container.hero-inner,
+  .pain-band > .container {
+    width: min(calc(100% - 112px), 1520px) !important;
+    max-width: 1520px !important;
+    margin-inline: auto !important;
+  }
+
+  .hero-commercial .hero-main {
+    grid-template-columns: minmax(0, 560px) minmax(0, 880px) !important;
+    gap: 80px !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .hero-commercial .hero-copy {
+    align-self: center !important;
+    justify-self: start !important;
+  }
+
+  .hero-commercial .hero-product {
+    align-self: center !important;
+    justify-self: end !important;
+    transform: none !important;
+  }
+
+  .hero-commercial .hero-product-stage {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1399px) {
+  .site-header .container.nav-shell,
+  .hero-commercial .container.hero-inner,
+  .pain-band > .container {
+    width: min(calc(100% - 80px), 1280px) !important;
+    max-width: 1280px !important;
+    margin-inline: auto !important;
+  }
+
+  .hero-commercial .hero-main {
+    grid-template-columns: minmax(0, 510px) minmax(0, 1fr) !important;
+    gap: 68px !important;
+    align-items: center !important;
+  }
+
+  .hero-commercial .hero-product {
+    align-self: center !important;
+    justify-self: end !important;
+    transform: none !important;
+  }
+}
+
+@media (min-width: 1001px) and (max-width: 1200px) {
+  .site-header .container.nav-shell,
+  .hero-commercial .container.hero-inner,
+  .pain-band > .container {
+    width: min(calc(100% - 48px), 1200px) !important;
+    margin-inline: auto !important;
+  }
+
+  .hero-commercial .hero-main {
+    align-items: center !important;
+  }
+
+  .hero-commercial .hero-product {
+    align-self: center !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  .site-header .container.nav-shell,
+  .hero-commercial .container.hero-inner,
+  .pain-band > .container {
+    margin-inline: auto !important;
+  }
+
+  .hero-commercial .hero-copy,
+  .hero-commercial .hero-product {
+    justify-self: stretch !important;
+  }
+}
+
+/* --- consolidated from global-layout-v25.css --- */
+/* v25 — one layout system for the whole institutional site.
+   Backgrounds/animations may remain full-bleed, but all readable content
+   shares the same outer axes as the header and hero. */
+
+@media (min-width: 1400px) {
+  :root {
+    --site-max: 1520px;
+    --site-gutter: 56px;
+    --section-space: 118px;
+    --section-head-gap: 56px;
+  }
+
+  .site-header .container.nav-shell,
+  .hero-commercial .container.hero-inner,
+  .pain-band > .container,
+  .flux-section > .container,
+  .how-section > .container,
+  .product-showcase-section > .container,
+  .features-section > .container,
+  .segments-section > .container,
+  .origin-section > .container,
+  .social-section > .container,
+  .pricing-section > .container,
+  .faq-section > .container,
+  .final-section > .container,
+  .site-footer .container {
+    width: min(calc(100% - 112px), 1520px) !important;
+    max-width: 1520px !important;
+    margin-inline: auto !important;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1399px) {
+  :root {
+    --site-max: 1280px;
+    --site-gutter: 40px;
+    --section-space: 108px;
+    --section-head-gap: 50px;
+  }
+
+  .site-header .container.nav-shell,
+  .hero-commercial .container.hero-inner,
+  .pain-band > .container,
+  .flux-section > .container,
+  .how-section > .container,
+  .product-showcase-section > .container,
+  .features-section > .container,
+  .segments-section > .container,
+  .origin-section > .container,
+  .social-section > .container,
+  .pricing-section > .container,
+  .faq-section > .container,
+  .final-section > .container,
+  .site-footer .container {
+    width: min(calc(100% - 80px), 1280px) !important;
+    max-width: 1280px !important;
+    margin-inline: auto !important;
+  }
+}
+
+@media (min-width: 1001px) and (max-width: 1200px) {
+  :root {
+    --site-max: 1200px;
+    --site-gutter: 24px;
+    --section-space: 96px;
+    --section-head-gap: 44px;
+  }
+
+  .site-header .container.nav-shell,
+  .hero-commercial .container.hero-inner,
+  .pain-band > .container,
+  .flux-section > .container,
+  .how-section > .container,
+  .product-showcase-section > .container,
+  .features-section > .container,
+  .segments-section > .container,
+  .origin-section > .container,
+  .social-section > .container,
+  .pricing-section > .container,
+  .faq-section > .container,
+  .final-section > .container,
+  .site-footer .container {
+    width: min(calc(100% - 48px), 1200px) !important;
+    margin-inline: auto !important;
+  }
+}
+
+/* Consistent vertical rhythm from the diagnostic section down. */
+.pain-band.section,
+.flux-section.section,
+.how-section.section,
+.product-showcase-section.section,
+.features-section.section,
+.segments-section.section,
+.origin-section.section,
+.social-section.section,
+.pricing-section.section,
+.faq-section.section,
+.final-section.section {
+  padding-top: var(--section-space) !important;
+  padding-bottom: var(--section-space) !important;
+}
+
+/* Shared heading rhythm: same distance from heading to the main content. */
+.section-head,
+.product-showcase-heading,
+.flux-header,
+.pricing-head {
+  margin-bottom: var(--section-head-gap) !important;
+}
+
+/* Keep split headings on a common visual cadence without flattening each section. */
+@media (min-width: 1001px) {
+  .split-head,
+  .product-showcase-heading {
+    grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.72fr) !important;
+    gap: 72px !important;
+    align-items: end !important;
+  }
+
+  .split-head > p,
+  .product-showcase-heading > p {
+    max-width: 520px !important;
+    justify-self: end !important;
+  }
+
+  .faq-grid {
+    grid-template-columns: minmax(320px, 0.66fr) minmax(0, 1.34fr) !important;
+    gap: 80px !important;
+  }
+}
+
+/* Surfaces align to the shell; their internal padding stays consistent. */
+@media (min-width: 1201px) {
+  .features-surface,
+  .pricing-surface {
+    padding-inline: 64px !important;
+  }
+
+  .final-cta {
+    padding-inline: 64px !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  :root {
+    --site-gutter: 22px;
+    --section-space: 82px;
+    --section-head-gap: 40px;
+  }
+
+  .pain-band.section,
+  .flux-section.section,
+  .how-section.section,
+  .product-showcase-section.section,
+  .features-section.section,
+  .segments-section.section,
+  .origin-section.section,
+  .social-section.section,
+  .pricing-section.section,
+  .faq-section.section,
+  .final-section.section {
+    padding-top: var(--section-space) !important;
+    padding-bottom: var(--section-space) !important;
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --site-gutter: 16px;
+    --section-space: 66px;
+    --section-head-gap: 34px;
+  }
+
+  .container,
+  .site-header .container.nav-shell,
+  .hero-commercial .container.hero-inner,
+  .site-footer .container {
+    width: min(calc(100% - 32px), 1200px) !important;
+    margin-inline: auto !important;
+  }
+}
+
+/* v27 — Home as a product showcase: contextual deep links stay visible without
+   competing with the primary demo CTA. */
+.section-deep-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  width: fit-content;
+  margin-top: 30px;
+  color: var(--brand);
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.section-deep-link svg {
+  width: 16px;
+  transition: transform 180ms ease;
+}
+
+.section-deep-link:hover svg {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-deep-link svg {
+    transition: none;
+  }
+}
+
+/* v31 compatibility: motion controls live in global Home styles so the
+   accessibility patch does not depend on local Hero/ProductPreview CSS. */
+.hero-motion-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #66758a;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.hero-motion-toggle span {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(28, 85, 201, 0.16);
+  border-radius: 999px;
+  background: rgba(28, 85, 201, 0.05);
+  color: var(--brand);
+  font-size: 9px;
+}
+
+.hero-motion-toggle:hover { color: var(--brand); }
+.hero-motion-toggle:focus-visible {
+  outline: 3px solid rgba(28, 85, 201, 0.18);
+  outline-offset: 5px;
+  border-radius: 8px;
+}
+
+.hero-product-static {
+  width: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+  background: #f4f7fb;
+}
+
+.hero-product-static-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1000px) {
+  .hero-motion-toggle { margin-inline: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-motion-toggle { display: none; }
+}
+
+/* v32 — Hero hierarchy refresh.
+   The animated beam field is now full-bleed while the product becomes the
+   dominant object in the first fold. */
+.hero-commercial .hero-beams-full {
+  inset: 0 !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 0.34 !important;
+  overflow: hidden !important;
+  mask-image: linear-gradient(180deg, transparent 0%, #000 9%, #000 80%, transparent 100%) !important;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 9%, #000 80%, transparent 100%) !important;
+}
+
+.hero-commercial .hero-beams-full::before {
+  height: 100% !important;
+  background:
+    radial-gradient(ellipse 48% 76% at 77% 49%, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0.22) 44%, transparent 74%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.42) 0%, transparent 20%, transparent 72%, rgba(255, 255, 255, 0.88) 100%) !important;
+}
+
+.hero-commercial .hero-beams-full::after {
+  background: linear-gradient(90deg, rgba(255,255,255,0.06) 0%, transparent 28%, transparent 76%, rgba(255,255,255,0.18) 100%) !important;
+}
+
+.hero-commercial .hero-inner,
+.hero-commercial .hero-main,
+.hero-commercial .hero-copy,
+.hero-commercial .hero-product {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-commercial .hero-product-stage {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-commercial .hero-product-stage::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -13% -8%;
+  border-radius: 42px;
+  background: radial-gradient(ellipse at center, rgba(67, 111, 220, 0.13) 0%, rgba(67, 111, 220, 0.055) 46%, transparent 74%);
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+@media (min-width: 1400px) {
+  .hero-commercial .hero-main {
+    grid-template-columns: minmax(0, 460px) minmax(0, 990px) !important;
+    gap: 70px !important;
+  }
+
+  .hero-commercial .hero-copy {
+    max-width: 460px !important;
+  }
+
+  .hero-commercial .hero-copy h1 {
+    max-width: 460px !important;
+    margin-bottom: 22px !important;
+    font-size: clamp(46px, 3.25vw, 58px) !important;
+    line-height: 1 !important;
+    letter-spacing: -0.046em !important;
+  }
+
+  .hero-commercial .hero-copy p {
+    max-width: 450px !important;
+    font-size: 15.5px !important;
+    line-height: 1.6 !important;
+  }
+
+  .hero-commercial .hero-product,
+  .hero-commercial .hero-product-stage {
+    max-width: 990px !important;
+  }
+
+  .hero-commercial .hero-product {
+    transform: translateX(8px) !important;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1399px) {
+  .hero-commercial .hero-main {
+    grid-template-columns: minmax(0, 430px) minmax(0, 1fr) !important;
+    gap: 54px !important;
+  }
+
+  .hero-commercial .hero-copy {
+    max-width: 430px !important;
+  }
+
+  .hero-commercial .hero-copy h1 {
+    max-width: 430px !important;
+    font-size: clamp(43px, 3.7vw, 54px) !important;
+  }
+
+  .hero-commercial .hero-copy p {
+    max-width: 420px !important;
+    font-size: 15.5px !important;
+  }
+
+  .hero-commercial .hero-product,
+  .hero-commercial .hero-product-stage {
+    max-width: 820px !important;
+  }
+}
+
+@media (min-width: 1001px) and (max-width: 1200px) {
+  .hero-commercial .hero-main {
+    grid-template-columns: minmax(0, 390px) minmax(0, 1fr) !important;
+    gap: 44px !important;
+  }
+
+  .hero-commercial .hero-copy {
+    max-width: 390px !important;
+  }
+
+  .hero-commercial .hero-copy h1 {
+    max-width: 390px !important;
+    font-size: clamp(39px, 4vw, 49px) !important;
+  }
+
+  .hero-commercial .hero-copy p {
+    max-width: 380px !important;
+    font-size: 15px !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  .hero-commercial .hero-copy h1 {
+    font-size: clamp(38px, 5.2vw, 49px) !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-commercial .hero-copy h1 {
+    font-size: clamp(33px, 8.4vw, 40px) !important;
+  }
+}
+
+/* v32.1 — exact React Bits Beams across the full hero, applied on top of v32. */
+.hero-commercial {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #f9fbff;
+  color: var(--ink);
+}
+
+.hero-commercial .hero-beams-reactbits {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  background: #f9fbff;
+  opacity: 0.58;
+  filter: saturate(0.78) contrast(0.94);
+}
+
+.hero-commercial .hero-beams-reactbits .beams-container {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.hero-commercial .hero-beams-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 58% 70% at 77% 50%, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.76) 24%, rgba(255, 255, 255, 0.34) 48%, transparent 72%),
+    linear-gradient(90deg, rgba(249, 251, 255, 0.84) 0%, rgba(249, 251, 255, 0.6) 27%, rgba(249, 251, 255, 0.16) 54%, rgba(249, 251, 255, 0.34) 78%, rgba(249, 251, 255, 0.72) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, transparent 24%, transparent 72%, rgba(249, 251, 255, 0.86) 100%);
+}
+
+.hero-commercial .heroBackdrop,
+.hero-commercial .hero-glow,
+.hero-commercial .hero-beams-full {
+  display: none !important;
+}
+
+.hero-commercial .hero-inner,
+.hero-commercial .hero-main,
+.hero-commercial .hero-copy,
+.hero-commercial .hero-product {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-commercial .hero-copy h1 {
+  color: var(--ink) !important;
+}
+
+.hero-commercial .hero-copy p {
+  color: #667085 !important;
+}
+
+.hero-commercial .hero-copy .button-secondary {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.76);
+  border-color: rgba(28, 85, 201, 0.18);
+  backdrop-filter: blur(12px);
+}
+
+.hero-commercial .hero-copy .button-secondary:hover {
+  border-color: rgba(28, 85, 201, 0.32);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 16px 38px rgba(28, 85, 201, 0.12);
+}
+
+.hero-commercial .hero-motion-toggle {
+  color: rgba(67, 78, 96, 0.72);
+}
+
+.hero-commercial .hero-motion-toggle:hover {
+  color: #1c55c9;
+}
+
+.hero-commercial .hero-product-stage::before {
+  inset: -11% -7%;
+  border-radius: 48px;
+  background: radial-gradient(ellipse at center, rgba(28, 85, 201, 0.13) 0%, rgba(87, 132, 255, 0.05) 48%, transparent 76%);
+  filter: blur(28px);
+}
+
+@media (min-width: 1400px) {
+  .hero-commercial {
+    padding-top: 124px !important;
+    padding-bottom: 124px !important;
+  }
+
+  .hero-commercial .hero-main {
+    grid-template-columns: minmax(0, 430px) minmax(0, 1030px) !important;
+    gap: 54px !important;
+  }
+
+  .hero-commercial .hero-copy {
+    max-width: 430px !important;
+  }
+
+  .hero-commercial .hero-copy h1 {
+    max-width: 430px !important;
+    font-size: clamp(42px, 2.8vw, 52px) !important;
+  }
+
+  .hero-commercial .hero-copy p {
+    max-width: 420px !important;
+  }
+
+  .hero-commercial .hero-product,
+  .hero-commercial .hero-product-stage {
+    max-width: 1030px !important;
+  }
+
+  .hero-commercial .hero-product {
+    justify-self: end !important;
+    transform: translateX(10px) !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  .hero-commercial {
+    min-height: auto;
+  }
+
+  .hero-commercial .hero-beams-shade {
+    background: linear-gradient(180deg, rgba(247, 249, 255, 0.68) 0%, rgba(247, 249, 255, 0.2) 48%, rgba(247, 249, 255, 0.82) 100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-commercial .hero-beams-reactbits {
+    display: none;
+  }
+}
+
+/* v32.5 — React Bits GhostFibers in light mode. The canvas keeps the motion
+   language of the effect while the hero stays aligned with the white Dr. Tasks UI. */
+.hero-commercial {
+  background: #ffffff !important;
+  color: #101522;
+}
+
+.hero-commercial .hero-ghost-fibers {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  background: #ffffff;
+}
+
+.hero-commercial .hero-ghost-fibers .ghost-fibers-container {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 1;
+  filter: saturate(1.08) contrast(1.04);
+}
+
+.hero-commercial .hero-ghost-fibers-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 48% 68% at 68% 50%, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.08) 54%, rgba(255, 255, 255, 0.18) 100%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.16) 24%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0.04) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, transparent 28%, transparent 76%, rgba(255, 255, 255, 0.16) 100%);
+}
+
+.hero-commercial .hero-beams-reactbits,
+.hero-commercial .hero-beams-shade {
+  display: none !important;
+}
+
+.hero-commercial .hero-copy h1 {
+  color: #101522 !important;
+  text-shadow: none;
+}
+
+.hero-commercial .hero-copy h1 > .text-rotate,
+.hero-commercial .hero-copy h1 .text-rotate-element,
+.hero-commercial .hero-copy h1 .text-rotate-word {
+  color: #1c55c9 !important;
+}
+
+.hero-commercial .hero-copy p {
+  color: #667085 !important;
+}
+
+.hero-commercial .hero-copy .button-secondary {
+  color: #151a24;
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(16, 24, 40, 0.13);
+  backdrop-filter: blur(14px);
+}
+
+.hero-commercial .hero-copy .button-secondary:hover {
+  color: #1c55c9;
+  border-color: rgba(28, 85, 201, 0.32);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 16px 38px rgba(28, 85, 201, 0.12);
+}
+
+.hero-commercial .hero-motion-toggle {
+  color: #667085;
+}
+
+.hero-commercial .hero-motion-toggle:hover {
+  color: #1c55c9;
+}
+
+.hero-commercial .hero-product-stage::before {
+  inset: -12% -8%;
+  border-radius: 52px;
+  background: radial-gradient(ellipse at center, rgba(28, 85, 201, 0.14) 0%, rgba(111, 151, 255, 0.08) 44%, rgba(255, 255, 255, 0) 74%);
+  filter: blur(38px);
+}
+
+.hero-commercial .hero-product-stage {
+  filter: drop-shadow(0 30px 52px rgba(45, 72, 125, 0.18));
+}
+
+@media (max-width: 1000px) {
+  .hero-commercial .hero-ghost-fibers-shade {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0.18) 46%, rgba(255, 255, 255, 0.7) 100%),
+      radial-gradient(ellipse 82% 55% at 50% 35%, rgba(143, 179, 255, 0.08), transparent 72%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-commercial .hero-ghost-fibers {
+    opacity: 0.9;
+  }
+}
+
+/* v34 — hero matched to the approved reference artwork.
+   Keep this block last: it intentionally normalizes the older hero experiments. */
+.hero-commercial {
+  min-height: 940px !important;
+  height: 100svh;
+  max-height: 1040px;
+  display: flex !important;
+  align-items: center !important;
+  overflow: hidden !important;
+  padding: 118px 0 82px !important;
+  background: #fff !important;
+  isolation: isolate;
+}
+
+.hero-commercial .heroBackdrop,
+.hero-commercial .hero-glow,
+.hero-commercial .hero-ghost-fibers,
+.hero-commercial .hero-ghost-fibers-shade,
+.hero-commercial .hero-beams-reactbits,
+.hero-commercial .hero-beams-shade,
+.hero-commercial .hero-beams-full {
+  display: none !important;
+}
+
+@media (min-width: 1201px) {
+  .site-header .container.nav-shell,
+  .hero-commercial .container.hero-inner {
+    width: min(calc(100% - 64px), 1410px) !important;
+    max-width: 1410px !important;
+    margin-inline: auto !important;
+  }
+
+  .hero-commercial .hero-main {
+    display: grid !important;
+    grid-template-columns: minmax(0, 390px) minmax(0, 1fr) !important;
+    gap: 48px !important;
+    align-items: start !important;
+    justify-content: space-between !important;
+  }
+
+  .hero-commercial .hero-copy {
+    width: 100% !important;
+    max-width: 390px !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding-top: 36px !important;
+    align-self: start !important;
+    justify-self: start !important;
+    text-align: left !important;
+  }
+
+  .hero-commercial .hero-copy h1 {
+    width: 100% !important;
+    max-width: 390px !important;
+    margin: 0 0 23px !important;
+    font-size: clamp(47px, 3.05vw, 54px) !important;
+    line-height: .985 !important;
+    letter-spacing: -.052em !important;
+    font-weight: 790 !important;
+  }
+
+  .hero-commercial .hero-copy h1 > .text-rotate {
+    min-height: 2.1em !important;
+    height: 2.1em !important;
+    padding-bottom: .02em !important;
+    margin-top: 8px !important;
+  }
+
+  .hero-commercial .hero-copy h1 > .text-rotate > .text-rotate {
+    min-height: 2.04em !important;
+  }
+
+  .hero-commercial .hero-copy p {
+    width: 100% !important;
+    max-width: 388px !important;
+    margin: 0 0 27px !important;
+    color: #61708a !important;
+    font-size: 14.4px !important;
+    line-height: 1.56 !important;
+  }
+
+  .hero-commercial .hero-actions {
+    justify-content: flex-start !important;
+    gap: 10px !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .hero-commercial .hero-actions .button {
+    min-height: 46px !important;
+    padding-inline: 18px !important;
+    border-radius: 12px !important;
+    font-size: 12.5px !important;
+    white-space: nowrap;
+  }
+
+  .hero-commercial .hero-actions .button-primary {
+    box-shadow: 0 12px 30px rgba(28, 85, 201, .24) !important;
+  }
+
+  .hero-commercial .hero-motion-toggle {
+    margin-top: 13px !important;
+    font-size: 11px !important;
+    color: #6f7c90 !important;
+  }
+
+  .hero-commercial .hero-motion-toggle span {
+    width: 22px !important;
+    height: 22px !important;
+    background: rgba(255,255,255,.82) !important;
+    border-color: rgba(28,85,201,.22) !important;
+    box-shadow: 0 4px 14px rgba(28,85,201,.08);
+  }
+
+  .hero-commercial .hero-product {
+    width: 100% !important;
+    max-width: 972px !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding-top: 36px !important;
+    align-self: start !important;
+    justify-self: end !important;
+    transform: none !important;
+  }
+
+  .hero-commercial .hero-product-stage {
+    width: 100% !important;
+    max-width: 972px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    filter: drop-shadow(0 27px 45px rgba(43, 72, 125, .16)) !important;
+  }
+
+  .hero-commercial .hero-product-stage::before {
+    inset: -9% -6% -13% !important;
+    border-radius: 46px !important;
+    background: radial-gradient(ellipse at center, rgba(46, 104, 224, .14), rgba(91, 139, 242, .06) 43%, transparent 73%) !important;
+    filter: blur(34px) !important;
+  }
+
+  .hero-commercial .hero-product-stage > * {
+    transform-origin: top center;
+  }
+}
+
+@media (min-width: 1500px) {
+  .hero-commercial .hero-main {
+    grid-template-columns: minmax(0, 392px) minmax(0, 976px) !important;
+    gap: 42px !important;
+  }
+
+  .hero-commercial .hero-copy {
+    max-width: 392px !important;
+  }
+
+  .hero-commercial .hero-product,
+  .hero-commercial .hero-product-stage {
+    max-width: 976px !important;
+  }
+}
+
+@media (min-width: 1201px) and (max-height: 860px) {
+  .hero-commercial {
+    min-height: 820px !important;
+    height: auto !important;
+    padding-top: 108px !important;
+    padding-bottom: 70px !important;
+  }
+
+  .hero-commercial .hero-copy {
+    padding-top: 20px !important;
+  }
+
+  .hero-commercial .hero-copy h1 {
+    font-size: clamp(44px, 3.2vw, 50px) !important;
+  }
+}
+
+@media (min-width: 1001px) and (max-width: 1200px) {
+  .hero-commercial {
+    min-height: 840px !important;
+    height: auto !important;
+    padding: 118px 0 78px !important;
+  }
+
+  .hero-commercial .container.hero-inner {
+    width: min(calc(100% - 48px), 1160px) !important;
+  }
+
+  .hero-commercial .hero-main {
+    grid-template-columns: minmax(0, 350px) minmax(0, 1fr) !important;
+    gap: 34px !important;
+    align-items: start !important;
+  }
+
+  .hero-commercial .hero-copy {
+    max-width: 350px !important;
+    padding-top: 22px !important;
+    text-align: left !important;
+  }
+
+  .hero-commercial .hero-copy h1 {
+    max-width: 350px !important;
+    font-size: clamp(41px, 4vw, 47px) !important;
+  }
+
+  .hero-commercial .hero-copy p {
+    max-width: 345px !important;
+    font-size: 14px !important;
+  }
+
+  .hero-commercial .hero-actions {
+    justify-content: flex-start !important;
+  }
+
+  .hero-commercial .hero-product {
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding-top: 22px !important;
+    align-self: start !important;
+  }
+
+  .hero-commercial .hero-product-stage {
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    align-self: start !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  .hero-commercial {
+    min-height: auto !important;
+    height: auto !important;
+    padding: 112px 0 96px !important;
+  }
+
+  .hero-commercial .hero-main {
+    grid-template-columns: 1fr !important;
+    gap: 54px !important;
+  }
+
+  .hero-commercial .hero-copy {
+    max-width: 680px !important;
+    margin-inline: auto !important;
+    padding-top: 0 !important;
+    text-align: center !important;
+  }
+
+  .hero-commercial .hero-copy h1 {
+    max-width: 680px !important;
+    font-size: clamp(42px, 6vw, 54px) !important;
+  }
+
+  .hero-commercial .hero-copy p {
+    max-width: 610px !important;
+  }
+
+  .hero-commercial .hero-actions {
+    justify-content: center !important;
+  }
+
+  .hero-commercial .hero-product,
+  .hero-commercial .hero-product-stage {
+    width: 100% !important;
+    max-width: 860px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin-inline: auto !important;
+    transform: none !important;
+  }
+
+  .hero-commercial .hero-product {
+    padding-top: 0 !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-commercial {
+    padding: 96px 0 72px !important;
+  }
+
+  .hero-commercial .hero-main {
+    gap: 38px !important;
+  }
+
+  .hero-commercial .hero-copy h1 {
+    font-size: clamp(36px, 10vw, 44px) !important;
+  }
+
+  .hero-commercial .hero-actions {
+    flex-direction: column !important;
+  }
+}
+
+/* v35 — prevent hero content collision and enrich the approved light-ribbon motion. */
+@media (min-width: 1201px) {
+  .hero-commercial .container.hero-inner {
+    width: min(calc(100% - 80px), 1500px) !important;
+    max-width: 1500px !important;
+    margin-inline: auto !important;
+  }
+
+  .hero-commercial .hero-main {
+    grid-template-columns: minmax(0, 420px) minmax(0, 1fr) !important;
+    column-gap: 44px !important;
+    align-items: start !important;
+  }
+
+  .hero-commercial .hero-copy {
+    position: relative !important;
+    z-index: 3 !important;
+    width: 100% !important;
+    max-width: 420px !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+  }
+
+  .hero-commercial .hero-copy h1 {
+    width: 100% !important;
+    max-width: 420px !important;
+    font-size: clamp(46px, 3.05vw, 52px) !important;
+    letter-spacing: -.052em !important;
+  }
+
+  .hero-commercial .hero-copy p {
+    max-width: 412px !important;
+  }
+
+  .hero-commercial .hero-product {
+    position: relative !important;
+    z-index: 2 !important;
+    width: 100% !important;
+    max-width: 1036px !important;
+    min-width: 0 !important;
+    justify-self: stretch !important;
+  }
+
+  .hero-commercial .hero-product-stage {
+    width: 100% !important;
+    max-width: 1036px !important;
+    min-width: 0 !important;
+    margin-left: auto !important;
+  }
+}
+
+@media (min-width: 1500px) {
+  .hero-commercial .hero-main {
+    grid-template-columns: minmax(0, 430px) minmax(0, 1fr) !important;
+    column-gap: 44px !important;
+  }
+
+  .hero-commercial .hero-copy,
+  .hero-commercial .hero-copy h1 {
+    max-width: 430px !important;
+  }
+
+  .hero-commercial .hero-copy p {
+    max-width: 420px !important;
+  }
+
+  .hero-commercial .hero-product,
+  .hero-commercial .hero-product-stage {
+    max-width: 1026px !important;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1360px) {
+  .hero-commercial .container.hero-inner {
+    width: min(calc(100% - 56px), 1280px) !important;
+  }
+
+  .hero-commercial .hero-main {
+    grid-template-columns: minmax(0, 390px) minmax(0, 1fr) !important;
+    column-gap: 34px !important;
+  }
+
+  .hero-commercial .hero-copy,
+  .hero-commercial .hero-copy h1 {
+    max-width: 390px !important;
+  }
+
+  .hero-commercial .hero-copy h1 {
+    font-size: clamp(43px, 3.55vw, 48px) !important;
+  }
+}
+
+/* v36 — give the copy and product their own visual lanes.
+   The header now shares the exact same desktop shell as the hero, while the
+   FluxOS preview stays right-anchored and slightly smaller so rotating copy
+   never appears to be swallowed by the interface. */
+@media (min-width: 1201px) {
+  .site-header .container.nav-shell,
+  .hero-commercial .container.hero-inner {
+    width: min(calc(100% - 80px), 1500px) !important;
+    max-width: 1500px !important;
+    margin-inline: auto !important;
+  }
+
+  .hero-commercial .hero-main {
+    grid-template-columns: minmax(0, 430px) minmax(0, 1fr) !important;
+    column-gap: 56px !important;
+  }
+
+  .hero-commercial .hero-copy,
+  .hero-commercial .hero-copy h1 {
+    max-width: 430px !important;
+  }
+
+  .hero-commercial .hero-product {
+    width: 100% !important;
+    max-width: 960px !important;
+    justify-self: end !important;
+    transform: none !important;
+  }
+
+  .hero-commercial .hero-product-stage {
+    width: 100% !important;
+    max-width: 960px !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+}
+
+@media (min-width: 1500px) {
+  .hero-commercial .hero-main {
+    grid-template-columns: minmax(0, 430px) minmax(0, 1fr) !important;
+    column-gap: 60px !important;
+  }
+
+  .hero-commercial .hero-product,
+  .hero-commercial .hero-product-stage {
+    max-width: 960px !important;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1360px) {
+  .site-header .container.nav-shell,
+  .hero-commercial .container.hero-inner {
+    width: min(calc(100% - 56px), 1280px) !important;
+    max-width: 1280px !important;
+  }
+
+  .hero-commercial .hero-main {
+    grid-template-columns: minmax(0, 390px) minmax(0, 1fr) !important;
+    column-gap: 46px !important;
+  }
+
+  .hero-commercial .hero-product,
+  .hero-commercial .hero-product-stage {
+    max-width: 900px !important;
+  }
+}
