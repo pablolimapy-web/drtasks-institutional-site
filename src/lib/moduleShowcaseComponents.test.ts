@@ -8,7 +8,7 @@ test("showcase sequence owns a single cleaned-up timer", () => {
   const source = read("src/components/product-showcase/useShowcaseSequence.ts");
   assert.match(source, /window\.setTimeout/);
   assert.match(source, /window\.clearTimeout/);
-  assert.match(source, /if \(paused \|\| reducedMotion\) return/);
+  assert.match(source, /if \(paused \|\| reducedMotion \|\| durations\.length === 0\) return/);
 });
 
 test("reconstructed demos share one Dr. Tasks shell instead of duplicating full navigation", () => {
@@ -102,10 +102,12 @@ test("ModuleShowcase uses CardSwap as the primary module navigation instead of a
   assert.doesNotMatch(source, /getNextTabIndex/);
 });
 
-test("ModuleShowcase synchronizes animated explanatory copy with the front interface", () => {
+test("ModuleShowcase synchronizes sequential explanatory copy with the front interface", () => {
   const source = read("src/components/ModuleShowcase.tsx");
-  assert.match(source, /useTransition\(transitionItems/);
-  assert.match(source, /keys:\s*\(module\) => module\.id/);
+  assert.match(source, /AnimatePresence/);
+  assert.match(source, /mode="wait"/);
+  assert.doesNotMatch(source, /LayoutGroup/);
+  assert.doesNotMatch(source, /layoutId=/);
   assert.match(source, /aria-live="polite"/);
   assert.doesNotMatch(source, /active\.eyebrow|moduleKicker/);
   assert.match(source, /module\.headline/);
@@ -130,7 +132,8 @@ test("CardSwap adapts the React Bits interaction for Dr. Tasks and cleans up GSA
   assert.match(source, /window\.setInterval/);
   assert.match(source, /window\.clearInterval/);
   assert.match(source, /tlRef\.current\?\.kill\(\)/);
-  assert.match(source, /y:\s*["']\+=500["']/);
+  assert.match(source, /y:\s*["']\+=260["']/);
+  assert.match(source, /timeline\.addLabel\("promote", config\.promoteAt\)/);
 });
 
 test("CardSwap follows the original React Bits responsive deck scaling", () => {

@@ -1255,19 +1255,23 @@
   }
 }
 
+.showcaseMode {
+  width: 100%;
+  min-width: 0;
+}
+
 .showcase.showcaseMode {
   width: 100%;
   height: 100%;
+  max-width: none;
   margin-left: 0;
   margin-right: 0;
-  min-width: 0;
-  max-width: none;
 }
 
 .showcaseMode .frame {
+  width: 100%;
   height: 100%;
   aspect-ratio: auto;
-  transform: none !important;
 }
 
 /* v37 — interactive product demo */
@@ -3344,4 +3348,22 @@
 @media (prefers-reduced-motion: reduce) {
   .brandBeamOne,
   .brandBeamTwo { animation: none; }
+}
+
+/* v40 — drawer backdrop isolation */
+.drawerBackdrop {
+  right: 35.2%;
+  background: rgba(226, 235, 248, 0.28);
+  backdrop-filter: blur(2px) saturate(0.96);
+  -webkit-backdrop-filter: blur(2px) saturate(0.96);
+}
+
+.drawer {
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+@media (max-width: 720px) {
+  .drawerBackdrop { right: 42%; }
 }

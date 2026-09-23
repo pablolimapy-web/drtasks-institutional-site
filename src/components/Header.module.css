@@ -27,6 +27,7 @@
 
 .demoButton {
   white-space: nowrap;
+  border-radius: 16px;
 }
 
 @media (max-width: 720px) {
@@ -46,5 +47,69 @@
 
   .demoButton {
     display: none !important;
+  }
+}
+
+/* v41 — header CTA interaction */
+.demoButton {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transform: translateZ(0);
+  transition:
+    transform 270ms cubic-bezier(.22, 1, .36, 1),
+    box-shadow 270ms cubic-bezier(.22, 1, .36, 1),
+    background-color 230ms ease;
+}
+
+.demoButton::before {
+  content: "";
+  position: absolute;
+  inset: -45% auto -45% -34%;
+  width: 34%;
+  pointer-events: none;
+  transform: translateX(-145%) skewX(-18deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.08), rgba(255,255,255,.66), rgba(255,255,255,.08), transparent);
+  filter: blur(2px);
+  opacity: 0;
+  transition: transform 620ms cubic-bezier(.16, 1, .3, 1), opacity 180ms ease;
+}
+
+.demoButton:hover {
+  transform: translateY(-2px) scale(1.015);
+  box-shadow:
+    0 16px 30px rgba(28, 85, 201, .26),
+    0 6px 12px rgba(28, 85, 201, .14),
+    inset 0 1px 0 rgba(255,255,255,.24);
+}
+
+.demoButton:hover::before {
+  transform: translateX(145%) skewX(-18deg);
+  opacity: 1;
+}
+
+.demoButton:active {
+  transform: translateY(0) scale(.98);
+  transition-duration: 90ms;
+}
+
+.demoButton:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(28, 85, 201, .15), 0 12px 26px rgba(28, 85, 201, .18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demoButton,
+  .demoButton::before {
+    transition-duration: 0.01ms !important;
+  }
+
+  .demoButton:hover,
+  .demoButton:active {
+    transform: none !important;
+  }
+
+  .demoButton::before {
+    display: none;
   }
 }

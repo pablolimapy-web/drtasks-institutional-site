@@ -1,0 +1,46 @@
+.section {
+  position: relative;
+  overflow: clip;
+  padding: clamp(112px, 9vw, 154px) 0;
+  background:
+    radial-gradient(circle at 8% 20%, rgba(28,85,201,.065), transparent 24%),
+    linear-gradient(180deg, #fff 0%, #f8faff 100%);
+  color: var(--text);
+}
+.inner { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(320px,.8fr); align-items: center; gap: clamp(56px,7vw,110px); }
+.visualColumn { min-width: 0; }
+.stackShell { position: relative; width: min(100%, 820px); aspect-ratio: 1.83 / 1; margin-left: -3%; }
+.stackCard { position: relative; width: 100%; height: 100%; overflow: hidden; border: 1px solid rgba(15,32,56,.09); border-radius: 26px; background: #fff; box-shadow: 0 30px 70px rgba(22,52,100,.16); }
+.screenImage { width: 100%; height: 100%; object-fit: cover; }
+.screenLabel { position: absolute; left: 18px; bottom: 17px; display: inline-flex; min-height: 34px; align-items: center; padding: 0 12px; border: 1px solid rgba(28,85,201,.13); border-radius: 999px; background: rgba(255,255,255,.9); color: #31558f; font-size: 11px; font-weight: 720; box-shadow: 0 10px 26px rgba(32,58,101,.1); backdrop-filter: blur(10px); }
+.stackHint { margin: 24px 0 0 2%; color: #7b8490; font-size: 12px; }
+.copy { max-width: 590px; }
+.kicker { display: flex; align-items: center; gap: 11px; margin-bottom: 24px; color: #27344a; font-size: 14px; font-weight: 720; }
+.kicker span { width: 24px; height: 2px; border-radius: 999px; background: var(--brand); }
+.copy h2 { margin: 0; font-size: clamp(44px,4.5vw,68px); font-weight: 620; line-height: 1.01; letter-spacing: -.052em; text-wrap: balance; }
+.copy > p { margin: 27px 0 0; max-width: 540px; color: var(--muted); font-size: clamp(17px,1.22vw,19px); line-height: 1.62; }
+.hierarchy { position: relative; display: grid; gap: 0; margin: 34px 0 36px; padding: 0; list-style: none; }
+.hierarchy::before { position: absolute; top: 18px; bottom: 18px; left: 17px; width: 1px; background: linear-gradient(#a9c4f8, #d8e3f8); content: ""; }
+.hierarchy li { position: relative; display: grid; grid-template-columns: 36px 1fr; gap: 15px; align-items: start; min-height: 62px; }
+.stepIndex { position: relative; z-index: 1; display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid rgba(28,85,201,.14); border-radius: 50%; background: #fff; color: var(--brand); font-size: 10px; font-weight: 780; box-shadow: 0 7px 18px rgba(28,85,201,.08); }
+.hierarchy strong { display: block; padding-top: 1px; color: #1d2430; font-size: 15px; font-weight: 730; }
+.hierarchy small { display: block; margin-top: 4px; color: #7a828e; font-size: 12px; line-height: 1.4; }
+@media (max-width: 1040px) { .section { padding: 98px 0; } .inner { grid-template-columns: 1fr; gap: 64px; } .copy { max-width: 760px; order: -1; } .visualColumn { width: min(100%, 900px); } .stackShell { margin-left: 0; } }
+@media (max-width: 720px) { .section { padding: 82px 0 94px; } .copy h2 { font-size: clamp(38px,10.5vw,50px); } .copy > p { font-size: 16px; } .stackShell { width: 96%; margin-inline: auto; aspect-ratio: 1.58/1; } .stackCard { border-radius: 18px; } .screenLabel { left: 12px; bottom: 11px; } .stackHint { text-align: center; } }
+@media (prefers-reduced-motion: reduce) { .stackHint { display: none; } }
+
+/* Editorial desktop split; semantic/mobile order stays copy → product → deep link. */
+.inner { grid-template-areas: "visual copy" "visual cta"; grid-template-rows: minmax(0, 1fr) auto; align-items: stretch; }
+.copy { grid-area: copy; align-self: end; }
+.visual { grid-area: visual; grid-row: 1 / span 2; align-self: center; min-width: 0; }
+.chapterCta { grid-area: cta; align-self: start; margin-top: 34px; }
+@media (max-width: 1040px) {
+  .inner { grid-template-areas: "copy" "visual" "cta"; grid-template-rows: auto; gap: 0; }
+  .copy { order: initial; align-self: auto; }
+  .visual { grid-row: auto; width: min(100%, 900px); margin-top: 60px; }
+  .chapterCta { margin-top: 34px; }
+}
+@media (max-width: 720px) {
+  .visual { margin-top: 44px; }
+  .chapterCta { margin-top: 28px; }
+}

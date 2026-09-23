@@ -10,19 +10,6 @@
   transform-origin: bottom right;
 }
 
-.container::before {
-  position: absolute;
-  inset: 24% 4% -4% 16%;
-  z-index: -1;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(28, 85, 201, .12), rgba(28, 85, 201, 0) 70%);
-  filter: blur(26px);
-  content: "";
-  opacity: .34;
-  pointer-events: none;
-  animation: deckShadowBreath 8s ease-in-out infinite alternate;
-}
-
 .card {
   position: absolute;
   top: 50%;
@@ -50,17 +37,6 @@
   pointer-events: none;
 }
 
-@keyframes deckShadowBreath {
-  0% {
-    opacity: .26;
-    transform: translate3d(-1%, 2%, 0) scale(.96);
-  }
-  100% {
-    opacity: .46;
-    transform: translate3d(2%, -2%, 0) scale(1.04);
-  }
-}
-
 @media (max-width: 1040px) {
   .container {
     transform: scale(.82) translate(16%, 22%);
@@ -80,10 +56,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .container::before {
-    animation: none;
-  }
-
   .card {
     will-change: auto;
   }

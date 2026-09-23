@@ -20,8 +20,8 @@ const records = [
   ["Operação interna", "Alinhamento de equipe", "00:32:08", "Não faturável"],
 ] as const;
 
-export function TimeModuleDemo({ paused, reducedMotion }: { paused: boolean; reducedMotion: boolean }) {
-  const sceneIndex = useShowcaseSequence({ durations: DURATIONS, paused, reducedMotion, staticScene: 4 });
+export function TimeModuleDemo({ paused, reducedMotion, loop }: { paused: boolean; reducedMotion: boolean; loop: boolean }) {
+  const sceneIndex = useShowcaseSequence({ durations: DURATIONS, paused, reducedMotion, staticScene: 4, speed: 0.65, loop });
   const timerActive = sceneIndex >= 1;
 
   return (

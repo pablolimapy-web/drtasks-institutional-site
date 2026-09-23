@@ -7,9 +7,18 @@ type SequenceOptions = {
   paused: boolean;
   reducedMotion: boolean;
   staticScene: number;
+  speed?: number;
+  loop?: boolean;
 };
 
-export function useShowcaseSequence({ durations, paused, reducedMotion, staticScene }: SequenceOptions) {
+export function useShowcaseSequence({
+  durations,
+  paused,
+  reducedMotion,
+  staticScene,
+  speed = 1,
+  loop = false,
+}: SequenceOptions) {
   const [sceneIndex, setSceneIndex] = useState(0);
 
   useEffect(() => {
@@ -17,16 +26,23 @@ export function useShowcaseSequence({ durations, paused, reducedMotion, staticSc
   }, [reducedMotion, staticScene]);
 
   useEffect(() => {
-    if (paused || reducedMotion) return;
-    if (durations.length === 0 || sceneIndex >= durations.length - 1) return;
+    if (paused || reducedMotion || durations.length === 0) return;
 
-    const duration = durations[Math.min(sceneIndex, durations.length - 1)];
+    const atFinalScene = sceneIndex >= durations.length - 1;
+    if (atFinalScene && !loop) return;
+
+    const duration = durations[Math.min(sceneIndex, durations.length - 1)] ?? 400;
+    const delay = Math.max(120, Math.round(duration * speed));
     const timeout = window.setTimeout(() => {
+      if (loop && sceneIndex >= durations.length - 1) {
+        setSceneIndex(0);
+        return;
+      }
       setSceneIndex((current) => Math.min(current + 1, durations.length - 1));
-    }, duration);
+    }, delay);
 
     return () => window.clearTimeout(timeout);
-  }, [durations, paused, reducedMotion, sceneIndex]);
+  }, [durations, loop, paused, reducedMotion, sceneIndex, speed]);
 
   return sceneIndex;
 }

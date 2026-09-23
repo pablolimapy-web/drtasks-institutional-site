@@ -13,8 +13,8 @@ const markers = [
   { id: "D", x: 78, y: 32, status: "completed" },
 ] as const;
 
-export function LocationModuleDemo({ paused, reducedMotion }: { paused: boolean; reducedMotion: boolean }) {
-  const sceneIndex = useShowcaseSequence({ durations: DURATIONS, paused, reducedMotion, staticScene: 4 });
+export function LocationModuleDemo({ paused, reducedMotion, loop }: { paused: boolean; reducedMotion: boolean; loop: boolean }) {
+  const sceneIndex = useShowcaseSequence({ durations: DURATIONS, paused, reducedMotion, staticScene: 4, speed: 0.65, loop });
 
   return (
     <DemoShell activeNav="Localização" ariaLabel="Demonstração da localização de tarefas">

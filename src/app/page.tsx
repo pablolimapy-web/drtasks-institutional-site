@@ -2,9 +2,9 @@ import { createPageMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 import { Header } from "@/components/Header";
 import { HeroCommercial } from "@/components/HeroCommercialRotating";
-import { PainBand } from "@/components/PainBand";
-import { FluxOS } from "@/components/FluxOS";
-import { ProductPillars } from "@/components/ProductPillars";
+import { TechnologyLogoLoop } from "@/components/TechnologyLogoLoop";
+import { ModuleShowcase } from "@/components/ModuleShowcase";
+import { HomeModuleJourney } from "@/components/home-modules/HomeModuleJourney";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Segments } from "@/components/Segments";
 import { OriginStory } from "@/components/OriginStory";
@@ -26,9 +26,9 @@ export default function HomePage() {
       <Header />
       <main>
         <HeroCommercial />
-        <PainBand />
-        <FluxOS />
-        <ProductPillars />
+        <TechnologyLogoLoop />
+        <ModuleShowcase />
+        <HomeModuleJourney />
         <HowItWorks />
         <Segments />
         <OriginStory />

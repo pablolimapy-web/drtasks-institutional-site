@@ -20,8 +20,8 @@ const rows = [
   { project: "Projeto 154", status: "Recebido", month: "Ago/26", emitted: "R$ 27 mil", received: "R$ 27 mil", balance: "R$ 0" },
 ] as const;
 
-export function FinanceModuleDemo({ paused, reducedMotion }: { paused: boolean; reducedMotion: boolean }) {
-  const sceneIndex = useShowcaseSequence({ durations: DURATIONS, paused, reducedMotion, staticScene: 3 });
+export function FinanceModuleDemo({ paused, reducedMotion, loop }: { paused: boolean; reducedMotion: boolean; loop: boolean }) {
+  const sceneIndex = useShowcaseSequence({ durations: DURATIONS, paused, reducedMotion, staticScene: 3, speed: 0.65, loop });
 
   return (
     <DemoShell activeNav="Financeiro" ariaLabel="Demonstração da gestão financeira do Dr. Tasks">

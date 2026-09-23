@@ -28,11 +28,12 @@ test("showcase uses a dedicated next-interface button instead of card clicks", (
   assert.doesNotMatch(source, /onCardClick=/);
 });
 
-test("showcase keeps the React Bits deck geometry but advances only from explicit controls", () => {
-  assert.match(source, /cardDistance=\{60\}/);
-  assert.match(source, /verticalDistance=\{70\}/);
-  assert.match(source, /delay=\{0\}/);
-  assert.match(source, /pauseOnHover=\{false\}/);
+test("showcase keeps the React Bits deck geometry with fast hover-pausable rotation", () => {
+  assert.match(source, /cardDistance=\{74\}/);
+  assert.match(source, /verticalDistance=\{76\}/);
+  assert.match(source, /MODULE_ROTATION_DELAY_MS\s*=\s*3500/);
+  assert.match(source, /delay=\{MODULE_ROTATION_DELAY_MS\}/);
+  assert.match(source, /pauseOnHover/);
 });
 
 test("copy column has no vertical divider and CardSwap uses original bottom-right anchoring", () => {
@@ -55,14 +56,18 @@ test("showcase removes AI-like kicker subtitles and lets the module name lead", 
   assert.doesNotMatch(metadata, /eyebrow\s*:/);
 });
 
-test("left presentation uses react-spring for first reveal and synchronized module copy transitions", () => {
+test("left presentation swaps copy sequentially without shared-layout ghosting", () => {
   const packageJson = fs.readFileSync("package.json", "utf8");
   assert.match(packageJson, /"@react-spring\/web"/);
   assert.match(source, /from "@react-spring\/web"/);
-  assert.match(source, /useTransition/);
-  assert.match(source, /useTrail/);
+  assert.match(source, /AnimatePresence/);
+  assert.match(source, /mode="wait"/);
+  assert.doesNotMatch(source, /LayoutGroup/);
+  assert.doesNotMatch(source, /layoutId=/);
+  assert.match(source, /exit=\{reducedMotion \? undefined : \{ opacity: 0,/);
   assert.match(source, /useSpring/);
-  assert.match(source, /<animated\./);
+  assert.match(source, /<animated\.div/);
+  assert.doesNotMatch(source, /useTrail|useTransition/);
 });
 
 test("CardSwap announces the incoming front card when the swap starts", () => {
@@ -75,15 +80,15 @@ test("CardSwap announces the incoming front card when the swap starts", () => {
 });
 
 test("left presentation is larger and sits closer to the product deck", () => {
-  assert.match(styles, /grid-template-columns:\s*minmax\(360px,\s*\.72fr\)\s+minmax\(0,\s*1\.28fr\)/);
-  assert.match(styles, /gap:\s*clamp\(18px,\s*2vw,\s*32px\)/);
+  assert.match(styles, /grid-template-columns:\s*minmax\(330px,\s*\.62fr\)\s+minmax\(0,\s*1\.38fr\)/);
+  assert.match(styles, /gap:\s*clamp\(8px,\s*1\.2vw,\s*20px\)/);
   assert.match(styles, /font-size:\s*clamp\(46px,\s*4\.2vw,\s*62px\)/);
   assert.match(styles, /font-size:\s*clamp\(17px,\s*1\.25vw,\s*19px\)/);
 });
 
 test("first copy reveal waits until the showcase enters the viewport", () => {
-  assert.match(source, /const transitionItems = stageInView \|\| reducedMotion \? \[active\] : \[\];/);
-  assert.match(source, /useTransition\(transitionItems/);
+  assert.match(source, /\(stageInView \|\| reducedMotion\) && \(/);
+  assert.match(source, /initial=\{reducedMotion \? false : \{ opacity: 0, y: 12, filter: "blur\(5px\)" \}\}/);
 });
 
 test("react-spring dependency is locked with its runtime packages", () => {
@@ -100,4 +105,13 @@ test("left presentation keeps only primary copy and actions", () => {
   assert.doesNotMatch(source, /Pausar animação|Movimento reduzido|Retomar/);
   assert.match(source, /Próxima interface/);
   assert.match(source, /Conhecer \{module\.label\}/);
+});
+
+
+test("desktop product deck grows into the site edge instead of floating inside the content column", () => {
+  assert.match(source, /width="96%"/);
+  assert.match(source, /height="82%"/);
+  assert.match(styles, /margin-right:\s*calc\(\(var\(--site-gutter\) \+ clamp\(72px, 5vw, 120px\)\) \* -1\)/);
+  assert.match(styles, /\.deckColumn\s*\{[\s\S]*?min-height:\s*760px/);
+  assert.match(styles, /@media \(max-width:\s*1040px\)[\s\S]*?margin-right:\s*0/);
 });

@@ -22,8 +22,8 @@ const columns = [
   { title: "Aguardando Aprovação", count: 62, tone: "approval", cards: ["Projeto 102 · Serviço técnico"] },
 ] as const;
 
-export function ProjectsModuleDemo({ paused, reducedMotion }: { paused: boolean; reducedMotion: boolean }) {
-  const sceneIndex = useShowcaseSequence({ durations: DURATIONS, paused, reducedMotion, staticScene: 3 });
+export function ProjectsModuleDemo({ paused, reducedMotion, loop }: { paused: boolean; reducedMotion: boolean; loop: boolean }) {
+  const sceneIndex = useShowcaseSequence({ durations: DURATIONS, paused, reducedMotion, staticScene: 3, speed: 0.65, loop });
 
   return (
     <DemoShell activeNav="Projetos" ariaLabel="Demonstração da carteira de projetos em Kanban">

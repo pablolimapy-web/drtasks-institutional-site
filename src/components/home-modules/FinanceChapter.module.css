@@ -1,0 +1,46 @@
+.section {
+  position: relative;
+  overflow: clip;
+  padding: clamp(112px, 9vw, 158px) 0 clamp(120px, 9vw, 164px);
+  background: #f5f8fc;
+  color: var(--text);
+}
+.section::before { position: absolute; top: 0; left: 50%; width: min(72vw,1100px); height: 1px; transform: translateX(-50%); background: linear-gradient(90deg, transparent, rgba(38,69,117,.12), transparent); content: ""; }
+.inner { display: grid; grid-template-columns: minmax(320px,.82fr) minmax(0,1.28fr); gap: clamp(54px,6vw,92px); align-items: center; }
+.copy { max-width: 600px; }
+.kicker { display: flex; align-items: center; gap: 11px; margin-bottom: 24px; color: #27344a; font-size: 14px; font-weight: 720; }
+.kicker span { width: 24px; height: 2px; border-radius: 999px; background: var(--brand); }
+.copy h2 { margin: 0; font-size: clamp(46px,4.5vw,68px); font-weight: 620; line-height: 1; letter-spacing: -.052em; text-wrap: balance; }
+.copy > p { margin: 27px 0 0; max-width: 560px; color: var(--muted); font-size: clamp(17px,1.2vw,19px); line-height: 1.62; }
+.supports { display: grid; gap: 10px; margin: 34px 0 36px; }
+.supportCard { display: grid; grid-template-columns: 14px minmax(0,1fr); gap: 2px 12px; align-items: start; padding: 13px 15px; border: 1px solid rgba(28,85,201,.08); border-radius: 16px; background: rgba(255,255,255,.74); box-shadow: 0 8px 24px rgba(32,58,101,.045); }
+.supportMarker { grid-row: 1 / span 2; width: 8px; height: 8px; margin-top: 6px; border-radius: 999px; background: var(--brand); box-shadow: 0 0 0 5px rgba(28,85,201,.07); }
+.supportCard strong { position: relative; z-index: 1; color: #202a39; font-size: 13px; font-weight: 740; }
+.supportCard small { position: relative; z-index: 1; color: #747d89; font-size: 11.5px; line-height: 1.46; }
+.visual { position: relative; min-width: 0; min-height: clamp(520px,45vw,680px); margin-right: calc(var(--site-gutter) * -1); }
+.mainScreen, .backScreenOne, .backScreenTwo { position: absolute; overflow: hidden; border: 1px solid rgba(21,46,88,.08); background: #fff; box-shadow: 0 30px 78px rgba(24,52,98,.13); }
+.mainScreen { z-index: 3; top: 13%; left: 0; width: 104%; border-radius: 26px 0 0 26px; }
+.mainImage, .backScreenOne img, .backScreenTwo img { display: block; width: 100%; height: auto; }
+.backScreenOne { z-index: 1; top: 0; right: -2%; width: 48%; border-radius: 20px; opacity: .68; transform: translateY(-5%) rotate(2deg); }
+.backScreenTwo { z-index: 2; right: 2%; bottom: 0; width: 44%; border-radius: 20px; opacity: .9; transform: rotate(-1.5deg); }
+.screenCaption { position: absolute; right: 18px; bottom: 16px; display: inline-flex; min-height: 34px; align-items: center; padding: 0 12px; border: 1px solid rgba(28,85,201,.12); border-radius: 999px; background: rgba(255,255,255,.9); color: #31558f; font-size: 11px; font-weight: 720; backdrop-filter: blur(10px); }
+@media (max-width: 1040px) { .section { padding: 98px 0 108px; } .inner { grid-template-columns: 1fr; gap: 64px; } .copy { max-width: 760px; } .visual { min-height: 570px; margin-right: 0; } .mainScreen { width: 96%; border-radius: 24px; } .backScreenOne { right: 1%; } .backScreenTwo { right: 5%; } }
+@media (max-width: 720px) { .section { padding: 82px 0 94px; } .copy h2 { font-size: clamp(39px,10.5vw,51px); } .copy > p { font-size: 16px; } .visual { min-height: 410px; } .mainScreen { top: 10%; width: 100%; border-radius: 18px; } .backScreenOne { width: 54%; border-radius: 15px; } .backScreenTwo { width: 54%; border-radius: 15px; } .screenCaption { display: none; } }
+@media (max-width: 430px) { .visual { min-height: 330px; } }
+@media (prefers-reduced-motion: reduce) { .backScreenOne, .backScreenTwo { transform: none; } }
+
+/* Keep the mobile narrative in reading order: copy → product → deep link. */
+.inner { grid-template-areas: "copy visual" "cta visual"; grid-template-rows: minmax(0, 1fr) auto; align-items: stretch; }
+.copy { grid-area: copy; align-self: end; }
+.visual { grid-area: visual; grid-row: 1 / span 2; align-self: center; }
+.chapterCta { grid-area: cta; align-self: start; margin-top: 34px; }
+@media (max-width: 1040px) {
+  .inner { grid-template-areas: "copy" "visual" "cta"; grid-template-rows: auto; gap: 0; }
+  .copy { align-self: auto; }
+  .visual { grid-row: auto; margin-top: 60px; }
+  .chapterCta { margin-top: 34px; }
+}
+@media (max-width: 720px) {
+  .visual { margin-top: 44px; }
+  .chapterCta { margin-top: 28px; }
+}

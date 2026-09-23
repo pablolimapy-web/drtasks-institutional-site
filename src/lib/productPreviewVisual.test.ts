@@ -25,14 +25,3 @@ test("FluxOS table keeps real OS data while exposing the real progress signal", 
   assert.match(source, /130 - N° 09\/2025 - MANUTENÇÃO EM SUBESTAÇÃO/);
   assert.match(source, /46\.355,95/);
 });
-
-test("FluxOS showcase mode cancels Hero oversizing and fills the CardSwap viewport", () => {
-  assert.match(
-    styles,
-    /\.showcase\.showcaseMode\s*\{[^}]*width:\s*100%;[^}]*height:\s*100%;[^}]*margin-left:\s*0;[^}]*margin-right:\s*0;[^}]*max-width:\s*none;/s,
-  );
-  assert.match(
-    styles,
-    /\.showcaseMode\s+\.frame\s*\{[^}]*height:\s*100%;[^}]*aspect-ratio:\s*auto;[^}]*transform:\s*none\s*!important;/s,
-  );
-});

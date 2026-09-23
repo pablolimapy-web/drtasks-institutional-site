@@ -5,6 +5,7 @@ import {
   cloneElement,
   forwardRef,
   isValidElement,
+  useCallback,
   useEffect,
   useImperativeHandle,
   useMemo,
@@ -118,18 +119,26 @@ const CardSwap = forwardRef<CardSwapHandle, CardSwapProps>(function CardSwap(
   onActiveChangeRef.current = onActiveChange;
   onCardClickRef.current = onCardClick;
 
+  const clearRotationTimer = useCallback(() => {
+    if (intervalRef.current !== null) {
+      window.clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  }, []);
+
+  const startRotationTimer = useCallback(() => {
+    clearRotationTimer();
+    if (paused || reducedMotion || delay <= 0 || hoverPausedRef.current) return;
+    intervalRef.current = window.setInterval(() => swapRef.current(), delay);
+  }, [clearRotationTimer, delay, paused, reducedMotion]);
+
   useImperativeHandle(ref, () => ({
     next: () => {
-      if (intervalRef.current !== null) {
-        window.clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      }
+      clearRotationTimer();
       swapRef.current(true);
-      if (!paused && !reducedMotion && delay > 0) {
-        intervalRef.current = window.setInterval(() => swapRef.current(), delay);
-      }
+      startRotationTimer();
     },
-  }), [delay, paused, reducedMotion]);
+  }), [clearRotationTimer, startRotationTimer]);
 
   useEffect(() => {
     const total = refs.length;
@@ -137,20 +146,24 @@ const CardSwap = forwardRef<CardSwapHandle, CardSwapProps>(function CardSwap(
 
     const config = easing === "elastic"
       ? {
-          ease: "elastic.out(0.6,0.9)",
-          durDrop: 2,
-          durMove: 2,
-          durReturn: 2,
-          promoteOverlap: 0.9,
-          returnDelay: 0.05,
+          easeDrop: "power3.inOut",
+          easeMove: "power3.out",
+          easeReturn: "power3.inOut",
+          durDrop: 0.82,
+          durMove: 0.78,
+          durReturn: 0.9,
+          promoteAt: 0.16,
+          returnAt: 0.42,
         }
       : {
-          ease: "power1.inOut",
-          durDrop: 0.8,
-          durMove: 0.8,
-          durReturn: 0.8,
-          promoteOverlap: 0.45,
-          returnDelay: 0.2,
+          easeDrop: "power2.inOut",
+          easeMove: "power2.out",
+          easeReturn: "power2.inOut",
+          durDrop: 0.66,
+          durMove: 0.64,
+          durReturn: 0.72,
+          promoteAt: 0.12,
+          returnAt: 0.34,
         };
 
     const placeOrder = () => {
@@ -193,12 +206,13 @@ const CardSwap = forwardRef<CardSwapHandle, CardSwapProps>(function CardSwap(
       tlRef.current = timeline;
 
       timeline.to(frontElement, {
-        y: "+=500",
+        y: "+=260",
+        x: "-=36",
         duration: config.durDrop,
-        ease: config.ease,
-      });
+        ease: config.easeDrop,
+      }, 0);
 
-      timeline.addLabel("promote", `-=${config.durDrop * config.promoteOverlap}`);
+      timeline.addLabel("promote", config.promoteAt);
       rest.forEach((cardIndex, position) => {
         const element = refs[cardIndex]?.current;
         const slot = makeSlot(position, cardDistance, verticalDistance, total);
@@ -210,14 +224,14 @@ const CardSwap = forwardRef<CardSwapHandle, CardSwapProps>(function CardSwap(
             y: slot.y,
             z: slot.z,
             duration: config.durMove,
-            ease: config.ease,
+            ease: config.easeMove,
           },
-          `promote+=${position * 0.15}`,
+          `promote+=${position * 0.06}`,
         );
       });
 
       const backSlot = makeSlot(total - 1, cardDistance, verticalDistance, total);
-      timeline.addLabel("return", `promote+=${config.durMove * config.returnDelay}`);
+      timeline.addLabel("return", config.returnAt);
       timeline.call(() => {
         gsap.set(frontElement, { zIndex: backSlot.zIndex });
       }, undefined, "return");
@@ -228,7 +242,7 @@ const CardSwap = forwardRef<CardSwapHandle, CardSwapProps>(function CardSwap(
           y: backSlot.y,
           z: backSlot.z,
           duration: config.durReturn,
-          ease: config.ease,
+          ease: config.easeReturn,
         },
         "return",
       );
@@ -242,20 +256,15 @@ const CardSwap = forwardRef<CardSwapHandle, CardSwapProps>(function CardSwap(
     placeOrder();
     notifyFront();
 
-    if (!paused && !reducedMotion && delay > 0) {
-      intervalRef.current = window.setInterval(() => swap(), delay);
-    }
+    startRotationTimer();
 
     return () => {
-      if (intervalRef.current !== null) {
-        window.clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      }
+      clearRotationTimer();
       tlRef.current?.kill();
       tlRef.current = null;
       swappingRef.current = false;
     };
-  }, [cardDistance, verticalDistance, delay, easing, paused, reducedMotion, refs, skewAmount]);
+  }, [cardDistance, clearRotationTimer, easing, refs, skewAmount, startRotationTimer, verticalDistance]);
 
   const rendered = childArr.map((child, index) => {
     if (!isValidElement(child)) return child;
@@ -280,12 +289,12 @@ const CardSwap = forwardRef<CardSwapHandle, CardSwapProps>(function CardSwap(
       onMouseEnter={() => {
         if (!pauseOnHover) return;
         hoverPausedRef.current = true;
-        tlRef.current?.pause();
+        clearRotationTimer();
       }}
       onMouseLeave={() => {
         if (!pauseOnHover) return;
         hoverPausedRef.current = false;
-        tlRef.current?.play();
+        startRotationTimer();
       }}
     >
       {rendered}

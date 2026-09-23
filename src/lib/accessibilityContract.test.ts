@@ -52,9 +52,10 @@ test("major auto-rotating experiences expose pause controls and reduced-motion g
 });
 
 
-test("ModuleShowcase uses explicit navigation instead of an unpausable auto-rotation", () => {
+test("ModuleShowcase auto-rotation respects reduced motion and exposes hover/manual control", () => {
   assert.match(moduleShowcase, /useReducedMotion\(/);
-  assert.match(moduleShowcase, /delay=\{0\}/);
+  assert.match(moduleShowcase, /MODULE_ROTATION_DELAY_MS\s*=\s*3500/);
+  assert.match(moduleShowcase, /pauseOnHover/);
   assert.match(moduleShowcase, /Próxima interface/);
   assert.doesNotMatch(moduleShowcase, /aria-pressed=/);
 });

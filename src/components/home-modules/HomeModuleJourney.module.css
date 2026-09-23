@@ -1,0 +1,15 @@
+.journey {
+  position: relative;
+  overflow: clip;
+  background: #fff;
+}
+
+.journey :global(section[id^="modulo-"]) {
+  scroll-margin-top: 96px;
+}
+
+@media (max-width: 720px) {
+  .journey :global(section[id^="modulo-"]) {
+    scroll-margin-top: 82px;
+  }
+}

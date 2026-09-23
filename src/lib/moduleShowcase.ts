@@ -2,8 +2,16 @@ import { productPillars } from "./productArchitecture.ts";
 
 export type ModuleShowcaseId = "fluxos" | "projects" | "finance" | "team" | "resources";
 
+export type HomeModuleAnchor =
+  | "modulo-fluxos"
+  | "modulo-projetos"
+  | "modulo-financeiro"
+  | "modulo-equipe"
+  | "modulo-recursos";
+
 export type ModuleShowcaseModule = {
   id: ModuleShowcaseId;
+  anchor: HomeModuleAnchor;
   label: string;
   headline: string;
   description: string;
@@ -18,6 +26,7 @@ const hrefFor = (id: (typeof productPillars)[number]["id"]) =>
 export const moduleShowcaseModules: readonly ModuleShowcaseModule[] = [
   {
     id: "fluxos",
+    anchor: "modulo-fluxos",
     label: "FluxOS",
     headline: "Saiba onde cada projeto está — e o que precisa acontecer depois.",
     description: "Estágios, responsáveis, prazo, risco e próxima ação permanecem no mesmo contexto.",
@@ -27,6 +36,7 @@ export const moduleShowcaseModules: readonly ModuleShowcaseModule[] = [
   },
   {
     id: "projects",
+    anchor: "modulo-projetos",
     label: "Projetos",
     headline: "Veja a carteira antes de abrir cada projeto.",
     description: "Indicadores, filtros e Kanban deixam prioridades e atrasos visíveis sem perder a visão do todo.",
@@ -36,6 +46,7 @@ export const moduleShowcaseModules: readonly ModuleShowcaseModule[] = [
   },
   {
     id: "finance",
+    anchor: "modulo-financeiro",
     label: "Financeiro",
     headline: "O financeiro acompanha a operação que gerou cada valor.",
     description: "Receitas, despesas, bancos, resumo e custos administrativos permanecem conectados ao contexto operacional.",
@@ -45,6 +56,7 @@ export const moduleShowcaseModules: readonly ModuleShowcaseModule[] = [
   },
   {
     id: "team",
+    anchor: "modulo-equipe",
     label: "Equipe & tempo",
     headline: "Tempo registrado vira leitura operacional, não uma planilha paralela.",
     description: "Timers, lançamentos, aprovações e produtividade ficam próximos do trabalho executado pela equipe.",
@@ -54,6 +66,7 @@ export const moduleShowcaseModules: readonly ModuleShowcaseModule[] = [
   },
   {
     id: "resources",
+    anchor: "modulo-recursos",
     label: "Recursos",
     headline: "Quando o trabalho acontece em campo, o contexto acompanha a tarefa.",
     description: "Filtros, localização e detalhe da atividade ajudam a encontrar o que está acontecendo fora do escritório.",
