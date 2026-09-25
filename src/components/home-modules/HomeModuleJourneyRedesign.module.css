@@ -1,0 +1,18 @@
+.journey {
+  --chapter-max: 1500px;
+  --chapter-pad-inline: clamp(20px, 5vw, 76px);
+  --chapter-gap: clamp(88px, 10vw, 152px);
+  position: relative;
+  isolation: isolate;
+}
+
+.journey :global(section[id^="modulo-"]) {
+  scroll-margin-top: 104px;
+}
+
+@media (max-width: 760px) {
+  .journey {
+    --chapter-pad-inline: 18px;
+    --chapter-gap: 78px;
+  }
+}

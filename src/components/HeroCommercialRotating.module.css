@@ -118,6 +118,19 @@
   isolation: isolate;
 }
 
+.heroSection::after {
+  position: absolute;
+  z-index: -2;
+  right: -8vw;
+  bottom: -112px;
+  left: -8vw;
+  height: 225px;
+  background:
+    radial-gradient(ellipse 76% 68% at 50% 0%, rgba(76, 132, 236, .2) 0%, rgba(93, 151, 245, .105) 38%, rgba(235, 243, 255, .28) 58%, transparent 78%);
+  content: "";
+  pointer-events: none;
+}
+
 .heroBackdrop {
   position: absolute;
   inset: 0;

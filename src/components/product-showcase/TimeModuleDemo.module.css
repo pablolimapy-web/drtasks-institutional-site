@@ -6,3 +6,76 @@
 .records{margin-top:7px;border:1px solid #e4eaf2;border-radius:10px;background:#fff;overflow:hidden}.page[data-scene="3"] .records,.page[data-scene="4"] .records{opacity:1;transform:none}.recordsHead,.record{display:grid;grid-template-columns:1.1fr 1.55fr .8fr .85fr;gap:6px;align-items:center;padding:7px 9px}.recordsHead{background:#f5f8fc;border-bottom:1px solid #e7ecf3;color:#7b8799;font-size:6px}.record{border-bottom:1px solid #eef2f6;font-size:6.5px;opacity:0;transform:translateY(5px);transition:opacity .4s ease,transform .4s ease;transition-delay:calc(var(--row) * 80ms)}.page[data-scene="3"] .record,.page[data-scene="4"] .record{opacity:1;transform:none}.record:last-child{border-bottom:0}.record span{color:#718095}.record em{font-style:normal;color:#207453;background:#ecf8f2;border-radius:999px;padding:3px 5px;width:max-content}.record:last-child em{color:#9a6a18;background:#fff5de}
 .goal{margin-top:7px;display:grid;grid-template-columns:92px minmax(0,1fr);gap:8px;align-items:center}.page[data-scene="4"] .goal{opacity:1;transform:none}.goal>span{height:5px;border-radius:99px;background:#e7edf4;overflow:hidden}.goal>span b{display:block;height:100%;border-radius:inherit;background:#2c7bd4;transition:width .8s cubic-bezier(.2,.8,.2,1)}.goal p{margin:0;color:#748197;font-size:6px}.goal p strong,.goal p b{color:#263850}
 @media(max-width:760px){.hero p{display:none}.timerAction{padding:7px 8px;max-width:132px;overflow:hidden;text-overflow:ellipsis}.kpis{grid-template-columns:repeat(4,minmax(72px,1fr));overflow:hidden}.kpis article:nth-child(n+5){display:none}.filters span:nth-child(n+3){display:none}.recordsHead,.record{grid-template-columns:1.15fr 1.3fr .7fr}.recordsHead span:nth-child(4),.record em{display:none}.goal{grid-template-columns:70px 1fr}}
+
+/* Guided in-product presentation */
+.page { position: relative; }
+.recordFocus { background:#f0f7ff; box-shadow:inset 3px 0 #2f7fd5; }
+.page[data-scene="4"] .recordFocus { background:#f4f9ff; }
+
+/* Presentation entrance — Time starts the timer, then fills the operational reading. */
+.page {
+  transform-origin: 50% 34%;
+  animation: timeCanvasIn .72s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.page[data-scene="0"] .hero,
+.page[data-scene="0"] .tabs {
+  animation: timeHeaderReveal .62s .06s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.page[data-scene="1"] .timerActive {
+  animation: timeTimerStart .62s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.page[data-scene="2"] .kpis article {
+  animation: timeKpiReveal .48s calc(.03s + var(--i) * 60ms) cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.page[data-scene="3"] .record {
+  animation: timeRecordReveal .52s calc(.05s + var(--row) * 90ms) cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.page[data-scene="4"] .goal > span b {
+  animation: timeGoalFill .88s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.page[data-paused="true"] *,
+.page[data-paused="true"] {
+  animation-play-state: paused !important;
+}
+
+.page[data-reduced-motion="true"],
+.page[data-reduced-motion="true"] * {
+  animation: none !important;
+}
+
+@keyframes timeCanvasIn {
+  from { opacity: 0; transform: translateY(11px) scale(.983); filter: blur(5px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+
+@keyframes timeHeaderReveal {
+  from { opacity: 0; transform: translateY(-7px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes timeTimerStart {
+  0% { transform: scale(.95); box-shadow: 0 0 0 0 rgba(20,115,78,0); }
+  46% { transform: scale(1.03); box-shadow: 0 0 0 7px rgba(20,115,78,.08); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(20,115,78,0); }
+}
+
+@keyframes timeKpiReveal {
+  from { opacity: 0; transform: translateY(10px) scale(.96); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes timeRecordReveal {
+  from { opacity: 0; transform: translateX(15px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes timeGoalFill {
+  from { transform: scaleX(.55); transform-origin: left; }
+  to { transform: scaleX(1); transform-origin: left; }
+}

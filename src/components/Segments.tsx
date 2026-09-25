@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { ArrowRightIcon } from "./Icons";
 import { Reveal } from "./Reveal";
 
 const segments = [
@@ -7,5 +9,34 @@ const segments = [
 ];
 
 export function Segments() {
-  return <section className="section segments-section" id="segmentos"><div className="container"><Reveal><div className="section-head section-head-wide"><span className="eyebrow">Para quem é</span><h2>Começamos onde a dor é mais reconhecível.</h2><p>O produto foi desenhado para operações por estágios, mas a entrada comercial prioriza construção e contextos técnicos próximos.</p></div></Reveal><div className="segments-grid segments-grid-three">{segments.map((item,i)=><Reveal delay={i*70} key={item.title}><article className="segment-card segment-card-v18"><span className="segment-tag">{item.tag}</span><h3>{item.title}</h3><p>{item.body}</p><div className="segment-example">{item.example}</div><small>{item.modules}</small><span className="segment-arrow">↗</span></article></Reveal>)}</div></div></section>;
+  return (
+    <section className="section segments-section" id="segmentos">
+      <div className="container">
+        <Reveal>
+          <div className="section-head section-head-wide">
+            <span className="eyebrow">Para quem é</span>
+            <h2>Começamos onde a dor é mais reconhecível.</h2>
+            <p>O produto foi desenhado para operações por estágios, mas a entrada comercial prioriza construção e contextos técnicos próximos.</p>
+          </div>
+        </Reveal>
+        <div className="segments-grid segments-grid-three">
+          {segments.map((item, i) => (
+            <Reveal delay={i * 70} key={item.title}>
+              <article className="segment-card segment-card-v18">
+                <span className="segment-tag">{item.tag}</span>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+                <div className="segment-example">{item.example}</div>
+                <small>{item.modules}</small>
+                <span className="segment-arrow">↗</span>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+        <Link href="/segmentos/construcao" className="text-link section-deep-link">
+          Saiba mais sobre construção e obras <ArrowRightIcon />
+        </Link>
+      </div>
+    </section>
+  );
 }

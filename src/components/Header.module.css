@@ -1,3 +1,18 @@
+
+.transparentHeader {
+  background: transparent !important;
+  border-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.transparentHeader:global(.is-scrolled) {
+  background: transparent !important;
+  border-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+}
 .shell {
   gap: 28px;
 }

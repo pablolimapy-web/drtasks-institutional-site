@@ -1,0 +1,6 @@
+.stackContainer { position: relative; width: 100%; height: 100%; perspective: 900px; }
+.cardRotate { position: absolute; inset: 0; cursor: grab; }
+.cardRotate:active { cursor: grabbing; }
+.card { width: 100%; height: 100%; overflow: hidden; border-radius: 26px; transform-origin: 88% 88%; }
+.card img { pointer-events: none; user-select: none; -webkit-user-drag: none; }
+@media (prefers-reduced-motion: reduce) { .cardRotate { cursor: default; } }

@@ -32,7 +32,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(({ customClass, classN
 ));
 Card.displayName = "Card";
 
-type EasingMode = "linear" | "elastic";
+type EasingMode = "linear" | "elastic" | "focus";
 
 export type CardSwapHandle = {
   next: () => void;
@@ -68,7 +68,12 @@ const makeSlot = (position: number, distX: number, distY: number, total: number)
   zIndex: total - position,
 });
 
-const placeNow = (element: HTMLDivElement | null, slot: Slot, skew: number) => {
+const deckVisual = (position: number) => ({
+  scale: Math.max(0.984, 1 - position * 0.004),
+  opacity: position === 0 ? 1 : position === 1 ? 0.38 : position === 2 ? 0.14 : position >= 3 ? 0.02 : 0.02,
+});
+
+const placeNow = (element: HTMLDivElement | null, slot: Slot, skew: number, position: number) => {
   if (!element) return;
   gsap.set(element, {
     x: slot.x,
@@ -79,6 +84,8 @@ const placeNow = (element: HTMLDivElement | null, slot: Slot, skew: number) => {
     skewY: skew,
     transformOrigin: "center center",
     zIndex: slot.zIndex,
+    ...deckVisual(position),
+    filter: "blur(0px)",
     force3D: true,
   });
 };
@@ -144,7 +151,18 @@ const CardSwap = forwardRef<CardSwapHandle, CardSwapProps>(function CardSwap(
     const total = refs.length;
     if (total === 0) return;
 
-    const config = easing === "elastic"
+    const config = easing === "focus"
+      ? {
+          easeDrop: "power2.out",
+          easeMove: "power3.out",
+          easeReturn: "power3.out",
+          durDrop: 0.18,
+          durMove: 0.34,
+          durReturn: 0.3,
+          promoteAt: 0.06,
+          returnAt: 0.18,
+        }
+      : easing === "elastic"
       ? {
           easeDrop: "power3.inOut",
           easeMove: "power3.out",
@@ -168,7 +186,7 @@ const CardSwap = forwardRef<CardSwapHandle, CardSwapProps>(function CardSwap(
 
     const placeOrder = () => {
       orderRef.current.forEach((cardIndex, position) => {
-        placeNow(refs[cardIndex]?.current, makeSlot(position, cardDistance, verticalDistance, total), skewAmount);
+        placeNow(refs[cardIndex]?.current, makeSlot(position, cardDistance, verticalDistance, total), skewAmount, position);
       });
     };
 
@@ -205,17 +223,30 @@ const CardSwap = forwardRef<CardSwapHandle, CardSwapProps>(function CardSwap(
       });
       tlRef.current = timeline;
 
-      timeline.to(frontElement, {
-        y: "+=260",
-        x: "-=36",
-        duration: config.durDrop,
-        ease: config.easeDrop,
-      }, 0);
+      if (easing === "focus") {
+        timeline.to(frontElement, {
+          y: "-=10",
+          scale: 0.985,
+          opacity: 0.58,
+          filter: "blur(2px)",
+          duration: config.durDrop,
+          ease: config.easeDrop,
+        }, 0);
+      } else {
+        timeline.to(frontElement, {
+          y: "+=96",
+          x: "-=18",
+          opacity: 0.42,
+          duration: config.durDrop,
+          ease: config.easeDrop,
+        }, 0);
+      }
 
       timeline.addLabel("promote", config.promoteAt);
       rest.forEach((cardIndex, position) => {
         const element = refs[cardIndex]?.current;
         const slot = makeSlot(position, cardDistance, verticalDistance, total);
+        const visual = deckVisual(position);
         timeline.set(element, { zIndex: slot.zIndex }, "promote");
         timeline.to(
           element,
@@ -223,29 +254,62 @@ const CardSwap = forwardRef<CardSwapHandle, CardSwapProps>(function CardSwap(
             x: slot.x,
             y: slot.y,
             z: slot.z,
+            scale: visual.scale,
+            opacity: visual.opacity,
+            filter: "blur(0px)",
             duration: config.durMove,
             ease: config.easeMove,
           },
-          `promote+=${position * 0.06}`,
+          `promote+=${position * (easing === "focus" ? 0.025 : 0.06)}`,
         );
       });
 
-      const backSlot = makeSlot(total - 1, cardDistance, verticalDistance, total);
+      const backPosition = total - 1;
+      const backSlot = makeSlot(backPosition, cardDistance, verticalDistance, total);
+      const backVisual = deckVisual(backPosition);
       timeline.addLabel("return", config.returnAt);
-      timeline.call(() => {
-        gsap.set(frontElement, { zIndex: backSlot.zIndex });
-      }, undefined, "return");
-      timeline.to(
-        frontElement,
-        {
+
+      if (easing === "focus") {
+        timeline.set(frontElement, {
           x: backSlot.x,
-          y: backSlot.y,
+          y: backSlot.y + 10,
           z: backSlot.z,
-          duration: config.durReturn,
-          ease: config.easeReturn,
-        },
-        "return",
-      );
+          scale: backVisual.scale * 0.99,
+          opacity: 0,
+          filter: "blur(3px)",
+          zIndex: backSlot.zIndex,
+        }, "return");
+        timeline.to(
+          frontElement,
+          {
+            y: backSlot.y,
+            scale: backVisual.scale,
+            opacity: backVisual.opacity,
+            filter: "blur(0px)",
+            duration: config.durReturn,
+            ease: config.easeReturn,
+          },
+          "return+=0.02",
+        );
+      } else {
+        timeline.call(() => {
+          gsap.set(frontElement, { zIndex: backSlot.zIndex });
+        }, undefined, "return");
+        timeline.to(
+          frontElement,
+          {
+            x: backSlot.x,
+            y: backSlot.y,
+            z: backSlot.z,
+            scale: backVisual.scale,
+            opacity: backVisual.opacity,
+            filter: "blur(0px)",
+            duration: config.durReturn,
+            ease: config.easeReturn,
+          },
+          "return",
+        );
+      }
 
       timeline.call(() => {
         orderRef.current = [...rest, front];

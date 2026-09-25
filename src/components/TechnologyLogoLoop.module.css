@@ -1,8 +1,9 @@
 .section {
   position: relative;
   overflow: hidden;
-  padding: 72px 0 42px;
-  background: #ffffff;
+  margin-top: -48px;
+  padding: 120px 0 42px;
+  background: linear-gradient(180deg, rgba(244, 248, 255, .54) 0%, rgba(250, 252, 255, .9) 48px, #ffffff 132px, #ffffff 100%);
 }
 
 .section::before {
@@ -90,7 +91,8 @@
 
 @media (max-width: 760px) {
   .section {
-    padding: 46px 0 30px;
+    margin-top: -24px;
+    padding: 76px 0 30px;
   }
 
   .inner {

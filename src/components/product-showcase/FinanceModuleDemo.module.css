@@ -15,3 +15,116 @@
 @media(max-width:760px){
  .identity p{display:none}.primaryAction{padding:7px 8px}.summary{grid-template-columns:repeat(2,minmax(0,1fr));}.summary article:nth-child(-n+2){display:none}.filters span:nth-child(3){display:none}.filterAction{font-size:0;width:24px;padding:6px}.filterAction::before{content:"⌕";font-size:8px}.gridHead,.gridRow{grid-template-columns:1.25fr .8fr .9fr .85fr}.gridHead span:nth-child(3),.gridHead span:nth-child(4),.gridRow > :nth-child(3),.gridRow > :nth-child(4){display:none}
 }
+
+/* Guided in-product presentation */
+.page { position: relative; }
+.page[data-scene="4"] .identity,
+.page[data-scene="4"] .areaNav,
+.page[data-scene="4"] .summary,
+.page[data-scene="4"] .filters,
+.page[data-scene="4"] .grid { opacity: 1; transform: none; }
+.summary .summaryFocus { transform: translateY(-2px); border-color:#9ac6f4; box-shadow:0 10px 24px rgba(35,118,216,.12); }
+.summary article small { display:block; margin-top:3px; color:#23805a; font-size:5px; font-weight:700; }
+.filterActive { border-color:#9fc8f1!important; background:#eff7ff!important; color:#256fc3!important; }
+.gridRow.filteredOut { opacity:.18!important; }
+.page[data-scene="3"] .gridRow.focused,
+.page[data-scene="4"] .gridRow.focused { background:#f0f7ff; transform:translateX(3px); box-shadow:inset 3px 0 #2f7fd5; opacity:1; }
+.page[data-scene="3"] .gridRow:not(.focused):not(.filteredOut),
+.page[data-scene="4"] .gridRow:not(.focused):not(.filteredOut) { opacity:.68; }
+.marginResult {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  max-height:0;
+  margin-top:0;
+  overflow:hidden;
+  border:1px solid transparent;
+  border-radius:9px;
+  background:#f0f7ff;
+  padding:0 10px;
+  opacity:0;
+  transform:translateY(5px);
+  transition:max-height .45s ease, margin-top .45s ease, padding .45s ease, opacity .38s ease, transform .45s ease, border-color .45s ease;
+}
+.marginResultVisible { max-height:34px; margin-top:6px; border-color:#cfe1f5; padding:7px 10px; opacity:1; transform:none; }
+.marginResult span { color:#728095; font-size:6px; }
+.marginResult strong { color:#1c63b6; font-size:10px; }
+.marginResult i { margin-left:auto; border-radius:999px; background:#e8f6ef; padding:4px 6px; color:#19734f; font-size:5.5px; font-style:normal; font-weight:750; }
+@media(max-width:760px){.marginResult i{display:none}.marginResult{gap:5px}.summary article small{display:none}}
+
+/* Presentation entrance — Finance opens like a live ledger being reconciled. */
+.page {
+  transform-origin: 52% 34%;
+  animation: financeCanvasIn .74s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.page[data-scene="0"] .identity,
+.page[data-scene="0"] .areaNav {
+  animation: financeHeaderReveal .62s .06s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.page[data-scene="1"] .summary article {
+  animation: financeSummaryReveal .5s calc(.04s + var(--i) * 70ms) cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.page[data-scene="2"] .grid {
+  animation: financeGridOpen .55s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.page[data-scene="2"] .gridRow {
+  animation: financeLedgerReveal .48s calc(.12s + var(--row) * 75ms) cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.page[data-scene="3"] .focused {
+  animation: financeRowFocus .6s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.page[data-scene="4"] .marginResultVisible {
+  animation: financeResultPop .62s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.page[data-paused="true"] *,
+.page[data-paused="true"] {
+  animation-play-state: paused !important;
+}
+
+.page[data-reduced-motion="true"],
+.page[data-reduced-motion="true"] * {
+  animation: none !important;
+}
+
+@keyframes financeCanvasIn {
+  from { opacity: 0; transform: translateY(10px) scale(.984); filter: blur(5px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+
+@keyframes financeHeaderReveal {
+  from { opacity: 0; transform: translateY(-7px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes financeSummaryReveal {
+  from { opacity: 0; transform: translateY(10px) scale(.955); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes financeGridOpen {
+  from { opacity: 0; clip-path: inset(0 0 82% 0 round 10px); transform: translateY(8px); }
+  to { opacity: 1; clip-path: inset(0 round 10px); transform: none; }
+}
+
+@keyframes financeLedgerReveal {
+  from { opacity: 0; transform: translateX(12px); background: rgba(234,243,255,.72); }
+  to { opacity: 1; transform: none; background: #fff; }
+}
+
+@keyframes financeRowFocus {
+  0% { transform: translateX(0) scale(.985); box-shadow: inset 0 0 0 0 rgba(35,118,216,0); }
+  55% { transform: translateX(4px) scale(1.012); box-shadow: inset 3px 0 #2376d8, 0 7px 18px rgba(35,118,216,.08); }
+  100% { transform: translateX(3px) scale(1); box-shadow: inset 3px 0 #2376d8; }
+}
+
+@keyframes financeResultPop {
+  from { opacity: 0; transform: translateY(12px) scale(.92); filter: blur(3px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}

@@ -10,7 +10,7 @@ test("FluxOS autoplay reschedules on every scene change, even with accelerated s
 
   const dependencies = effectMatch[1];
   assert.match(dependencies, /sceneIndex/, "autoplay must depend on sceneIndex, not only durationMs");
-  assert.match(source, /scene\.durationMs \* 0\.15/, "showcase should accelerate the internal FluxOS sequence");
+  assert.match(source, /scene\.durationMs \* 0\.32/, "showcase should accelerate the internal FluxOS sequence");
 });
 
 test("ProductPreview keeps Hero as the default mode", () => {

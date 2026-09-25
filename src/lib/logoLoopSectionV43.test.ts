@@ -7,7 +7,8 @@ const css = read("../components/TechnologyLogoLoop.module.css");
 
 test("post-hero logo strip removes the divider and gives the hero more breathing room", () => {
   assert.doesNotMatch(css, /border-top\s*:/);
-  assert.match(css, /\.section\s*\{[\s\S]*?padding:\s*72px 0 42px;/);
+  assert.match(css, /\.section\s*\{[\s\S]*?margin-top:\s*-48px;[\s\S]*?padding:\s*120px 0 42px;/);
+  assert.match(css, /linear-gradient\(180deg,[\s\S]*?rgba\(244,\s*248,\s*255/);
 });
 
 test("post-hero logo strip spans the full viewport instead of a centered max-width container", () => {

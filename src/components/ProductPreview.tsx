@@ -275,7 +275,7 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0, mode = "hero", pau
   useEffect(() => {
     if (reducedMotion || paused) return;
     if (interactionMode || hoverPaused) return;
-    const sceneDelay = mode === "showcase" ? Math.max(420, Math.round(scene.durationMs * 0.15)) : scene.durationMs;
+    const sceneDelay = mode === "showcase" ? Math.max(720, Math.round(scene.durationMs * 0.32)) : scene.durationMs;
     const timeout = window.setTimeout(() => setSceneIndex((current) => nextSceneIndex(current)), sceneDelay);
     return () => window.clearTimeout(timeout);
   }, [mode, paused, interactionMode, hoverPaused, reducedMotion, sceneIndex, scene.durationMs]);

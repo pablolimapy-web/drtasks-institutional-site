@@ -7,7 +7,7 @@ const chapterNames = ["Fluxos", "Projects", "Finance", "Team", "Resources"] as c
 const files = chapterNames.map((name) => fs.readFileSync(`src/components/home-modules/${name}Chapter.tsx`, "utf8"));
 const joined = files.join("\n");
 
-test("every Home chapter uses a real product image and the centralized product deep link", () => {
+test("every Home chapter uses real product proof and the centralized product deep link", () => {
   assert.deepEqual(moduleShowcaseModules.map((module) => module.href), [
     "/produto/fluxos",
     "/produto/projetos-e-tarefas",
@@ -15,12 +15,17 @@ test("every Home chapter uses a real product image and the centralized product d
     "/produto/equipe",
     "/produto/recursos",
   ]);
-  assert.equal((joined.match(/next\/image/g) ?? []).length >= 5, true);
+  assert.equal((joined.match(/next\/image/g) ?? []).length >= 2, true);
+  assert.match(files[1], /hierarchyGrid/);
+  assert.match(files[3], /TeamProductPresentation/);
+  assert.match(files[0], /<ProductPreview mode="showcase"/);
   assert.equal((joined.match(/href=\{module\.href\}/g) ?? []).length, 5);
 });
 
-test("Home module chapters do not mount duplicate ProductPreview engines", () => {
-  assert.doesNotMatch(joined, /<ProductPreview/);
+test("only the FluxOS chapter mounts the interactive ProductPreview engine", () => {
+  assert.equal((joined.match(/<ProductPreview/g) ?? []).length, 1);
+  assert.match(files[0], /<ProductPreview mode="showcase"/);
+  for (const source of files.slice(1)) assert.doesNotMatch(source, /<ProductPreview/);
 });
 
 test("all five chapter styles declare responsive and reduced-motion handling", () => {

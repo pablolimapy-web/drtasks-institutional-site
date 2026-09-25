@@ -7,3 +7,91 @@
 .mapLegend{position:absolute;left:8px;bottom:7px;display:flex;gap:7px;border:1px solid rgba(214,224,236,.9);border-radius:7px;background:rgba(255,255,255,.86);padding:5px 6px;color:#718095;font-size:5px}.mapLegend span{display:flex;align-items:center;gap:3px}.mapLegend i{width:5px;height:5px;border-radius:50%}.legendToday{background:#e9a63a}.legendOverdue{background:#e46060}.legendDone{background:#34a475}
 .detail{border:1px solid #e3e9f2;border-radius:11px;background:#fff;padding:10px;align-self:stretch}.page[data-scene="4"] .detail{opacity:1;transform:none}.detailEyebrow{color:#d85e5e;font-size:5.5px;font-weight:800;letter-spacing:.11em}.detail>strong{display:block;margin-top:6px;font-size:8px;line-height:1.35}.detail>p{margin:4px 0 8px;color:#7d8999;font-size:6px}.detail dl{display:grid;gap:6px;margin:0}.detail dl div{display:grid;grid-template-columns:1fr auto;gap:6px}.detail dt{color:#8a95a5;font-size:5.5px}.detail dd{margin:0;color:#35445a;font-size:5.8px;font-weight:700}.late{color:#d85e5e!important}.detailAction{width:100%;margin-top:9px;border:0;border-radius:7px;background:#eef6ff;color:#216fc7;padding:7px;font-size:6px;font-weight:700}
 @media(max-width:760px){.primaryAction{display:none}.views span:nth-child(3),.views span:nth-child(4),.views span:nth-child(6){display:none}.filters{grid-template-columns:24px repeat(3,minmax(0,1fr))}.filters label:nth-child(2),.filters label:nth-child(3){display:none}.filters label:first-child{font-size:0}.filters label:first-child span{font-size:0;padding-inline:6px}.filters label:first-child span::before{content:"⌕";font-size:7px}.filters label:nth-child(4){grid-column:2}.locationWorkspace{grid-template-columns:1fr;position:relative}.detail{position:absolute;left:7px;right:7px;bottom:7px;padding:8px;background:rgba(255,255,255,.95);box-shadow:0 10px 24px rgba(31,47,78,.14)}.detail dl{grid-template-columns:repeat(3,1fr);gap:5px}.detail dl div{display:block}.detailAction{display:none}.mapLegend{display:none}}
+
+/* Guided in-product presentation */
+.page { position: relative; }
+.filterSelected span { border-color:#f0aaa5!important; background:#fff5f4!important; color:#b74e49!important; font-weight:700; }
+.page[data-scene="2"] .map { box-shadow:inset 0 0 0 1px rgba(75,143,226,.08); }
+.page[data-scene="3"] .focused,
+.page[data-scene="4"] .focused { transform:scale(1.16);box-shadow:0 0 0 6px rgba(228,96,96,.12),0 9px 20px rgba(119,38,38,.2) }
+
+/* Presentation entrance — Location draws the field view before revealing the critical task. */
+.page {
+  transform-origin: 50% 34%;
+  animation: locationCanvasIn .74s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.page[data-scene="0"] .heading,
+.page[data-scene="0"] .views {
+  animation: locationHeaderReveal .62s .06s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.page[data-scene="1"] .filterSelected {
+  animation: locationFilterFocus .56s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.page[data-scene="2"] .map {
+  animation: locationMapOpen .62s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.page[data-scene="2"] .road {
+  animation: locationRoadDraw .76s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.page[data-scene="2"] .roadTwo { animation-delay: .12s; }
+.page[data-scene="2"] .roadThree { animation-delay: .22s; }
+
+.page[data-scene="3"] .marker {
+  animation: locationMarkerDrop .52s calc(var(--marker) * 85ms) cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.page[data-scene="4"] .detail {
+  animation: locationDetailIn .56s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.page[data-paused="true"] *,
+.page[data-paused="true"] {
+  animation-play-state: paused !important;
+}
+
+.page[data-reduced-motion="true"],
+.page[data-reduced-motion="true"] * {
+  animation: none !important;
+}
+
+@keyframes locationCanvasIn {
+  from { opacity: 0; transform: translateY(11px) scale(.983); filter: blur(5px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+
+@keyframes locationHeaderReveal {
+  from { opacity: 0; transform: translateY(-7px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes locationFilterFocus {
+  0% { transform: scale(.97); }
+  52% { transform: scale(1.025); }
+  100% { transform: scale(1); }
+}
+
+@keyframes locationMapOpen {
+  from { opacity: 0; transform: scale(.975); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+
+@keyframes locationRoadDraw {
+  from { clip-path: inset(0 100% 0 0); opacity: .35; }
+  to { clip-path: inset(0); opacity: 1; }
+}
+
+@keyframes locationMarkerDrop {
+  0% { opacity: 0; filter: blur(3px); }
+  60% { opacity: 1; filter: blur(0); }
+  100% { opacity: 1; filter: blur(0); }
+}
+
+@keyframes locationDetailIn {
+  from { opacity: 0; transform: translateX(16px) scale(.97); }
+  to { opacity: 1; transform: none; }
+}

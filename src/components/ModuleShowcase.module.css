@@ -2,18 +2,18 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: var(--section-space) 0;
+  padding: clamp(72px, 8vw, 118px) 0 clamp(94px, 10vw, 150px);
   background: #fff;
   color: var(--text);
 }
 
 .ambient {
   position: absolute;
-  inset: 0;
+  inset: -12% 0 -8%;
   z-index: -1;
   background:
-    radial-gradient(ellipse 42% 52% at 72% 58%, rgba(28, 85, 201, .055), transparent 72%),
-    linear-gradient(180deg, rgba(248, 251, 255, .58), rgba(255, 255, 255, 0) 42%);
+    radial-gradient(ellipse 50% 44% at 50% 8%, rgba(71, 121, 229, .08), transparent 70%),
+    linear-gradient(180deg, rgba(247, 250, 255, .72), #fff 28%, #fff 100%);
   pointer-events: none;
 }
 
@@ -21,43 +21,122 @@
   margin-inline: auto;
 }
 
-.showcaseGrid {
-  display: grid;
-  grid-template-columns: minmax(330px, .62fr) minmax(0, 1.38fr);
-  gap: clamp(8px, 1.2vw, 20px);
-  align-items: center;
-  min-height: 720px;
+.presentationStage {
+  --stage-bg: #edf3ff;
+  --stage-bg-alt: #f8faff;
+  --stage-accent: #2d63d8;
+  --stage-accent-soft: rgba(45, 99, 216, .18);
+  position: relative;
+  min-height: 770px;
+  overflow: hidden;
+  border: 1px solid rgba(111, 139, 194, .14);
+  border-radius: clamp(28px, 3vw, 42px);
+  background:
+    radial-gradient(circle at 83% 14%, var(--stage-accent-soft), transparent 34%),
+    radial-gradient(circle at 52% 106%, rgba(255, 255, 255, .9), transparent 42%),
+    linear-gradient(135deg, var(--stage-bg) 0%, var(--stage-bg-alt) 76%);
+  box-shadow:
+    0 42px 110px rgba(32, 67, 126, .08),
+    inset 0 1px rgba(255, 255, 255, .82);
+  transition: border-color .4s ease, box-shadow .4s ease;
 }
 
-.copyColumn {
-  display: flex;
-  min-width: 0;
-  min-height: 540px;
-  flex-direction: column;
-  justify-content: center;
-  padding: 18px 0 12px;
+.presentationStage[data-module="fluxos"] {
+  --stage-bg: #edf3ff;
+  --stage-bg-alt: #f8faff;
+  --stage-accent: #2d63d8;
+  --stage-accent-soft: rgba(45, 99, 216, .18);
+}
+
+.presentationStage[data-module="projects"] {
+  --stage-bg: #f0f1ff;
+  --stage-bg-alt: #f9f9ff;
+  --stage-accent: #4e5fd8;
+  --stage-accent-soft: rgba(78, 95, 216, .16);
+}
+
+.presentationStage[data-module="finance"] {
+  --stage-bg: #edf8f5;
+  --stage-bg-alt: #f6fbff;
+  --stage-accent: #2581a5;
+  --stage-accent-soft: rgba(37, 129, 165, .15);
+}
+
+.presentationStage[data-module="team"] {
+  --stage-bg: #f4f0ff;
+  --stage-bg-alt: #fbf9ff;
+  --stage-accent: #6859cf;
+  --stage-accent-soft: rgba(104, 89, 207, .15);
+}
+
+.presentationStage[data-module="resources"] {
+  --stage-bg: #edf8fb;
+  --stage-bg-alt: #f7fbff;
+  --stage-accent: #287cae;
+  --stage-accent-soft: rgba(40, 124, 174, .16);
+}
+
+.presentationStage::after {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 3;
+  width: 48%;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--stage-bg) 96%, white 4%) 0%,
+    color-mix(in srgb, var(--stage-bg) 88%, transparent) 64%,
+    transparent 100%
+  );
+  content: "";
+  pointer-events: none;
+}
+
+.stageTexture {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: .48;
+  background-image:
+    linear-gradient(rgba(38, 79, 153, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(38, 79, 153, .035) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.16) 44%, rgba(0,0,0,.55) 100%);
+  pointer-events: none;
+}
+
+.stageCopy {
+  position: absolute;
+  z-index: 5;
+  top: clamp(42px, 5vw, 66px);
+  bottom: clamp(40px, 4.6vw, 62px);
+  left: clamp(36px, 4.7vw, 66px);
+  width: min(37%, 500px);
+  min-width: 330px;
 }
 
 .liveRegion {
   position: relative;
-  min-height: 455px;
+  width: 100%;
+  height: 100%;
 }
 
 .copyMotion {
   position: absolute;
-  inset: 0 auto auto 0;
-  width: min(100%, 560px);
+  inset: 0;
+  display: flex;
+  flex-direction: column;
   transform-origin: left center;
-  will-change: transform;
+  will-change: transform, opacity, filter;
 }
 
 .moduleLabel {
   display: inline-flex;
+  width: fit-content;
   align-items: center;
   gap: 10px;
-  color: var(--text);
+  color: var(--stage-accent);
   font-size: 15px;
-  font-weight: 720;
+  font-weight: 760;
   line-height: 1;
   letter-spacing: -.018em;
 }
@@ -66,42 +145,37 @@
   width: 22px;
   height: 2px;
   border-radius: 999px;
-  background: var(--brand);
+  background: currentColor;
   content: "";
 }
 
 .copyMotion h2 {
-  margin: 22px 0 0;
-  max-width: 590px;
-  color: var(--text);
-  font-size: clamp(46px, 4.2vw, 62px);
+  margin: clamp(80px, 10vh, 122px) 0 0;
+  max-width: 500px;
+  color: #111a2a;
+  font-size: clamp(42px, 4.1vw, 62px);
   font-weight: 620;
   line-height: 1.01;
   letter-spacing: -.052em;
   text-wrap: balance;
 }
 
-.headlineWord {
-  display: inline-block;
-  transform-origin: left center;
-  will-change: transform;
-}
-
 .description {
-  margin: 24px 0 0;
-  max-width: 510px;
-  color: var(--muted);
-  font-size: clamp(17px, 1.25vw, 19px);
-  line-height: 1.56;
+  margin: 22px 0 0;
+  max-width: 440px;
+  color: #59677a;
+  font-size: clamp(16px, 1.15vw, 18px);
+  line-height: 1.55;
   letter-spacing: -.012em;
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px 22px;
+  gap: 14px 20px;
   align-items: center;
-  margin-top: 34px;
+  margin-top: auto;
+  padding-top: 30px;
 }
 
 .nextButton {
@@ -110,17 +184,17 @@
   justify-content: center;
   gap: 14px;
   min-height: 48px;
-  border: 1px solid var(--brand);
-  border-radius: 10px;
-  background: var(--brand);
-  padding: 0 20px;
+  border: 1px solid var(--stage-accent);
+  border-radius: 999px;
+  background: var(--stage-accent);
+  padding: 0 21px;
   color: #fff;
   font: inherit;
   font-size: 13.5px;
-  font-weight: 720;
+  font-weight: 740;
   cursor: pointer;
-  box-shadow: 0 12px 26px rgba(28, 85, 201, .16);
-  transition: transform .22s cubic-bezier(.22, 1, .36, 1), box-shadow .22s ease, background .22s ease;
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--stage-accent) 20%, transparent);
+  transition: transform .22s cubic-bezier(.22, 1, .36, 1), box-shadow .22s ease, filter .22s ease;
 }
 
 .nextButton span {
@@ -130,7 +204,8 @@
 
 .nextButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 17px 34px rgba(28, 85, 201, .22);
+  filter: saturate(1.05);
+  box-shadow: 0 17px 34px color-mix(in srgb, var(--stage-accent) 27%, transparent);
 }
 
 .nextButton:hover span {
@@ -139,15 +214,15 @@
 
 .nextButton:focus-visible,
 .productLink:focus-visible {
-  outline: 2px solid rgba(28, 85, 201, .5);
+  outline: 2px solid color-mix(in srgb, var(--stage-accent) 58%, white);
   outline-offset: 4px;
 }
 
 .productLink {
   position: relative;
-  color: #505c6b;
+  color: #4f5d70;
   font-size: 13px;
-  font-weight: 680;
+  font-weight: 690;
   text-decoration: none;
   transition: color .2s ease;
 }
@@ -167,7 +242,7 @@
 }
 
 .productLink:hover {
-  color: var(--brand);
+  color: var(--stage-accent);
 }
 
 .productLink:hover::after {
@@ -175,12 +250,34 @@
   transform: scaleX(1);
 }
 
-.deckColumn {
-  position: relative;
+.stageIndex {
+  position: absolute;
+  z-index: 6;
+  top: 32px;
+  right: 36px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: color-mix(in srgb, var(--stage-accent) 54%, #667085);
+  font-size: 10px;
+  font-weight: 760;
+  letter-spacing: .08em;
+}
+
+.stageIndex i {
+  width: 34px;
+  height: 1px;
+  background: color-mix(in srgb, var(--stage-accent) 34%, transparent);
+}
+
+.stageProduct {
+  position: absolute;
+  z-index: 2;
+  top: 7%;
+  right: 1.5%;
+  width: 62%;
+  height: 86%;
   min-width: 0;
-  min-height: 760px;
-  width: calc(100% + var(--site-gutter) + clamp(72px, 5vw, 120px));
-  margin-right: calc((var(--site-gutter) + clamp(72px, 5vw, 120px)) * -1);
   transform-origin: center center;
   will-change: opacity, transform;
 }
@@ -188,43 +285,21 @@
 .swapStage {
   position: absolute;
   inset: 0;
-  min-height: 760px;
 }
 
-.stageJumpLink {
+.swapStage::before {
   position: absolute;
-  z-index: 20;
-  right: clamp(14px, 2vw, 28px);
-  bottom: clamp(14px, 2vw, 26px);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 42px;
-  padding: 0 15px;
-  border: 1px solid rgba(28, 85, 201, .18);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, .9);
-  color: var(--brand);
-  font-size: 12px;
-  font-weight: 720;
-  text-decoration: none;
-  box-shadow: 0 12px 30px rgba(19, 48, 101, .12);
-  backdrop-filter: blur(14px);
-  transition: transform .22s cubic-bezier(.22, 1, .36, 1), box-shadow .22s ease, background .22s ease;
-}
-
-.stageJumpLink:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, .98);
-  box-shadow: 0 16px 36px rgba(19, 48, 101, .16);
-}
-
-.stageJumpLink:focus-visible {
-  outline: 2px solid rgba(28, 85, 201, .55);
-  outline-offset: 4px;
+  inset: 17% 4% 7% 14%;
+  z-index: 0;
+  background: radial-gradient(ellipse at 62% 42%, var(--stage-accent-soft), rgba(255,255,255,.04) 48%, transparent 72%);
+  filter: blur(34px);
+  content: "";
+  pointer-events: none;
 }
 
 .demoViewport {
+  position: relative;
+  isolation: isolate;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -239,100 +314,367 @@
 }
 
 @media (max-width: 1180px) {
-  .showcaseGrid {
-    grid-template-columns: minmax(330px, .78fr) minmax(0, 1.22fr);
-    gap: 18px;
+  .presentationStage {
+    min-height: 720px;
+  }
+
+  .stageCopy {
+    width: 38%;
+    min-width: 310px;
   }
 
   .copyMotion h2 {
-    font-size: clamp(42px, 4.5vw, 54px);
+    margin-top: 76px;
+    font-size: clamp(40px, 4.4vw, 54px);
+  }
+
+  .stageProduct {
+    top: 8%;
+    right: 0;
+    width: 64%;
+    height: 84%;
   }
 }
 
 @media (max-width: 1040px) {
-  .showcaseGrid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    min-height: 0;
+  .presentationStage {
+    min-height: 1010px;
   }
 
-  .copyColumn {
-    min-height: 0;
-  }
-
-  .liveRegion {
-    min-height: 480px;
-  }
-
-  .copyMotion {
-    width: min(100%, 720px);
-  }
-
-  .deckColumn {
-    min-height: 580px;
+  .presentationStage::after {
+    inset: 0 0 auto 0;
     width: 100%;
-    margin-right: 0;
+    height: 47%;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--stage-bg) 97%, white 3%) 0%,
+      color-mix(in srgb, var(--stage-bg) 86%, transparent) 72%,
+      transparent 100%
+    );
   }
 
-  .swapStage {
-    min-height: 580px;
+  .stageCopy {
+    top: 38px;
+    right: 38px;
+    bottom: auto;
+    left: 38px;
+    width: auto;
+    min-width: 0;
+    height: 355px;
+  }
+
+  .copyMotion h2 {
+    max-width: 720px;
+    margin-top: 44px;
+    font-size: clamp(40px, 5.2vw, 56px);
+  }
+
+  .description {
+    max-width: 650px;
+  }
+
+  .actions {
+    margin-top: 30px;
+    padding-top: 0;
+  }
+
+  .stageProduct {
+    top: auto;
+    right: -2%;
+    bottom: -1.5%;
+    width: 104%;
+    height: 64%;
+  }
+
+  .stageIndex {
+    top: 26px;
+    right: 30px;
   }
 }
 
 @media (max-width: 720px) {
-  .showcaseGrid {
-    gap: 18px;
+  .section {
+    padding-top: 60px;
   }
 
-  .liveRegion {
-    min-height: 510px;
+  .presentationStage {
+    min-height: 850px;
+    border-radius: 26px;
+  }
+
+  .stageCopy {
+    top: 28px;
+    right: 24px;
+    left: 24px;
+    height: 360px;
+  }
+
+  .moduleLabel {
+    font-size: 13px;
   }
 
   .copyMotion h2 {
-    margin-top: 18px;
-    font-size: clamp(38px, 10vw, 48px);
+    margin-top: 34px;
+    font-size: clamp(35px, 9vw, 46px);
   }
 
   .description {
-    margin-top: 20px;
-    font-size: 16px;
+    margin-top: 18px;
+    font-size: 15px;
   }
-
 
   .actions {
-    margin-top: 28px;
+    gap: 12px 16px;
+    margin-top: 24px;
   }
 
+  .nextButton {
+    min-height: 44px;
+    padding-inline: 17px;
+  }
 
-  .deckColumn,
-  .swapStage {
-    min-height: 430px;
+  .stageProduct {
+    right: -9%;
+    bottom: -5%;
+    width: 118%;
+    height: 55%;
+  }
+
+  .stageIndex {
+    display: none;
   }
 }
 
 @media (max-width: 480px) {
-  .liveRegion {
-    min-height: 540px;
+  .presentationStage {
+    min-height: 790px;
   }
 
+  .stageCopy {
+    height: 390px;
+  }
 
-  .deckColumn,
-  .swapStage {
-    min-height: 360px;
+  .copyMotion h2 {
+    font-size: clamp(32px, 9.5vw, 40px);
+  }
+
+  .productLink {
+    font-size: 12px;
+  }
+
+  .stageProduct {
+    bottom: -3%;
+    height: 49%;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .copyMotion,
-  .deckColumn {
+  .stageProduct {
     will-change: auto;
   }
 
   .nextButton,
   .nextButton span,
   .productLink,
-  .productLink::after,
-  .stageJumpLink {
+  .productLink::after {
     transition: none;
   }
+}
+
+/* v7 — cinematic module introductions */
+.cinematicAura {
+  position: absolute;
+  z-index: 1;
+  top: -24%;
+  right: -10%;
+  width: 72%;
+  height: 92%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--stage-accent) 20%, white), transparent 36%),
+    radial-gradient(circle at 62% 48%, color-mix(in srgb, var(--stage-accent) 12%, transparent), transparent 62%);
+  filter: blur(26px);
+  pointer-events: none;
+  transform-origin: center;
+}
+
+.cinematicHeadline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: .23em;
+  row-gap: .02em;
+}
+
+.headlineMask {
+  display: inline-block;
+  overflow: hidden;
+  padding: .05em .015em .08em 0;
+  margin: -.05em 0 -.08em;
+  vertical-align: bottom;
+}
+
+.headlineWord {
+  display: inline-block;
+  transform-origin: left bottom;
+  will-change: transform, opacity, filter;
+}
+
+.copyDescription,
+.copyActions {
+  will-change: transform, opacity, filter;
+}
+
+.stageProduct {
+  perspective: 1400px;
+  perspective-origin: 56% 48%;
+}
+
+.cinematicDemo {
+  transform-style: preserve-3d;
+  transform-origin: 56% 56%;
+  will-change: transform, opacity, filter, clip-path;
+}
+
+.interfaceSweep {
+  position: absolute;
+  z-index: 26;
+  top: -35%;
+  left: -42%;
+  width: 28%;
+  height: 180%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, .06) 20%,
+    rgba(255, 255, 255, .72) 49%,
+    rgba(130, 174, 255, .18) 58%,
+    transparent 100%
+  );
+  opacity: 0;
+  filter: blur(5px);
+  transform: rotate(13deg) translate3d(-40%, 0, 0);
+  pointer-events: none;
+  animation: interfaceSweep 1.35s .82s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.interfaceEdgeGlow {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .64),
+    inset 0 0 34px color-mix(in srgb, var(--stage-accent) 8%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--stage-accent) 8%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  animation: interfaceEdgeGlow 1.1s .5s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.cinematicDemo[data-cinematic-module="projects"] {
+  transform-origin: 64% 48%;
+}
+
+.cinematicDemo[data-cinematic-module="finance"] {
+  transform-origin: 52% 60%;
+}
+
+.cinematicDemo[data-cinematic-module="team"] {
+  transform-origin: 60% 48%;
+}
+
+.cinematicDemo[data-cinematic-module="resources"] {
+  transform-origin: 66% 56%;
+}
+
+.cinematicDemo[data-cinematic-module="projects"] .interfaceSweep {
+  transform: rotate(10deg) translate3d(-40%, 0, 0);
+}
+
+.cinematicDemo[data-cinematic-module="finance"] .interfaceSweep {
+  transform: rotate(16deg) translate3d(-40%, 0, 0);
+}
+
+.cinematicDemo[data-cinematic-module="team"] .interfaceSweep {
+  transform: rotate(8deg) translate3d(-40%, 0, 0);
+}
+
+.cinematicDemo[data-cinematic-module="resources"] .interfaceSweep {
+  transform: rotate(18deg) translate3d(-40%, 0, 0);
+}
+
+@keyframes interfaceSweep {
+  0% {
+    opacity: 0;
+    left: -42%;
+  }
+  18% {
+    opacity: .16;
+  }
+  46% {
+    opacity: .68;
+  }
+  78% {
+    opacity: .12;
+  }
+  100% {
+    left: 124%;
+    opacity: 0;
+  }
+}
+
+@keyframes interfaceEdgeGlow {
+  0% { opacity: 0; }
+  42% { opacity: .95; }
+  100% { opacity: .34; }
+}
+
+@media (max-width: 720px) {
+  .cinematicAura {
+    top: 28%;
+    right: -24%;
+    width: 118%;
+    height: 58%;
+  }
+
+  .cinematicHeadline {
+    column-gap: .2em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .headlineWord,
+  .copyDescription,
+  .copyActions,
+  .cinematicDemo {
+    will-change: auto;
+  }
+
+  .interfaceSweep,
+  .interfaceEdgeGlow {
+    display: none;
+    animation: none !important;
+  }
+}
+
+/* v8 — dedicated vignette -> product reveal */
+.demoReveal {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+  will-change: opacity, transform, filter;
+}
+
+.demoReveal > * {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demoReveal { will-change: auto; }
 }

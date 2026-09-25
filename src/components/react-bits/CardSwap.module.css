@@ -6,7 +6,7 @@
   height: 100%;
   overflow: visible;
   perspective: 900px;
-  transform: translate(5%, 20%);
+  transform: translate(2%, 8%);
   transform-origin: bottom right;
 }
 
@@ -24,7 +24,21 @@
   transform-style: preserve-3d;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  will-change: transform;
+  will-change: transform, opacity, filter;
+}
+
+.focusVeil {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 40;
+  border-radius: 14px;
+  background:
+    radial-gradient(ellipse at 48% 46%, rgba(37, 99, 235, .105), rgba(37, 99, 235, .045) 42%, transparent 72%);
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  will-change: opacity;
 }
 
 .card::after {
@@ -39,24 +53,25 @@
 
 @media (max-width: 1040px) {
   .container {
-    transform: scale(.82) translate(16%, 22%);
+    transform: scale(.9) translate(6%, 9%);
   }
 }
 
 @media (max-width: 768px) {
   .container {
-    transform: scale(.75) translate(25%, 25%);
+    transform: scale(.82) translate(11%, 12%);
   }
 }
 
 @media (max-width: 480px) {
   .container {
-    transform: scale(.55) translate(25%, 25%);
+    transform: scale(.7) translate(18%, 16%);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card {
+  .card,
+  .focusVeil {
     will-change: auto;
   }
 }

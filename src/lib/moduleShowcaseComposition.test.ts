@@ -14,12 +14,16 @@ test("showcase removes the extra institutional intro and click hint", () => {
   assert.doesNotMatch(source, /deckHint/);
 });
 
-test("showcase puts the animated explanation before the CardSwap stack", () => {
-  const copyIndex = source.indexOf("className={styles.copyColumn}");
-  const deckIndex = source.indexOf("className={styles.deckColumn}");
-  assert.ok(copyIndex >= 0, "copy column must exist");
-  assert.ok(deckIndex >= 0, "deck column must exist");
-  assert.ok(copyIndex < deckIndex, "copy must render before the card stack");
+test("showcase composes copy and CardSwap inside one presentation stage", () => {
+  const stageIndex = source.indexOf("className={styles.presentationStage}");
+  const copyIndex = source.indexOf("className={styles.stageCopy}", stageIndex);
+  const productIndex = source.indexOf("className={styles.stageProduct}", stageIndex);
+  const deckIndex = source.indexOf("<CardSwap\n", productIndex);
+  assert.ok(stageIndex >= 0, "presentation stage must exist");
+  assert.ok(copyIndex > stageIndex, "copy must live inside the presentation stage");
+  assert.ok(productIndex > stageIndex, "product must live inside the presentation stage");
+  assert.ok(deckIndex > productIndex, "CardSwap must live inside the product area");
+  assert.doesNotMatch(source, /showcaseGrid|copyColumn|deckColumn/);
 });
 
 test("showcase uses a dedicated next-interface button instead of card clicks", () => {
@@ -28,20 +32,21 @@ test("showcase uses a dedicated next-interface button instead of card clicks", (
   assert.doesNotMatch(source, /onCardClick=/);
 });
 
-test("showcase keeps the React Bits deck geometry with fast hover-pausable rotation", () => {
-  assert.match(source, /cardDistance=\{74\}/);
-  assert.match(source, /verticalDistance=\{76\}/);
-  assert.match(source, /MODULE_ROTATION_DELAY_MS\s*=\s*3500/);
+test("showcase keeps a restrained CardSwap deck with hover-pausable rotation", () => {
+  assert.match(source, /cardDistance=\{18\}/);
+  assert.match(source, /verticalDistance=\{20\}/);
+  assert.match(source, /MODULE_ROTATION_DELAY_MS\s*=\s*12400/);
   assert.match(source, /delay=\{MODULE_ROTATION_DELAY_MS\}/);
   assert.match(source, /pauseOnHover/);
 });
 
-test("copy column has no vertical divider and CardSwap uses original bottom-right anchoring", () => {
-  const copyRule = styles.match(/\.copyColumn\s*\{[\s\S]*?\n\}/)?.[0] ?? "";
-  assert.doesNotMatch(copyRule, /border-left/);
+test("unified stage has no divider and CardSwap stays contained inside the colored canvas", () => {
+  const stageRule = styles.match(/\.presentationStage\s*\{[\s\S]*?\n\}/)?.[0] ?? "";
+  assert.doesNotMatch(stageRule, /border-left/);
+  assert.match(stageRule, /overflow:\s*hidden/);
   assert.match(cardSwapStyles, /bottom:\s*0/);
   assert.match(cardSwapStyles, /right:\s*0/);
-  assert.match(cardSwapStyles, /transform:\s*translate\(5%,\s*20%\)/);
+  assert.match(cardSwapStyles, /transform:\s*translate\(2%,\s*8%\)/);
 });
 
 test("CardSwap exposes an imperative next action for external controls", () => {
@@ -56,7 +61,7 @@ test("showcase removes AI-like kicker subtitles and lets the module name lead", 
   assert.doesNotMatch(metadata, /eyebrow\s*:/);
 });
 
-test("left presentation swaps copy sequentially without shared-layout ghosting", () => {
+test("stage copy swaps sequentially without shared-layout ghosting", () => {
   const packageJson = fs.readFileSync("package.json", "utf8");
   assert.match(packageJson, /"@react-spring\/web"/);
   assert.match(source, /from "@react-spring\/web"/);
@@ -79,16 +84,17 @@ test("CardSwap announces the incoming front card when the swap starts", () => {
   assert.ok(notifyIndex < motionIndex, "copy must update as the card transition begins");
 });
 
-test("left presentation is larger and sits closer to the product deck", () => {
-  assert.match(styles, /grid-template-columns:\s*minmax\(330px,\s*\.62fr\)\s+minmax\(0,\s*1\.38fr\)/);
-  assert.match(styles, /gap:\s*clamp\(8px,\s*1\.2vw,\s*20px\)/);
-  assert.match(styles, /font-size:\s*clamp\(46px,\s*4\.2vw,\s*62px\)/);
-  assert.match(styles, /font-size:\s*clamp\(17px,\s*1\.25vw,\s*19px\)/);
+test("colored stage integrates editorial copy with a dominant product surface", () => {
+  assert.match(styles, /\.presentationStage\s*\{[\s\S]*?min-height:\s*770px/);
+  assert.match(styles, /\.stageCopy\s*\{[\s\S]*?width:\s*min\(37%,\s*500px\)/);
+  assert.match(styles, /\.stageProduct\s*\{[\s\S]*?width:\s*62%/);
+  assert.match(styles, /font-size:\s*clamp\(42px,\s*4\.1vw,\s*62px\)/);
+  assert.match(styles, /font-size:\s*clamp\(16px,\s*1\.15vw,\s*18px\)/);
 });
 
 test("first copy reveal waits until the showcase enters the viewport", () => {
   assert.match(source, /\(stageInView \|\| reducedMotion\) && \(/);
-  assert.match(source, /initial=\{reducedMotion \? false : \{ opacity: 0, y: 12, filter: "blur\(5px\)" \}\}/);
+  assert.match(source, /initial=\{reducedMotion \? false : \{ opacity: 0, y: 16, filter: "blur\(6px\)" \}\}/);
 });
 
 test("react-spring dependency is locked with its runtime packages", () => {
@@ -98,8 +104,7 @@ test("react-spring dependency is locked with its runtime packages", () => {
   }
 });
 
-
-test("left presentation keeps only primary copy and actions", () => {
+test("stage presentation keeps only primary copy and actions", () => {
   assert.doesNotMatch(source, /storySteps|storyStep|storySignal/);
   assert.doesNotMatch(source, /copyControls|positionCount|positionTrack|pauseButton/);
   assert.doesNotMatch(source, /Pausar animação|Movimento reduzido|Retomar/);
@@ -107,11 +112,10 @@ test("left presentation keeps only primary copy and actions", () => {
   assert.match(source, /Conhecer \{module\.label\}/);
 });
 
-
-test("desktop product deck grows into the site edge instead of floating inside the content column", () => {
-  assert.match(source, /width="96%"/);
-  assert.match(source, /height="82%"/);
-  assert.match(styles, /margin-right:\s*calc\(\(var\(--site-gutter\) \+ clamp\(72px, 5vw, 120px\)\) \* -1\)/);
-  assert.match(styles, /\.deckColumn\s*\{[\s\S]*?min-height:\s*760px/);
-  assert.match(styles, /@media \(max-width:\s*1040px\)[\s\S]*?margin-right:\s*0/);
+test("desktop product deck is framed by the same colored stage instead of escaping into a separate column", () => {
+  assert.match(source, /width="86%"/);
+  assert.match(source, /height="72%"/);
+  assert.match(styles, /\.presentationStage\s*\{[\s\S]*?overflow:\s*hidden/);
+  assert.match(styles, /\.stageProduct\s*\{[\s\S]*?position:\s*absolute/);
+  assert.match(styles, /@media \(max-width:\s*1040px\)[\s\S]*?\.stageProduct\s*\{[\s\S]*?width:\s*104%/);
 });

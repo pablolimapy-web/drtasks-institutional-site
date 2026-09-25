@@ -6,8 +6,8 @@ const source = fs.readFileSync("src/components/home-modules/FluxosChapter.tsx", 
 
 test("FluxOS chapter is product-first and deep-links correctly", () => {
   assert.match(source, /id=\{module\.anchor\}/);
-  assert.match(source, /fluxos-overview\.png/);
-  assert.match(source, /fluxos-drawer\.png/);
+  assert.match(source, /ProductPreview/);
+  assert.match(source, /mode="showcase"/);
   assert.match(source, /Saiba mais sobre FluxOS/);
   assert.match(source, /href=\{module\.href\}/);
 });

@@ -9,35 +9,9 @@ import { HowItWorks } from "@/components/HowItWorks";
 import { Segments } from "@/components/Segments";
 import { OriginStory } from "@/components/OriginStory";
 import { SocialProof } from "@/components/SocialProof";
-import { Pricing } from "@/components/Pricing";
 import { FAQ } from "@/components/FAQ";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
 
-export const metadata = createPageMetadata(
-  "Gestão operacional por estágios",
-  site.description,
-  "/",
-);
-
-export default function HomePage() {
-  return (
-    <>
-      <Header />
-      <main>
-        <HeroCommercial />
-        <TechnologyLogoLoop />
-        <ModuleShowcase />
-        <HomeModuleJourney />
-        <HowItWorks />
-        <Segments />
-        <OriginStory />
-        <SocialProof />
-        <Pricing />
-        <FAQ />
-        <FinalCTA />
-      </main>
-      <Footer />
-    </>
-  );
-}
+export const metadata = createPageMetadata("Gestão operacional por estágios",site.description,"/");
+export default function HomePage(){return <><Header/><main><HeroCommercial/><TechnologyLogoLoop/><ModuleShowcase/><HomeModuleJourney/><HowItWorks/><Segments/><OriginStory/><SocialProof/><FAQ/><FinalCTA/></main><Footer/></>}

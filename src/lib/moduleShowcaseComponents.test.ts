@@ -88,7 +88,7 @@ test("ModuleShowcase follows the same global home canvas and vertical rhythm as 
   assert.match(source, /className=\{`container \$\{styles\.inner\}`\}/);
   assert.doesNotMatch(css, /\.inner\s*\{[^}]*\bwidth\s*:/s);
   assert.doesNotMatch(css, /@media[^}]*[\s\S]*?\.inner\s*\{[^}]*\bwidth\s*:/);
-  assert.match(css, /\.section\s*\{[^}]*padding:\s*var\(--section-space\)\s+0;/s);
+  assert.match(css, /\.section\s*\{[^}]*padding:\s*clamp\(72px,\s*8vw,\s*118px\)\s+0\s+clamp\(94px,\s*10vw,\s*150px\)/s);
 });
 
 test("ModuleShowcase uses CardSwap as the primary module navigation instead of a top tab rail", () => {
@@ -115,11 +115,14 @@ test("ModuleShowcase synchronizes sequential explanatory copy with the front int
   assert.doesNotMatch(source, /positionCount|positionTrack|Pausar animação/);
 });
 
-test("ModuleShowcase reuses ProductPreview for FluxOS while only the front card animates", () => {
+test("ModuleShowcase delegates each real interface directly to its own in-product presentation", () => {
   const source = read("src/components/ModuleShowcase.tsx");
+  assert.doesNotMatch(source, /ModuleProductTour/);
   assert.match(source, /<ProductPreview[^>]*mode="showcase"/);
-  assert.match(source, /paused=\{paused\}/);
-  assert.match(source, /module\.id !== active\.id/);
+  assert.match(source, /ProjectsModuleDemo/);
+  assert.match(source, /FinanceModuleDemo/);
+  assert.match(source, /TimeModuleDemo/);
+  assert.match(source, /LocationModuleDemo/);
 });
 
 test("CardSwap adapts the React Bits interaction for Dr. Tasks and cleans up GSAP timers", () => {
@@ -132,15 +135,17 @@ test("CardSwap adapts the React Bits interaction for Dr. Tasks and cleans up GSA
   assert.match(source, /window\.setInterval/);
   assert.match(source, /window\.clearInterval/);
   assert.match(source, /tlRef\.current\?\.kill\(\)/);
-  assert.match(source, /y:\s*["']\+=260["']/);
+  assert.match(source, /easing === "focus"/);
+  assert.match(source, /filter:\s*"blur\(3px\)"/);
+  assert.doesNotMatch(source, /y:\s*["']\+=260["']/);
   assert.match(source, /timeline\.addLabel\("promote", config\.promoteAt\)/);
 });
 
 test("CardSwap follows the original React Bits responsive deck scaling", () => {
   const css = read("src/components/react-bits/CardSwap.module.css");
   assert.match(css, /@media \(max-width: 768px\)/);
-  assert.match(css, /scale\(\.75\)/);
-  assert.match(css, /scale\(\.55\)/);
+  assert.match(css, /scale\(\.82\)/);
+  assert.match(css, /scale\(\.7\)/);
 });
 
 test("showcase removes the extra connected-product heading and lets active module copy lead", () => {
@@ -151,5 +156,5 @@ test("showcase removes the extra connected-product heading and lets active modul
   assert.doesNotMatch(source, /Módulos que trabalham juntos\./);
   assert.match(source, /module\.headline/);
   assert.match(css, /var\(--text\)/);
-  assert.match(css, /var\(--brand\)/);
+  assert.match(css, /var\(--stage-accent\)/);
 });
