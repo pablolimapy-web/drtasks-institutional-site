@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./site-shell.css";
 import "./home.css";
+import "./home-alignment-v84-1.css";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {

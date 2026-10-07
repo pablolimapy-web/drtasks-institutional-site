@@ -1,2 +1,15 @@
-import Link from "next/link"; import styles from "./OriginStory.module.css";
-export function OriginStory(){return <section className={styles.section}><div className={styles.inner}><div className={styles.editorialSplit}><div><span>08 / ORIGEM</span><h2>Não começamos<br/>imaginando como o<br/>trabalho deveria funcionar.<br/><em>Começamos tentando<br/>enxergar o que já estava<br/>acontecendo.</em></h2></div><i className={styles.divider}/><div className={styles.body}><p>O Dr. Tasks nasceu da experiência com planilhas, contratos, obras e controle operacional. A pergunta original era simples: <strong>o que está acontecendo agora e qual é a próxima ação?</strong></p><p>A construção civil é o trabalho por projetos foram o primeiro contexto, mas o modelo foi desenhado para qualquer operação que precisa de execução com responsáveis, prazos e histórico.</p><Link href="/sobre">Conheça a<br/>história do Dr. Tasks　→</Link></div></div></div></section>}
+import Link from "next/link";
+import styles from "./OriginStory.module.css";
+
+export function OriginStory() {
+  return (
+    <section className={styles.section} aria-labelledby="origin-title">
+      <div className={styles.inner}>
+        <span className={styles.eyebrow}>ORIGEM</span>
+        <h2 id="origin-title">O Dr. Tasks nasceu de operação real, não de uma abstração de produtividade.</h2>
+        <p>Planilhas, contratos, obras, aprovações e execução já existiam antes do produto. O sistema nasceu tentando preservar o contexto entre essas partes para que a equipe saiba o que aconteceu, quem responde e qual é a próxima ação.</p>
+        <Link href="/sobre">Conheça a história do Dr. Tasks <span>↗</span></Link>
+      </div>
+    </section>
+  );
+}

@@ -1,7 +1,20 @@
 import Link from "next/link";
-import { ArrowRightIcon } from "./Icons";
-import { primaryCta, secondaryCta } from "@/lib/commercial";
+import { primaryCta } from "@/lib/commercial";
+import styles from "./FinalCTA.module.css";
 
 export function FinalCTA() {
-  return <section className="section final-section"><div className="container final-cta final-cta-v18"><div className="final-glow"/><div><span className="eyebrow eyebrow-dark">Próximo passo</span><h2>Pare de procurar o status. Comece a conduzir o próximo passo.</h2><p>Veja como o FluxOS organiza OS, estágios, responsáveis, prazos, bloqueios e próximas ações em uma leitura operacional.</p></div><div className="final-actions"><Link href={primaryCta.href} className="button button-primary">{primaryCta.label} <ArrowRightIcon /></Link><a href={secondaryCta.href} className="button button-dark-secondary">{secondaryCta.label}</a></div><div className="final-flow" aria-hidden="true"><span/><span/><span/><span className="done"/></div></div></section>;
+  return (
+    <section className={styles.section} aria-labelledby="final-cta-title">
+      <div className={styles.grid} aria-hidden="true" />
+      <div className={styles.inner}>
+        <span className={styles.eyebrow}>PRÓXIMO PASSO</span>
+        <h2 id="final-cta-title">Pare de reconstruir o contexto. Comece a conduzir a operação.</h2>
+        <p>Veja como projetos, aprovações, financeiro, equipe e campo podem continuar conectados do problema à próxima ação.</p>
+        <div className={styles.actions}>
+          <Link className={styles.primary} href={primaryCta.href}>{primaryCta.label}<span>↗</span></Link>
+          <Link className={styles.secondary} href="/#modulos">Rever os módulos<span>↑</span></Link>
+        </div>
+      </div>
+    </section>
+  );
 }

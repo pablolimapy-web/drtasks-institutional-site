@@ -7,9 +7,9 @@ const read = (path: string) => readFileSync(new URL(path, import.meta.url), "utf
 const home = read("../app/page.tsx");
 const packageJson = JSON.parse(read("../../package.json")) as { dependencies?: Record<string, string> };
 
-test("LogoLoop section sits immediately between Hero and ModuleShowcase", () => {
-  assert.match(home, /import \{ TechnologyLogoLoop \} from "@\/components\/TechnologyLogoLoop"/);
-  assert.match(home, /<HeroCommercial \/>\s*<TechnologyLogoLoop \/>\s*<ModuleShowcase \/>/);
+test("technology LogoLoop stays available as a legacy component but is retired from Home", () => {
+  assert.doesNotMatch(home, /TechnologyLogoLoop/);
+  assert.doesNotMatch(home, /ModuleShowcase/);
 });
 
 test("React Bits LogoLoop registry source is installed as the JS-CSS variant", () => {

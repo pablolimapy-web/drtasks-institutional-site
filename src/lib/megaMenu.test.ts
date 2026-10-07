@@ -2,10 +2,10 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { megaMenuItems, megaMenuActions } from "./megaMenu.ts";
 
-test("mega menu exposes the current product navigation plus FluxOS and Sobre", () => {
+test("mega menu exposes the compact commercial home navigation plus Sobre", () => {
   assert.deepEqual(
     megaMenuItems.map((item) => item.href),
-    ["/#produto", "/#fluxos", "/#segmentos", "/#como-funciona", "/#recursos", "/sobre"],
+    ["/#modulos", "/#modulo-fluxos", "/#modulo-financeiro", "/#modulo-projetos", "/#modulo-recursos", "/sobre"],
   );
 });
 

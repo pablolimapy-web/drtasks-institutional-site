@@ -1,9 +1,9 @@
 export const megaMenuItems = [
-  { label: "Produto", href: "/#produto", eyebrow: "Visão do produto" },
-  { label: "FluxOS", href: "/#fluxos", eyebrow: "Operação por estágios" },
-  { label: "Para quem é", href: "/#segmentos", eyebrow: "Construção e operações" },
-  { label: "Como funciona", href: "/#como-funciona", eyebrow: "Do projeto à próxima ação" },
-  { label: "Recursos", href: "/#recursos", eyebrow: "O que já está disponível" },
+  { label: "Módulos", href: "/#modulos", eyebrow: "Oito dores conectadas" },
+  { label: "FluxOS", href: "/#modulo-fluxos", eyebrow: "Visão operacional" },
+  { label: "Financeiro", href: "/#modulo-financeiro", eyebrow: "Origem e resultado" },
+  { label: "Projetos", href: "/#modulo-projetos", eyebrow: "Contexto até a tarefa" },
+  { label: "Recursos", href: "/#modulo-recursos", eyebrow: "Evidência no contexto" },
   { label: "Sobre", href: "/sobre", eyebrow: "Origem do Dr. Tasks" },
 ] as const;
 

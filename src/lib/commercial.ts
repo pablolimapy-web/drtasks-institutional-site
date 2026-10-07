@@ -6,13 +6,13 @@ export const commercialPositioning = {
 };
 
 export const primaryCta = { label: "Agendar demonstração", href: "/demo" } as const;
-export const secondaryCta = { label: "Ver o FluxOS em ação", href: "#fluxos" } as const;
+export const secondaryCta = { label: "Conhecer os módulos", href: "#modulos" } as const;
 
 export const homeNavItems = [
-  { href: "#produto", label: "Produto" },
-  { href: "#segmentos", label: "Para quem é" },
-  { href: "#como-funciona", label: "Como funciona" },
-  { href: "#recursos", label: "Recursos" },
+  { href: "#modulos", label: "Módulos" },
+  { href: "#modulo-fluxos", label: "FluxOS" },
+  { href: "#modulo-financeiro", label: "Financeiro" },
+  { href: "#modulo-recursos", label: "Recursos" },
 ] as const;
 
 export const availability = {
