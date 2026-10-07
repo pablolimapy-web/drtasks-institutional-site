@@ -241,3 +241,8 @@
     display: none;
   }
 }
+
+/* v75 — character choreography stays intact; balanced mode skips per-glyph blur. */
+.heroSection[data-motion-quality="balanced"] .rotatingChar {
+  will-change: transform, opacity;
+}

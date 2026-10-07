@@ -3,12 +3,14 @@
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { type CSSProperties, type FormEvent, useEffect, useMemo, useState } from "react";
 import { getFluxosHeroScene, nextFluxosHeroScene } from "@/lib/fluxosHeroSequence";
+import type { HeroMotionQuality } from "@/lib/heroMotionQuality";
 import styles from "./ProductPreview.module.css";
 
 type ProductPreviewProps = {
   phaseIndex?: number;
   mode?: "hero" | "showcase";
   paused?: boolean;
+  motionQuality?: HeroMotionQuality;
 };
 
 type FluxRow = {
@@ -232,7 +234,7 @@ function Drop({ index }: { index: number }) {
   return <span className={styles.drop} style={{ "--i": index } as CSSProperties} />;
 }
 
-export function ProductPreview({ phaseIndex: _phaseIndex = 0, mode = "hero", paused = false }: ProductPreviewProps) {
+export function ProductPreview({ phaseIndex: _phaseIndex = 0, mode = "hero", paused = false, motionQuality = "full" }: ProductPreviewProps) {
   const reducedMotion = useReducedMotion();
   const firstSceneIndex = mode === "showcase" ? 1 : 0;
   const [sceneIndex, setSceneIndex] = useState(firstSceneIndex);
@@ -254,6 +256,8 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0, mode = "hero", pau
   const [newOsInstitution, setNewOsInstitution] = useState("");
   const [newOsPriority, setNewOsPriority] = useState<"M" | "A">("M");
   const scene = getFluxosHeroScene(sceneIndex);
+  const performanceMotion = motionQuality === "performance";
+  const balancedMotion = motionQuality !== "full";
 
   const nextSceneIndex = (current: number) => {
     const next = nextFluxosHeroScene(current);
@@ -435,7 +439,8 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0, mode = "hero", pau
 
   return (
     <div
-      className={`${styles.showcase} ${mode === "showcase" ? styles.showcaseMode : ""} ${interactionMode ? styles.interactive : ""}`}
+      className={`${styles.showcase} ${mode === "showcase" ? styles.showcaseMode : ""} ${interactionMode ? styles.interactive : ""} ${balancedMotion ? styles.motionBalanced : ""} ${performanceMotion ? styles.motionPerformance : ""}`}
+      data-motion-quality={motionQuality}
       role="region"
       aria-label="Demonstração interativa do FluxOS"
       onPointerEnter={() => setPointerInside(true)}
@@ -445,8 +450,8 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0, mode = "hero", pau
     >
       <motion.div
         className={styles.frame}
-        initial={reducedMotion ? false : { opacity: 0, y: 18, scale: 0.975, rotateX: 1.5 }}
-        animate={{ opacity: 1, y: 0, scale: drawerOpen ? 1.006 : 1, rotateX: 0 }}
+        initial={reducedMotion ? false : { opacity: 0, y: 18, rotateX: 1.5 }}
+        animate={{ opacity: 1, y: 0, rotateX: 0 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className={styles.screen}>
@@ -455,7 +460,7 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0, mode = "hero", pau
           <motion.aside
             className={styles.sidebar}
             initial={false}
-            animate={{ opacity: shellBuilt ? 1 : 0, x: shellBuilt ? 0 : -56, filter: shellBuilt ? "blur(0px)" : "blur(7px)" }}
+            animate={{ opacity: shellBuilt ? 1 : 0, x: shellBuilt ? 0 : -56, ...(balancedMotion ? {} : { filter: shellBuilt ? "blur(0px)" : "blur(7px)" }) }}
             transition={{ duration: 0.9, delay: shellBuilt ? 0.04 : 0, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className={styles.logoRow}>
@@ -488,7 +493,7 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0, mode = "hero", pau
           <motion.header
             className={styles.topbar}
             initial={false}
-            animate={{ opacity: shellBuilt ? 1 : 0, y: shellBuilt ? 0 : -42, filter: shellBuilt ? "blur(0px)" : "blur(7px)" }}
+            animate={{ opacity: shellBuilt ? 1 : 0, y: shellBuilt ? 0 : -42, ...(balancedMotion ? {} : { filter: shellBuilt ? "blur(0px)" : "blur(7px)" }) }}
             transition={{ duration: 0.82, delay: shellBuilt ? 0.12 : 0, ease: [0.16, 1, 0.3, 1] }}
           >
             <button
@@ -557,7 +562,9 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0, mode = "hero", pau
                         opacity: shellBuilt ? 1 : 0,
                         y: shellBuilt ? (kpiFocus && !interactionMode ? -5 - (index % 2) * 2 : 0) : 24,
                         scale: kpiFocus && !interactionMode ? 1.035 : activeKpi === index ? 1.018 : 1,
-                        boxShadow: kpiFocus && !interactionMode ? "0 14px 34px rgba(38, 61, 103, 0.11)" : "0 4px 12px rgba(34, 49, 77, 0.025)",
+                        ...(balancedMotion ? {} : {
+                          boxShadow: kpiFocus && !interactionMode ? "0 14px 34px rgba(38, 61, 103, 0.11)" : "0 4px 12px rgba(34, 49, 77, 0.025)",
+                        }),
                       }}
                       transition={{ duration: 0.66, delay: shellBuilt ? 0.58 + index * 0.12 : 0, ease: [0.16, 1, 0.3, 1] }}
                       onClick={() => chooseKpi(index)}
@@ -812,7 +819,7 @@ export function ProductPreview({ phaseIndex: _phaseIndex = 0, mode = "hero", pau
 
           <AnimatePresence>
             {intro && mode !== "showcase" && !reducedMotion && (
-              <motion.div className={styles.brandIntro} initial={{ opacity: 1 }} exit={{ opacity: 0, scale: 1.035, filter: "blur(2px)" }} transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}>
+              <motion.div className={styles.brandIntro} initial={{ opacity: 1 }} exit={{ opacity: 0, scale: 1.035, ...(balancedMotion ? {} : { filter: "blur(2px)" }) }} transition={{ duration: 1.0, ease: [0.22, 1, 0.36, 1] }}>
                 <div className={styles.brandGrid} />
                 <span className={`${styles.brandRibbon} ${styles.brandRibbonOne}`} />
                 <span className={`${styles.brandRibbon} ${styles.brandRibbonTwo}`} />

@@ -3367,3 +3367,114 @@
 @media (max-width: 720px) {
   .drawerBackdrop { right: 42%; }
 }
+
+/* v75 — balanced mode keeps all choreography, but turns the costly live glass/glow
+   layers into cheaper static raster effects on slower GPUs. */
+.motionBalanced .brandGlowOne,
+.motionBalanced .brandGlowTwo {
+  filter: blur(36px);
+  opacity: .34;
+}
+
+.motionBalanced .brandOrbOne,
+.motionBalanced .brandOrbTwo {
+  filter: blur(30px);
+  opacity: .1 !important;
+}
+
+.motionBalanced .brandRibbon {
+  filter: none;
+  box-shadow: 0 0 20px rgba(82, 126, 230, .1);
+}
+
+.motionBalanced .brandBeam {
+  filter: none;
+}
+
+.motionBalanced .brandBadge {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: rgba(255,255,255,.82);
+}
+
+.motionBalanced .drawerBackdrop {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: rgba(226, 235, 248, .42);
+}
+
+.motionBalanced .brandIntro .brandSweep {
+  filter: none;
+}
+
+.motionBalanced .frame,
+.motionBalanced .brandRibbon,
+.motionBalanced .brandGlow,
+.motionBalanced .brandBeam,
+.motionBalanced .brandOrb,
+.motionBalanced .drop,
+.motionBalanced .externalDriftOne,
+.motionBalanced .externalDriftTwo,
+.motionBalanced .externalDriftThree,
+.motionBalanced .externalDriftFour {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* v76 — constrained-device tier: same demo choreography, cheaper paint. */
+.motionPerformance .frame {
+  contain: layout paint;
+  isolation: isolate;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.motionPerformance .brandGlowOne,
+.motionPerformance .brandGlowTwo,
+.motionPerformance .brandOrbOne,
+.motionPerformance .brandOrbTwo {
+  filter: none;
+  opacity: .16 !important;
+}
+
+.motionPerformance .brandRibbon,
+.motionPerformance .brandBeam,
+.motionPerformance .brandIntro .brandSweep {
+  filter: none;
+  box-shadow: none;
+}
+
+.motionPerformance .brandBadge,
+.motionPerformance .drawerBackdrop {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.motionPerformance .drawerBackdrop {
+  background: rgba(226, 235, 248, .5);
+}
+
+.motionPerformance .screen,
+.motionPerformance .brandIntro,
+.motionPerformance .externalAnnotations {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+@media (max-width: 768px) {
+  .showcase .brandGlowOne,
+  .showcase .brandGlowTwo,
+  .showcase .brandOrbOne,
+  .showcase .brandOrbTwo,
+  .showcase .brandRibbon,
+  .showcase .brandBeam,
+  .showcase .brandIntro .brandSweep {
+    filter: none;
+  }
+
+  .showcase .brandBadge,
+  .showcase .drawerBackdrop {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

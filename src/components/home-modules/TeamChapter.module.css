@@ -1,7 +1,7 @@
 .section {
   position: relative;
   isolation: isolate;
-  padding: clamp(124px, 11vw, 180px) 0;
+  padding: clamp(176px, 14vw, 248px) 0;
   background:
     radial-gradient(circle at 62% 22%, rgba(37, 103, 199, .14), transparent 28%),
     radial-gradient(circle at 80% 75%, rgba(93, 76, 255, .07), transparent 26%),
@@ -372,7 +372,7 @@
 }
 
 @media (max-width: 600px) {
-  .section { padding: 82px 0; }
+  .section { padding: 120px 0; }
   .copyColumn h2 { font-size: 38px; }
 }
 

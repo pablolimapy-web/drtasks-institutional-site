@@ -14,6 +14,7 @@ import {
   secondaryCta,
 } from "@/lib/commercial";
 import { heroRotatingCopy } from "@/lib/heroCommercialRotating";
+import { useHeroMotionQuality } from "@/lib/heroMotionQuality";
 import styles from "./HeroCommercialRotating.module.css";
 
 
@@ -23,14 +24,17 @@ export function HeroCommercial() {
   const reducedMotion = useReducedMotion();
   const productStageRef = useRef<HTMLDivElement>(null);
   const productInView = useInView(productStageRef, { amount: 0.12 });
-  const showStaticProduct = Boolean(reducedMotion) || !productInView;
+  const showStaticProduct = Boolean(reducedMotion);
+  const motionQuality = useHeroMotionQuality(productInView && !Boolean(reducedMotion));
+  const useFullTextBlur = motionQuality === "full";
 
   return (
       <section
           className={`hero section hero-commercial ${styles.heroSection}`}
           id="inicio"
+          data-motion-quality={motionQuality}
       >
-        <HeroLightRibbons paused={motionPaused || !productInView} />
+        <HeroLightRibbons paused={motionPaused || !productInView} quality={motionQuality} />
 
         <div className="container hero-inner">
           <div className="hero-main">
@@ -50,26 +54,26 @@ export function HeroCommercial() {
                     initial={{
                       y: "105%",
                       opacity: 0,
-                      filter: "blur(5px)",
+                      ...(useFullTextBlur ? { filter: "blur(5px)" } : {}),
                     }}
                     animate={{
                       y: 0,
                       opacity: 1,
-                      filter: "blur(0px)",
+                      ...(useFullTextBlur ? { filter: "blur(0px)" } : {}),
                     }}
                     exit={{
                       y: "-105%",
                       opacity: 0,
-                      filter: "blur(5px)",
+                      ...(useFullTextBlur ? { filter: "blur(5px)" } : {}),
                     }}
                     staggerDuration={0.012}
                     transition={{
-                      type: "spring",
-                      damping: 30,
-                      stiffness: 410,
+                      type: "tween",
+                      duration: 0.64,
+                      ease: [0.22, 1, 0.36, 1],
                     }}
                     rotationInterval={3200}
-                    auto={!motionPaused && !reducedMotion}
+                    auto={!motionPaused && !reducedMotion && productInView}
                     onNext={setActivePhrase}
                 />
               </h1>
@@ -115,7 +119,7 @@ export function HeroCommercial() {
                     />
                   </div>
                 ) : (
-                  <ProductPreview phaseIndex={activePhrase} paused={motionPaused} />
+                  <ProductPreview phaseIndex={activePhrase} paused={motionPaused || !productInView} motionQuality={motionQuality} />
                 )}
               </div>
             </div>

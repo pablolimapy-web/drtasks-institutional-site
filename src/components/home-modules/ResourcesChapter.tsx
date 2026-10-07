@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { animate, stagger } from "animejs";
-import { motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { getModuleShowcaseModule } from "@/lib/moduleShowcase";
 import { ModuleChapterLink } from "./ModuleChapterLink";
@@ -90,10 +90,12 @@ export function ResourcesChapter() {
   const wasVisible = useRef(false);
   const [sceneRun, setSceneRun] = useState(0);
   const [sceneActive, setSceneActive] = useState(reducedMotion);
+  const [opening, setOpening] = useState(false);
   const [activeEvidenceIndex, setActiveEvidenceIndex] = useState(0);
 
   useEffect(() => {
     if (reducedMotion) {
+      setOpening(false);
       setSceneActive(true);
       return;
     }
@@ -106,9 +108,11 @@ export function ResourcesChapter() {
       if (visible && !wasVisible.current) {
         wasVisible.current = true;
         setSceneRun((value) => value + 1);
-        setSceneActive(true);
+        setSceneActive(false);
+        setOpening(true);
       } else if (!entry.isIntersecting && wasVisible.current) {
         wasVisible.current = false;
+        setOpening(false);
         setSceneActive(false);
       }
     }, { threshold: [0, 0.18, 0.45] });
@@ -118,7 +122,20 @@ export function ResourcesChapter() {
   }, [reducedMotion]);
 
   useEffect(() => {
-    if (reducedMotion || !sceneActive) {
+    if (reducedMotion || !opening) return;
+
+    const timer = window.setTimeout(() => {
+      setOpening(false);
+      if (wasVisible.current) setSceneActive(true);
+    }, 2600);
+
+    return () => window.clearTimeout(timer);
+  }, [opening, reducedMotion]);
+
+  const storyActive = reducedMotion || (sceneActive && !opening);
+
+  useEffect(() => {
+    if (reducedMotion || !storyActive) {
       setActiveEvidenceIndex(0);
       return;
     }
@@ -128,10 +145,10 @@ export function ResourcesChapter() {
     }, 1850);
 
     return () => window.clearInterval(timer);
-  }, [reducedMotion, sceneActive, sceneRun]);
+  }, [reducedMotion, storyActive, sceneRun]);
 
   useEffect(() => {
-    if (reducedMotion || !sceneActive) return;
+    if (reducedMotion || !storyActive) return;
     const root = sectionRef.current;
     if (!root) return;
 
@@ -156,9 +173,9 @@ export function ResourcesChapter() {
       fieldAnimation.pause();
       featureAnimation.pause();
     };
-  }, [reducedMotion, sceneActive, sceneRun]);
+  }, [reducedMotion, storyActive, sceneRun]);
 
-  const show = reducedMotion || sceneActive;
+  const show = storyActive;
   const enter = (delay: number, y = 18) => reducedMotion ? {} : {
     initial: { opacity: 0, y, filter: "blur(8px)" },
     animate: show ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y, filter: "blur(8px)" },
@@ -169,7 +186,88 @@ export function ResourcesChapter() {
     <section ref={sectionRef} id={module.anchor} className={styles.section} aria-labelledby="resources-title">
       <div className={styles.ambient} aria-hidden="true"><i/><i/><i/></div>
 
-      <div className={styles.inner} key={sceneRun}>
+      <AnimatePresence initial={false}>
+        {opening ? (
+          <motion.div
+            key="resources-opening"
+            className={styles.sectionOpening}
+            initial={reducedMotion ? false : { opacity: 0, filter: "blur(16px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)" }}
+            exit={reducedMotion ? { opacity: 0 } : { opacity: 0, scale: 1.025, filter: "blur(14px)" }}
+            transition={{ duration: reducedMotion ? 0 : 0.72, ease: [0.16, 1, 0.3, 1] }}
+            aria-hidden="true"
+          >
+            <motion.span
+              className={styles.openingEyebrow}
+              initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: reducedMotion ? 0 : 0.5, delay: reducedMotion ? 0 : 0.1 }}
+            >
+              DR.TASKS / MÓDULO 05
+            </motion.span>
+
+            <div className={styles.openingTitleRow}>
+              <motion.span
+                className={styles.openingIndex}
+                initial={reducedMotion ? false : { opacity: 0, scale: 0.82, rotate: -5 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                transition={{ duration: reducedMotion ? 0 : 0.7, delay: reducedMotion ? 0 : 0.18, ease: [0.16, 1, 0.3, 1] }}
+              >
+                05
+              </motion.span>
+
+              <motion.div
+                className={styles.openingTitle}
+                initial={reducedMotion ? false : { opacity: 0, x: 30, filter: "blur(9px)" }}
+                animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                transition={{ duration: reducedMotion ? 0 : 0.78, delay: reducedMotion ? 0 : 0.26, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <strong>RECURSOS</strong>
+                <span>COM CONTEXTO</span>
+              </motion.div>
+            </div>
+
+            <motion.div
+              className={styles.openingBridge}
+              initial={reducedMotion ? false : { opacity: 0, scaleX: 0.18 }}
+              animate={{ opacity: 1, scaleX: 1 }}
+              transition={{ duration: reducedMotion ? 0 : 0.9, delay: reducedMotion ? 0 : 0.42, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {[
+                ["01", "CAMPO"],
+                ["02", "EVIDÊNCIA"],
+                ["03", "CONTEXTO"],
+                ["04", "PROJETO"],
+              ].map(([index, label]) => (
+                <span className={styles.openingBridgeNode} key={label}>
+                  <i>{index}</i>
+                  <b>{label}</b>
+                </span>
+              ))}
+              <span className={styles.openingBridgeLine}><i /></span>
+            </motion.div>
+
+            <motion.p
+              className={styles.openingStatement}
+              initial={reducedMotion ? false : { opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: reducedMotion ? 0 : 0.6, delay: reducedMotion ? 0 : 0.72 }}
+            >
+              O que acontece no campo precisa voltar para o projeto com contexto.
+            </motion.p>
+            <span className={styles.openingGlow} />
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+
+      <motion.div
+        className={`${styles.inner} ${opening ? styles.innerOpening : ""}`}
+        key={sceneRun}
+        animate={opening && !reducedMotion
+          ? { opacity: 0.14, scale: 0.988, filter: "blur(10px)" }
+          : { opacity: 1, scale: 1, filter: "blur(0px)" }}
+        transition={{ duration: reducedMotion ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div className={styles.referenceGrid}>
           <motion.div className={styles.copy} {...enter(0.04, 24)}>
             <span className={styles.eyebrow}>05 / RECURSOS</span>
@@ -342,7 +440,7 @@ export function ResourcesChapter() {
             </div>
           ))}
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

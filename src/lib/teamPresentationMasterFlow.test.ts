@@ -32,3 +32,9 @@ test("timeline is progress-only and the presentation receives the current master
   assert.match(presentation, /users-vignette/);
   assert.match(presentation, /closing/);
 });
+
+
+test("Equipe e Tempo has taller vertical breathing room", () => {
+  assert.match(css, /padding:\s*clamp\(176px,\s*14vw,\s*248px\)\s+0/);
+  assert.match(css, /@media \(max-width: 600px\)[\s\S]*\.section \{ padding: 120px 0; \}/);
+});

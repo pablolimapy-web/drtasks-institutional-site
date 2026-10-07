@@ -44,10 +44,14 @@ test("resources desktop composition reserves a real connector corridor before th
   assert.match(shell[1], /perspective\(1300px\)\s+rotateY\(-3\.4deg\)\s+rotateX\(0\.8deg\)/);
 });
 
-test("resources follows the same vertical section rhythm as finance and team", () => {
+test("resources uses the expanded vertical rhythm requested for the chapter", () => {
   const match = css.match(/\.section\s*\{([\s\S]*?)\}/);
   assert.ok(match, "section block must exist");
-  assert.match(match[1], /padding:\s*clamp\(104px,\s*10vw,\s*156px\)\s+0\s+clamp\(104px,\s*10vw,\s*156px\);/);
+  assert.match(match[1], /padding:\s*clamp\(132px,\s*12vw,\s*188px\)\s+0\s+clamp\(132px,\s*12vw,\s*188px\);/);
+
+  const grid = css.match(/\.referenceGrid\s*\{([\s\S]*?)\}/);
+  assert.ok(grid, "referenceGrid block must exist");
+  assert.match(grid[1], /min-height:\s*620px;/);
 });
 
 test("resources keeps entry motion outside the static 3D product transform", () => {

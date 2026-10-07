@@ -1,15 +1,23 @@
 "use client";
 
+import type { HeroMotionQuality } from "@/lib/heroMotionQuality";
 import styles from "./HeroLightRibbons.module.css";
 
 type HeroLightRibbonsProps = {
   paused?: boolean;
+  quality?: HeroMotionQuality;
 };
 
-export function HeroLightRibbons({ paused = false }: HeroLightRibbonsProps) {
+export function HeroLightRibbons({ paused = false, quality = "full" }: HeroLightRibbonsProps) {
+  const performance = quality === "performance";
+  const balanced = quality !== "full";
+  const blurFilter = performance ? "none" : balanced ? "url(#heroRibbonBlurLite)" : "url(#heroRibbonBlur)";
+  const glowFilter = performance ? "none" : balanced ? "url(#heroRibbonGlowLite)" : "url(#heroRibbonGlow)";
+  const hotGlowFilter = performance ? "none" : balanced ? "url(#heroRibbonHotGlowLite)" : "url(#heroRibbonHotGlow)";
+
   return (
     <div
-      className={`${styles.background} ${paused ? styles.paused : ""}`}
+      className={`${styles.background} ${balanced ? styles.balanced : ""} ${performance ? styles.performance : ""} ${paused ? styles.paused : ""}`}
       aria-hidden="true"
     >
       <div className={styles.baseWash} />
@@ -69,6 +77,23 @@ export function HeroLightRibbons({ paused = false }: HeroLightRibbonsProps) {
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+          <filter id="heroRibbonBlurLite" x="-18%" y="-18%" width="136%" height="136%">
+            <feGaussianBlur stdDeviation="4.25" />
+          </filter>
+          <filter id="heroRibbonGlowLite" x="-28%" y="-28%" width="156%" height="156%">
+            <feGaussianBlur stdDeviation="1.7" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <filter id="heroRibbonHotGlowLite" x="-36%" y="-36%" width="172%" height="172%">
+            <feGaussianBlur stdDeviation="2.6" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
         </defs>
 
         <g className={styles.topRibbonSoft} fill="none" strokeLinecap="round">
@@ -77,7 +102,7 @@ export function HeroLightRibbons({ paused = false }: HeroLightRibbonsProps) {
             stroke="url(#heroRibbonSoft)"
             strokeWidth="78"
             opacity="0.42"
-            filter="url(#heroRibbonBlur)"
+            filter={blurFilter}
           />
           <path
             d="M 392 -42 C 740 41 861 108 1084 221 C 1289 324 1478 361 1808 314"
@@ -90,7 +115,7 @@ export function HeroLightRibbons({ paused = false }: HeroLightRibbonsProps) {
             stroke="url(#heroRibbonBlue)"
             strokeWidth="28"
             opacity="0.86"
-            filter="url(#heroRibbonGlow)"
+            filter={glowFilter}
           />
           <path
             d="M 746 -83 C 1018 24 1185 133 1352 222 C 1517 310 1663 315 1834 271"
@@ -157,14 +182,14 @@ export function HeroLightRibbons({ paused = false }: HeroLightRibbonsProps) {
             stroke="url(#heroRibbonSoft)"
             strokeWidth="92"
             opacity="0.44"
-            filter="url(#heroRibbonBlur)"
+            filter={blurFilter}
           />
           <path
             d="M -118 674 C 181 728 386 830 598 870 C 810 910 1038 874 1248 821 C 1462 767 1664 716 1852 716"
             stroke="url(#heroRibbonBlue)"
             strokeWidth="28"
             opacity="0.91"
-            filter="url(#heroRibbonGlow)"
+            filter={glowFilter}
           />
           <path
             d="M -106 686 C 191 741 390 830 596 866 C 818 905 1020 869 1238 816 C 1469 760 1650 720 1842 719"
@@ -203,7 +228,7 @@ export function HeroLightRibbons({ paused = false }: HeroLightRibbonsProps) {
             strokeWidth="5"
             strokeDasharray="0.035 0.965"
             opacity="0.95"
-            filter="url(#heroRibbonGlow)"
+            filter={glowFilter}
           />
         </g>
         <g className={styles.shimmerTopAlt} fill="none" strokeLinecap="round">
@@ -214,7 +239,7 @@ export function HeroLightRibbons({ paused = false }: HeroLightRibbonsProps) {
             strokeWidth="3.2"
             strokeDasharray="0.022 0.978"
             opacity="0.88"
-            filter="url(#heroRibbonHotGlow)"
+            filter={hotGlowFilter}
           />
         </g>
         <g className={styles.shimmerMiddle} fill="none" strokeLinecap="round">
@@ -225,7 +250,7 @@ export function HeroLightRibbons({ paused = false }: HeroLightRibbonsProps) {
             strokeWidth="3.8"
             strokeDasharray="0.018 0.982"
             opacity="0.82"
-            filter="url(#heroRibbonGlow)"
+            filter={glowFilter}
           />
         </g>
         <g className={styles.shimmerBottom} fill="none" strokeLinecap="round">
@@ -236,7 +261,7 @@ export function HeroLightRibbons({ paused = false }: HeroLightRibbonsProps) {
             strokeWidth="5"
             strokeDasharray="0.03 0.97"
             opacity="0.96"
-            filter="url(#heroRibbonGlow)"
+            filter={glowFilter}
           />
         </g>
         <g className={styles.shimmerBottomAlt} fill="none" strokeLinecap="round">
@@ -247,19 +272,19 @@ export function HeroLightRibbons({ paused = false }: HeroLightRibbonsProps) {
             strokeWidth="3.2"
             strokeDasharray="0.02 0.98"
             opacity="0.92"
-            filter="url(#heroRibbonHotGlow)"
+            filter={hotGlowFilter}
           />
         </g>
       </svg>
 
-      <span className={`${styles.glint} ${styles.glintOne}`} />
-      <span className={`${styles.glint} ${styles.glintTwo} ${styles.glintBlinkA}`} />
-      <span className={`${styles.glint} ${styles.glintThree}`} />
-      <span className={`${styles.glint} ${styles.glintFour} ${styles.glintBlinkB}`} />
-      <span className={`${styles.glint} ${styles.glintFive} ${styles.glintBlinkA}`} />
-      <span className={`${styles.glint} ${styles.glintSix}`} />
-      <span className={`${styles.glint} ${styles.glintSeven} ${styles.glintBlinkC}`} />
-      <span className={`${styles.glint} ${styles.glintEight} ${styles.glintBlinkB}`} />
+      <span className={`${styles.glint} ${styles.glintOne}`}><span className={styles.glintCore} /></span>
+      <span className={`${styles.glint} ${styles.glintTwo} ${styles.glintBlinkA}`}><span className={styles.glintCore} /></span>
+      <span className={`${styles.glint} ${styles.glintThree}`}><span className={styles.glintCore} /></span>
+      <span className={`${styles.glint} ${styles.glintFour} ${styles.glintBlinkB}`}><span className={styles.glintCore} /></span>
+      <span className={`${styles.glint} ${styles.glintFive} ${styles.glintBlinkA}`}><span className={styles.glintCore} /></span>
+      <span className={`${styles.glint} ${styles.glintSix}`}><span className={styles.glintCore} /></span>
+      <span className={`${styles.glint} ${styles.glintSeven} ${styles.glintBlinkC}`}><span className={styles.glintCore} /></span>
+      <span className={`${styles.glint} ${styles.glintEight} ${styles.glintBlinkB}`}><span className={styles.glintCore} /></span>
       <span className={`${styles.microFlash} ${styles.microFlashOne}`} />
       <span className={`${styles.microFlash} ${styles.microFlashTwo}`} />
       <span className={`${styles.microFlash} ${styles.microFlashThree}`} />
