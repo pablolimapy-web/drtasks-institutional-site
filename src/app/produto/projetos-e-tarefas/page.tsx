@@ -29,7 +29,7 @@ export default function ProjectsTasksPage() {
           <div className={`container ${styles.heroGrid}`}>
             <div className={styles.heroCopy}>
               <span className="eyebrow">Projetos e tarefas · estrutura do trabalho</span>
-              <h1>Do cliente à tarefa, cada nível mantém o contexto do trabalho.</h1>
+              <h1>Cliente, obra, etapa e tarefa continuam ligados até a execução.</h1>
               <p>
                 Instituições, workspaces, projetos, estágios e tarefas organizam a operação em camadas claras.
                 A equipe sabe onde o trabalho pertence, em que ponto está e o que precisa acontecer depois.
@@ -57,7 +57,7 @@ export default function ProjectsTasksPage() {
           </div>
         </section>
 
-        <section className={`${styles.section} ${styles.sectionSoft}`} id="estrutura">
+        <section data-site-reveal="scale" className={`${styles.section} ${styles.sectionSoft}`} id="estrutura">
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -82,7 +82,7 @@ export default function ProjectsTasksPage() {
           </div>
         </section>
 
-        <section className={styles.section}>
+        <section data-site-reveal="scale" className={styles.section}>
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -98,7 +98,7 @@ export default function ProjectsTasksPage() {
           </div>
         </section>
 
-        <section className={`${styles.section} ${styles.sectionSoft}`}>
+        <section data-site-reveal="scale" className={`${styles.section} ${styles.sectionSoft}`}>
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -134,7 +134,7 @@ export default function ProjectsTasksPage() {
           </div>
         </section>
 
-        <section className={styles.section}>
+        <section data-site-reveal="scale" className={styles.section}>
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -163,7 +163,7 @@ export default function ProjectsTasksPage() {
           </div>
         </section>
 
-        <section className={styles.finalCta}>
+        <section data-site-reveal="scale" className={styles.finalCta}>
           <div className={`container ${styles.finalCard}`}>
             <div>
               <span className="eyebrow">Estrutura aplicada à sua rotina</span>

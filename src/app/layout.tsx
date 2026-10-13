@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./site-shell.css";
 import "./home.css";
-import "./home-alignment-v84-1.css";
+import "./home-motion.css";
+import "./site-pages.css";
 import { site } from "@/lib/site";
+import { EvaCallWidget } from "@/components/eva/EvaCallWidget";
+import { SiteReveal } from "@/components/SiteReveal";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -40,6 +43,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="pt-BR">
       <body>
         {children}
+        <SiteReveal />
+        <EvaCallWidget />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>
     </html>

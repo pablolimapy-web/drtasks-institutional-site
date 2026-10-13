@@ -10,13 +10,16 @@
     "test:unit": "node --experimental-strip-types --test src/lib/*.test.ts"
   },
   "dependencies": {
+    "@react-spring/web": "10.0.3",
     "@react-three/drei": "^10.7.8",
     "@react-three/fiber": "^9.7.0",
+    "@vapi-ai/web": "^2.7.1",
     "animejs": "^4.5.0",
     "gl-matrix": "^3.4.4",
     "gsap": "^3.13.0",
     "motion": "^13.3.0",
     "next": "15.5.2",
+    "ogl": "^1.0.11",
     "react": "19.1.1",
     "react-dom": "19.1.1",
     "react-icons": "^5.7.0",

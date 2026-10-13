@@ -6,9 +6,10 @@ import styles from "./HeroLightRibbons.module.css";
 type HeroLightRibbonsProps = {
   paused?: boolean;
   quality?: HeroMotionQuality;
+  tone?: "light" | "dark";
 };
 
-export function HeroLightRibbons({ paused = false, quality = "full" }: HeroLightRibbonsProps) {
+export function HeroLightRibbons({ paused = false, quality = "full", tone = "light" }: HeroLightRibbonsProps) {
   const performance = quality === "performance";
   const balanced = quality !== "full";
   const blurFilter = performance ? "none" : balanced ? "url(#heroRibbonBlurLite)" : "url(#heroRibbonBlur)";
@@ -17,7 +18,7 @@ export function HeroLightRibbons({ paused = false, quality = "full" }: HeroLight
 
   return (
     <div
-      className={`${styles.background} ${balanced ? styles.balanced : ""} ${performance ? styles.performance : ""} ${paused ? styles.paused : ""}`}
+      className={`${styles.background} ${tone === "dark" ? styles.dark : ""} ${balanced ? styles.balanced : ""} ${performance ? styles.performance : ""} ${paused ? styles.paused : ""}`}
       aria-hidden="true"
     >
       <div className={styles.baseWash} />

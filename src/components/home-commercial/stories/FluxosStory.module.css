@@ -1,0 +1,464 @@
+.stage {
+  position: relative;
+  height: 470px;
+  overflow: visible;
+  isolation: isolate;
+}
+
+.stepperRoot {
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.stepperSurface {
+  width: 100%;
+  max-width: none !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent;
+}
+
+.stepperIndicators {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  padding: 8px 0 30px !important;
+  isolation: isolate;
+}
+
+.stepperIndicators::before,
+.stepperIndicators::after {
+  content: "";
+  position: absolute;
+  left: 5.5%;
+  top: 31px;
+  height: 1px;
+  pointer-events: none;
+}
+
+.stepperIndicators::before {
+  right: 5.5%;
+  z-index: 0;
+  background: rgba(104, 149, 197, .18);
+}
+
+.stepperIndicators::after {
+  z-index: 1;
+  width: var(--flux-progress);
+  max-width: 89%;
+  background: linear-gradient(90deg, #387fda 0%, #67b5ff 44%, #c1e4ff 58%, #67b5ff 72%, #387fda 100%);
+  background-size: 180% 100%;
+  box-shadow: 0 0 12px rgba(73, 151, 242, .26);
+  animation: fluxProgressFlow 1.8s linear infinite;
+  transition: width .62s cubic-bezier(.16, 1, .3, 1);
+}
+
+.stepperIndicators :global(.step-connector) {
+  margin: 22px 14px 0;
+  height: 1px;
+  opacity: 0;
+  background: transparent;
+}
+
+.stepperIndicators :global(.step-connector-inner) {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.stepIndicator {
+  position: relative;
+  z-index: 2;
+  appearance: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 112px;
+  flex: 0 0 112px;
+  background: transparent;
+  color: #536f8f;
+  cursor: pointer;
+  text-align: center;
+  transition:
+    color .38s ease,
+    opacity .38s ease,
+    transform .5s cubic-bezier(.16, 1, .3, 1);
+}
+
+.stepIndicator:hover {
+  color: #98c8f7;
+}
+
+.stepIndicator[data-status="idle"] {
+  opacity: .48;
+}
+
+.stepIndicator[data-status="complete"] {
+  color: #6f9fc7;
+}
+
+.stepIndicator[data-status="active"] {
+  color: #c7e6ff;
+  transform: translateY(-3px);
+}
+
+.stepIndicatorIcon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin: 0 auto 10px;
+  border: 1px solid rgba(104, 162, 226, .24);
+  border-radius: 50%;
+  background: #071421;
+  color: currentColor;
+  box-shadow: 0 0 0 0 rgba(63, 139, 230, 0);
+  transition:
+    border-color .4s ease,
+    background .4s ease,
+    box-shadow .5s ease,
+    transform .5s cubic-bezier(.16, 1, .3, 1);
+}
+
+.stepIndicator[data-status="active"] .stepIndicatorIcon {
+  border-color: rgba(120, 188, 255, .72);
+  background: rgba(10, 31, 52, .98);
+  box-shadow:
+    0 0 0 7px rgba(53, 133, 226, .055),
+    0 0 26px rgba(62, 143, 236, .14);
+  animation: fluxStepActivate .62s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.stepIndicator[data-status="complete"] .stepIndicatorIcon {
+  border-color: rgba(74, 152, 255, .38);
+  background: rgba(13, 35, 60, .9);
+  animation: fluxStepComplete .48s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.stepIndicatorIcon svg {
+  width: 22px;
+  height: 22px;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 0 0 rgba(74, 159, 255, 0));
+  transition: filter .4s ease, transform .45s cubic-bezier(.16, 1, .3, 1);
+}
+
+.stepIndicator[data-status="active"] .stepIndicatorIcon svg {
+  transform: scale(1.06);
+  filter: drop-shadow(0 0 8px rgba(95, 176, 255, .2));
+}
+
+.stepIndicatorLabel {
+  display: block;
+  font-size: 8px;
+  font-weight: 760;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: letter-spacing .42s ease, color .38s ease;
+}
+
+.stepIndicator[data-status="active"] .stepIndicatorLabel {
+  letter-spacing: .135em;
+}
+
+.stepperContent {
+  min-height: 272px;
+  overflow: visible !important;
+}
+
+.stage :global(.step-default) {
+  padding: 0;
+}
+
+.stepScene {
+  min-height: 272px;
+  display: grid;
+  grid-template-columns: minmax(210px, .82fr) minmax(330px, 1.18fr);
+  align-items: center;
+  gap: clamp(44px, 7vw, 104px);
+  padding: 4px 2% 2px;
+}
+
+.stepSceneVisual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+}
+
+.stepSceneVisual::before,
+.stepSceneVisual::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.stepSceneVisual::before {
+  width: 154px;
+  height: 154px;
+  border: 1px solid rgba(84, 145, 212, .1);
+  border-top-color: rgba(103, 177, 255, .3);
+  animation: fluxOrbit 5.2s linear infinite;
+}
+
+.stepSceneVisual::after {
+  width: 104px;
+  height: 104px;
+  border: 1px solid rgba(102, 173, 247, .2);
+  box-shadow: 0 0 42px rgba(38, 108, 201, .07);
+  animation: fluxScenePulse 2.4s ease-in-out infinite;
+}
+
+.stepSceneIcon {
+  position: relative;
+  z-index: 2;
+  width: 80px;
+  height: 80px;
+  color: #a7d7ff;
+  filter: drop-shadow(0 0 18px rgba(57, 135, 231, .14));
+  animation: fluxIconIn .7s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.stepSceneIcon path,
+.stepSceneIcon rect {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: fluxIconDraw .82s .14s ease-out forwards;
+}
+
+.stepSceneCopy {
+  max-width: 510px;
+}
+
+.stepSceneCopy h3 {
+  margin: 0;
+  max-width: 490px;
+  font-size: clamp(27px, 2.5vw, 41px);
+  line-height: 1.01;
+  letter-spacing: -.045em;
+  color: #f1f6fc;
+}
+
+.stepSceneCopy p {
+  max-width: 455px;
+  margin: 17px 0 0;
+  font-size: 13px;
+  line-height: 1.62;
+  color: #7893af;
+}
+
+.stepperFooter {
+  padding: 5px 0 0 !important;
+}
+
+.stepperFooter :global(.footer-nav) {
+  margin-top: 0;
+  min-height: 30px;
+  align-items: center;
+}
+
+.stepperFooter :global(.back-button),
+.stepperFooter :global(.next-button) {
+  appearance: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent !important;
+  padding: 4px 0;
+  color: #6485a8;
+  font-size: 8px;
+  font-weight: 760;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.stepperFooter :global(.back-button:hover),
+.stepperFooter :global(.next-button:hover) {
+  color: #b9dcff;
+}
+
+.stepperFooter :global(.back-button)::before {
+  content: "←  ";
+}
+
+.stepperFooter :global(.next-button)::after {
+  content: "  →";
+}
+
+@media (max-width: 760px) {
+  .stage {
+    height: 500px;
+  }
+
+  .stepperIndicators {
+    padding-top: 0 !important;
+  }
+
+  .stepperIndicators::before,
+  .stepperIndicators::after {
+    top: 27px;
+  }
+
+  .stepIndicator {
+    width: 72px;
+    flex-basis: 72px;
+  }
+
+  .stepIndicatorIcon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .stepIndicatorIcon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .stepIndicatorLabel {
+    font-size: 6px;
+  }
+
+  .stepperIndicators :global(.step-connector) {
+    margin: 19px 5px 0;
+  }
+
+  .stepScene {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    min-height: 326px;
+    padding-inline: 0;
+  }
+
+  .stepSceneVisual {
+    min-height: 142px;
+  }
+
+  .stepSceneVisual::before {
+    width: 112px;
+    height: 112px;
+  }
+
+  .stepSceneVisual::after {
+    width: 76px;
+    height: 76px;
+  }
+
+  .stepSceneIcon {
+    width: 58px;
+    height: 58px;
+  }
+
+  .stepSceneCopy {
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .stepSceneCopy h3 {
+    font-size: 27px;
+  }
+
+  .stepSceneCopy p {
+    margin-inline: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stepperIndicators::after,
+  .stepIndicator,
+  .stepIndicatorIcon,
+  .stepIndicatorIcon svg,
+  .stepIndicatorLabel,
+  .stepSceneVisual::before,
+  .stepSceneVisual::after,
+  .stepSceneIcon,
+  .stepSceneIcon path,
+  .stepSceneIcon rect,
+  .stepperFooter :global(.back-button),
+  .stepperFooter :global(.next-button) {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .stepSceneIcon path,
+  .stepSceneIcon rect {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fluxProgressFlow {
+  from { background-position: 100% 0; }
+  to { background-position: -80% 0; }
+}
+
+@keyframes fluxStepActivate {
+  0% {
+    transform: scale(.82);
+    opacity: .5;
+  }
+  56% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fluxStepComplete {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(.92);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fluxIconIn {
+  from {
+    opacity: 0;
+    transform: scale(.8) translateY(6px);
+    filter: blur(3px) drop-shadow(0 0 0 rgba(57, 135, 231, 0));
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0) drop-shadow(0 0 18px rgba(57, 135, 231, .14));
+  }
+}
+
+@keyframes fluxIconDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fluxOrbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fluxScenePulse {
+  0%, 100% {
+    transform: scale(.96);
+    opacity: .65;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}

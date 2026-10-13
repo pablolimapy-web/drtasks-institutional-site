@@ -48,10 +48,9 @@ export default function HowItWorksPage() {
           <div className={`container ${styles.heroGrid}`}>
             <div className={styles.heroCopy}>
               <span className="eyebrow">Como funciona</span>
-              <h1>Do contexto à próxima ação, sem transformar a operação em um manual.</h1>
+              <h1>O trabalho nasce no contexto. O FluxOS mostra o que precisa acontecer agora.</h1>
               <p>
-                O Dr. Tasks organiza o trabalho em níveis claros e usa o FluxOS para transformar essa estrutura em
-                uma visão operacional: onde está, quem responde, o que bloqueia e qual é o próximo passo.
+                O Dr. Tasks mantém cliente, obra, projeto, etapa e tarefa relacionados. O FluxOS transforma essa estrutura em leitura operacional: onde está, quem responde, o que bloqueia e qual é o próximo passo.
               </p>
               <div className={styles.actions}>
                 <Link href="/demo" className="button button-primary">
@@ -77,7 +76,7 @@ export default function HowItWorksPage() {
           </div>
         </section>
 
-        <section className={`${styles.section} ${styles.soft}`}>
+        <section data-site-reveal="scale" className={`${styles.section} ${styles.soft}`}>
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -102,7 +101,7 @@ export default function HowItWorksPage() {
           </div>
         </section>
 
-        <section className={styles.section}>
+        <section data-site-reveal="scale" className={styles.section}>
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -131,7 +130,7 @@ export default function HowItWorksPage() {
           </div>
         </section>
 
-        <section className={`${styles.section} ${styles.soft}`}>
+        <section data-site-reveal="scale" className={`${styles.section} ${styles.soft}`}>
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -158,7 +157,7 @@ export default function HowItWorksPage() {
           </div>
         </section>
 
-        <section className={styles.section}>
+        <section data-site-reveal="scale" className={styles.section}>
           <div className={`container ${styles.storyGrid}`}>
             <div className={styles.storyCopy}>
               <span className="eyebrow">Da estrutura à leitura operacional</span>
@@ -182,7 +181,7 @@ export default function HowItWorksPage() {
           </div>
         </section>
 
-        <section className={styles.cta}>
+        <section data-site-reveal="scale" className={styles.cta}>
           <div className={`container ${styles.ctaBox}`}>
             <div>
               <h2>Quer ver esse modelo aplicado à sua operação?</h2>

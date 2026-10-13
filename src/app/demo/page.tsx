@@ -28,10 +28,9 @@ export default function DemoPage() {
           <div className={`container ${styles.heroGrid}`}>
             <div className={styles.copy}>
               <span className="eyebrow">Demonstração contextual</span>
-              <h1>Veja o Dr. Tasks aplicado à sua operação.</h1>
+              <h1>Traga seu processo. A demonstração começa nele.</h1>
               <p>
-                A conversa parte do processo que sua equipe já executa: projetos, OS, estágios, responsáveis, prazos,
-                bloqueios e compras. Depois mostramos onde FluxOS e os demais módulos entram nesse contexto.
+                Mostre como sua equipe acompanha obras, OS, aprovações e compras hoje. A partir daí, conectamos somente os módulos que realmente resolvem perda de contexto, cobrança manual e falta de próxima ação.
               </p>
               <div className={styles.points} aria-label="Assuntos da demonstração">
                 {demoPoints.map((point) => <span key={point}>{point}</span>)}

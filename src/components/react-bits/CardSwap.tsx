@@ -336,11 +336,11 @@ const CardSwap = forwardRef<CardSwapHandle, CardSwapProps>(function CardSwap(
     const childStyle = element.props.style as CSSProperties | undefined;
     const childOnClick = element.props.onClick;
 
-    return cloneElement(element, {
+    return cloneElement(element as ReactElement<any>, {
       key: index,
       ref: refs[index] as unknown as Ref<HTMLDivElement>,
       style: { width, height, ...childStyle },
-      onClick: (event) => {
+      onClick: (event: React.MouseEvent<HTMLDivElement>) => {
         childOnClick?.(event);
         onCardClickRef.current?.(index);
       },

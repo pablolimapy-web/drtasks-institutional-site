@@ -1,0 +1,588 @@
+.section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: max(100svh, 860px);
+  padding: 120px 0;
+  color: #f5f8ff;
+  overflow: hidden;
+  border-top: 1px solid rgba(139, 174, 216, 0.08);
+}
+
+.section[data-module="fluxos"] { background: #06111f; }
+.section[data-module="projects"] { background: #071421; }
+.section[data-module="finance"] { background: #050f1b; }
+.section[data-module="quotes"] { background: #081726; }
+.section[data-module="requests"] { background: #06121f; }
+.section[data-module="chat"] { background: #071522; }
+.section[data-module="team-time"] { background: #06111d; }
+.section[data-module="resources"] { background: #071624; }
+
+.inner {
+  position: relative;
+  z-index: 1;
+  width: min(calc(100% - 80px), 1500px);
+  max-width: 1500px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(20px, 2.6vw, 40px);
+  row-gap: clamp(46px, 5.5vw, 82px);
+  align-items: center;
+}
+
+.copy {
+  min-width: 0;
+  max-width: 680px;
+  position: relative;
+  z-index: 4;
+}
+
+.copy h2 {
+  margin: 0;
+  font-size: clamp(40px, 3.7vw, 58px);
+  line-height: 1.01;
+  letter-spacing: -0.047em;
+  text-wrap: balance;
+}
+
+.support {
+  margin: 24px 0 0;
+  max-width: 610px;
+  font-size: 16px;
+  line-height: 1.72;
+  color: #9baec9;
+}
+
+.visual {
+  min-width: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.cta {
+  margin-top: 32px;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid rgba(102, 170, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(47, 124, 255, 0.06);
+  color: #edf6ff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 760;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  transition: border-color .22s ease, background .22s ease, transform .22s ease;
+}
+
+.cta > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 18px;
+}
+
+.ctaIcon {
+  width: 48px;
+  display: grid;
+  place-items: center;
+  border-left: 1px solid rgba(102, 170, 255, 0.2);
+  background: rgba(47, 124, 255, 0.08);
+}
+
+.ctaIcon svg { width: 18px; height: 18px; }
+.ctaIcon path { stroke: #79b7ff; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.cta:hover { transform: translateY(-2px); border-color: rgba(116, 184, 255, 0.62); background: rgba(47, 124, 255, 0.11); }
+.cta:hover .ctaIcon { background: rgba(47, 124, 255, 0.16); }
+.cta:focus-visible { outline: 2px solid #f5f8ff; outline-offset: 5px; }
+
+/* FluxOS: keep the successful composition as the visual reference. */
+.section[data-module="fluxos"] .copy { grid-column: 1 / 5; }
+.section[data-module="fluxos"] .visual { grid-column: 5 / 13; }
+
+/* Projects: editorial intro above a full-width project map. */
+.section[data-module="projects"] .copy {
+  grid-column: 1 / 7;
+  grid-row: 1;
+  max-width: 780px;
+}
+.section[data-module="projects"] .visual {
+  grid-column: 1 / 13;
+  grid-row: 2;
+  width: 100%;
+}
+
+/* Finance: compact copy above a wide operational screen. */
+.section[data-module="finance"] .copy {
+  grid-column: 1 / 8;
+  grid-row: 1;
+  max-width: 840px;
+}
+.section[data-module="finance"] .visual {
+  grid-column: 1 / 13;
+  grid-row: 2;
+  width: 100%;
+}
+
+/* Quotes: the comparison surface owns most of the viewport; copy acts as commentary. */
+.section[data-module="quotes"] .visual {
+  grid-column: 1 / 9;
+  grid-row: 1;
+  width: 100%;
+}
+.section[data-module="quotes"] .copy {
+  grid-column: 9 / 13;
+  grid-row: 1;
+  justify-self: end;
+  padding-left: clamp(6px, 2.5vw, 40px);
+}
+.section[data-module="quotes"] .copy h2 { font-size: clamp(38px, 3.25vw, 52px); }
+
+/* Requests: approval flow becomes the dominant right-hand workspace. */
+.section[data-module="requests"] .copy {
+  grid-column: 1 / 5;
+  grid-row: 1;
+  align-self: center;
+}
+.section[data-module="requests"] .visual {
+  grid-column: 5 / 13;
+  grid-row: 1;
+  width: 100%;
+}
+
+/* Chat: product first, explanation follows like an editorial caption. */
+.section[data-module="chat"] .visual {
+  grid-column: 1 / 13;
+  grid-row: 1;
+  width: 100%;
+}
+.section[data-module="chat"] .copy {
+  grid-column: 2 / 8;
+  grid-row: 2;
+  max-width: 760px;
+}
+
+/* Team/time: the day is the scene; copy closes the interpretation. */
+.section[data-module="team-time"] .visual {
+  grid-column: 1 / 13;
+  grid-row: 1;
+  width: 100%;
+}
+.section[data-module="team-time"] .copy {
+  grid-column: 7 / 13;
+  grid-row: 2;
+  justify-self: end;
+  max-width: 720px;
+}
+
+/* Resources: field map is full-width with copy floating in its quiet left edge. */
+.section[data-module="resources"] .visual {
+  grid-column: 1 / 13;
+  grid-row: 1;
+  width: 100%;
+}
+.section[data-module="resources"] .copy {
+  grid-column: 1 / 6;
+  grid-row: 1;
+  align-self: start;
+  padding-top: 56px;
+  max-width: 620px;
+}
+.section[data-module="resources"] .visual { padding-left: clamp(280px, 27vw, 410px); }
+
+@media(max-width: 1080px) {
+  .section { min-height: auto; padding: 96px 0; }
+  .inner {
+    width: min(calc(100% - 40px), 920px);
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .section[data-module] .copy,
+  .section[data-module] .visual {
+    grid-column: 1;
+    grid-row: auto;
+    width: 100%;
+    max-width: none;
+    padding-left: 0;
+    padding-top: 0;
+    justify-self: stretch;
+  }
+  .section[data-module="quotes"] .copy { grid-row: 1; }
+  .section[data-module="quotes"] .visual { grid-row: 2; }
+  .section[data-module="team-time"] .copy { grid-row: 1; }
+  .section[data-module="team-time"] .visual { grid-row: 2; }
+  .section[data-module="resources"] .copy { grid-row: 1; max-width: 760px; }
+  .section[data-module="resources"] .visual { grid-row: 2; }
+}
+
+@media(max-width: 620px) {
+  .section { padding: 74px 0; }
+  .inner { width: calc(100% - 32px); gap: 38px; }
+  .copy h2,
+  .section[data-module="quotes"] .copy h2 { font-size: clamp(34px, 10vw, 46px); }
+  .support { margin-top: 20px; font-size: 15px; }
+  .cta { margin-top: 26px; min-height: 46px; }
+  .cta > span:first-child { padding: 0 15px; }
+  .ctaIcon { width: 44px; }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  .cta { transition: none; }
+  .cta:hover { transform: none; }
+}
+
+/* V106 — product scenes break the container without changing the FluxOS composition. */
+@media (min-width: 1081px) {
+  .section[data-module="projects"] .visual,
+  .section[data-module="finance"] .visual,
+  .section[data-module="chat"] .visual,
+  .section[data-module="team-time"] .visual {
+    margin-inline: -24px;
+    width: calc(100% + 48px);
+  }
+
+  .section[data-module="projects"] .copy,
+  .section[data-module="finance"] .copy {
+    padding-left: clamp(18px, 2vw, 34px);
+  }
+
+  .section[data-module="projects"] .copy h2,
+  .section[data-module="finance"] .copy h2 {
+    max-width: 880px;
+  }
+
+  .section[data-module="quotes"] .visual {
+    grid-column: 1 / 9;
+    transform: translateX(-24px);
+    width: calc(100% + 24px);
+  }
+
+  .section[data-module="requests"] .visual {
+    grid-column: 5 / 13;
+    transform: translateX(20px);
+  }
+}
+
+.cta {
+  min-height: 52px;
+  border-color: rgba(105, 174, 255, 0.38);
+  background: transparent;
+  box-shadow: inset 0 1px rgba(255,255,255,.025), 0 14px 38px rgba(0,0,0,.12);
+}
+.cta > span:first-child { padding-inline: 20px 24px; }
+.ctaIcon { width: 52px; }
+.cta:hover { border-color: rgba(126,192,255,.72); background: transparent; }
+
+/* V107 responsive polish */
+@media(max-width: 1366px) and (min-width: 1081px) {
+  .section { min-height: max(100svh, 780px); padding: 104px 0; }
+  .inner { width: min(calc(100% - 64px), 1320px); row-gap: 58px; }
+  .copy h2 { font-size: clamp(38px, 3.35vw, 52px); }
+  .support { max-width: 560px; font-size: 15px; }
+  .section[data-module="quotes"] .copy h2 { font-size: clamp(36px, 3vw, 46px); }
+  .section[data-module="resources"] .visual { padding-left: clamp(240px, 24vw, 330px); }
+}
+
+@media(max-width: 1180px) and (min-width: 1081px) {
+  .inner { width: min(calc(100% - 48px), 1120px); column-gap: 26px; }
+  .section[data-module="requests"] .copy { grid-column: 1 / 6; }
+  .section[data-module="requests"] .visual { grid-column: 6 / 13; transform: none; }
+  .section[data-module="quotes"] .visual { transform: none; width: 100%; }
+  .section[data-module="resources"] .visual { padding-left: 250px; }
+}
+
+@media(max-width: 760px) {
+  .section { padding: 78px 0; }
+  .inner { width: calc(100% - 36px); gap: 34px; }
+  .copy h2,
+  .section[data-module="quotes"] .copy h2 { font-size: clamp(32px, 9.4vw, 43px); line-height: 1.02; }
+  .support { max-width: 44ch; font-size: 14.5px; line-height: 1.65; }
+  .cta { width: 100%; max-width: 360px; justify-content: space-between; }
+  .cta > span:first-child { flex: 1; }
+}
+
+/* V111 — editorial system: scale and whitespace replace boxed SaaS surfaces. */
+.section {
+  min-height: max(100svh, 860px);
+  padding: var(--home-section-space) 0;
+  background: var(--home-canvas);
+  border-top: 0;
+}
+.section[data-module="fluxos"],
+.section[data-module="projects"],
+.section[data-module="finance"],
+.section[data-module="quotes"],
+.section[data-module="requests"],
+.section[data-module="chat"],
+.section[data-module="team-time"],
+.section[data-module="resources"] { background: var(--home-canvas); }
+.copy h2 {
+  color: var(--home-ink);
+  font-size: clamp(48px, 4.8vw, 76px);
+  font-weight: var(--home-display-weight);
+  line-height: .96;
+  letter-spacing: -.045em;
+}
+.support {
+  max-width: 36rem;
+  margin-top: 28px;
+  color: var(--home-muted);
+  font-size: 18px;
+  font-weight: var(--home-body-weight);
+  line-height: 1.62;
+}
+.cta {
+  min-height: 42px;
+  margin-top: 34px;
+  padding: 0;
+  gap: 12px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--home-ink);
+  overflow: visible;
+  font-weight: 560;
+}
+.cta > span:first-child { padding: 0; }
+.ctaIcon {
+  width: 38px;
+  border-left: 0;
+  background: transparent;
+  transition: transform .22s ease;
+}
+.ctaIcon path { stroke: var(--home-accent); }
+.cta:hover { transform: none; border-color: transparent; background: transparent; }
+.cta:hover .ctaIcon { background: transparent; transform: translate(4px, -2px); }
+@media(max-width:1080px) {
+  .section { min-height: auto; padding: 104px 0; }
+}
+@media(max-width:760px) {
+  .section { padding: 82px 0; }
+  .copy h2,
+  .section[data-module="quotes"] .copy h2 { font-size: clamp(36px, 10.8vw, 52px); }
+  .support { font-size: 16px; line-height: 1.6; }
+  .cta { width: auto; max-width: none; justify-content: flex-start; }
+  .cta > span:first-child { flex: 0 1 auto; }
+}
+
+/* V124 — final rhythm pass: same system, different spatial identities. */
+@media (min-width: 1081px) {
+  .section[data-module="fluxos"] { min-height: max(100svh, 900px); }
+  .section[data-module="projects"] { min-height: 980px; padding-top: 142px; padding-bottom: 132px; }
+  .section[data-module="finance"] { min-height: 920px; padding-top: 118px; padding-bottom: 146px; }
+  .section[data-module="quotes"] { min-height: 860px; padding-top: 132px; padding-bottom: 126px; }
+  .section[data-module="requests"] { min-height: 900px; padding-top: 126px; padding-bottom: 126px; }
+  .section[data-module="chat"] { min-height: 980px; padding-top: 120px; padding-bottom: 150px; }
+  .section[data-module="team-time"] { min-height: 900px; padding-top: 138px; padding-bottom: 118px; }
+  .section[data-module="resources"] { min-height: 940px; padding-top: 128px; padding-bottom: 136px; }
+
+  .section[data-module="requests"] .copy { grid-column: 1 / 5; }
+  .section[data-module="requests"] .visual { grid-column: 4 / 13; transform: none; }
+
+  .section[data-module="resources"] .copy { grid-column: 1 / 5; padding-top: 44px; }
+  .section[data-module="resources"] .visual { grid-column: 4 / 13; padding-left: 0; }
+
+  .section[data-module="chat"] .copy { grid-column: 2 / 7; }
+  .section[data-module="team-time"] .copy { grid-column: 8 / 13; }
+
+  .section[data-module="projects"] .copy h2 { max-width: 920px; }
+  .section[data-module="finance"] .copy h2 { max-width: 840px; }
+  .section[data-module="quotes"] .copy h2 { max-width: 540px; }
+  .section[data-module="requests"] .copy h2 { max-width: 560px; }
+  .section[data-module="resources"] .copy h2 { max-width: 560px; }
+}
+
+@media (max-width: 1080px) {
+  .section[data-module="chat"] .visual { grid-row: 1; }
+  .section[data-module="chat"] .copy { grid-row: 2; }
+  .section[data-module="quotes"] .copy,
+  .section[data-module="team-time"] .copy,
+  .section[data-module="resources"] .copy { grid-row: 1; }
+  .section[data-module="quotes"] .visual,
+  .section[data-module="team-time"] .visual,
+  .section[data-module="resources"] .visual { grid-row: 2; }
+}
+
+@media (max-width: 760px) {
+  .section[data-module="projects"],
+  .section[data-module="finance"],
+  .section[data-module="quotes"],
+  .section[data-module="requests"],
+  .section[data-module="chat"],
+  .section[data-module="team-time"],
+  .section[data-module="resources"] { padding-top: 86px; padding-bottom: 92px; }
+}
+
+/* V126 — restore the original Dr. Tasks navy rhythm and designed module actions. */
+.section[data-module="fluxos"] { background: #06111f; }
+.section[data-module="projects"] { background: #071421; }
+.section[data-module="finance"] { background: #050f1b; }
+.section[data-module="quotes"] { background: #081726; }
+.section[data-module="requests"] { background: #06121f; }
+.section[data-module="chat"] { background: #071522; }
+.section[data-module="team-time"] { background: #06111d; }
+.section[data-module="resources"] { background: #071624; }
+
+.copy h2,
+.section[data-module="quotes"] .copy h2 {
+  color: var(--home-ink);
+  font-size: var(--home-section-title);
+  font-weight: var(--home-display-weight);
+  line-height: 1.01;
+  letter-spacing: -.047em;
+}
+.support {
+  max-width: 610px;
+  margin-top: 24px;
+  color: var(--home-muted);
+  font-size: var(--home-section-body);
+  font-weight: var(--home-body-weight);
+  line-height: 1.72;
+}
+.cta {
+  min-height: 52px;
+  margin-top: 32px;
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0;
+  border: 1px solid rgba(105, 174, 255, .38);
+  border-radius: 14px;
+  background: linear-gradient(90deg, rgba(47,124,255,.13), rgba(47,124,255,.045));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035), 0 14px 34px rgba(0,0,0,.14);
+  color: #edf6ff;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 740;
+}
+.cta > span:first-child { padding: 0 20px; }
+.ctaIcon {
+  width: 50px;
+  border-left: 1px solid rgba(105,174,255,.22);
+  background: rgba(47,124,255,.08);
+  transition: background .22s ease, transform .22s ease;
+}
+.ctaIcon path { stroke: #79b7ff; }
+.cta:hover {
+  transform: translateY(-2px);
+  border-color: rgba(126,192,255,.7);
+  background: linear-gradient(90deg, rgba(47,124,255,.2), rgba(47,124,255,.07));
+}
+.cta:hover .ctaIcon { background: rgba(47,124,255,.16); transform: translateX(2px); }
+
+@media(max-width:760px) {
+  .copy h2,
+  .section[data-module="quotes"] .copy h2 { font-size: var(--home-section-title-mobile); }
+  .support { font-size: var(--home-section-body); }
+  .cta { width: 100%; max-width: 360px; justify-content: space-between; }
+  .cta > span:first-child { flex: 1; }
+}
+
+/* V134 — narrative rhythm: copy never follows an interface; conceptual modules stop imitating dashboards. */
+@media (min-width: 1081px) {
+  .section[data-module="projects"] .visual {
+    margin-inline: 0;
+    width: 100%;
+  }
+
+  .section[data-module="chat"] .copy {
+    grid-column: 1 / 5;
+    grid-row: 1;
+    align-self: center;
+    max-width: 560px;
+  }
+  .section[data-module="chat"] .visual {
+    grid-column: 5 / 13;
+    grid-row: 1;
+    margin-inline: 0;
+    width: 100%;
+  }
+
+  .section[data-module="team-time"] .copy {
+    grid-column: 1 / 8;
+    grid-row: 1;
+    justify-self: start;
+    max-width: 800px;
+  }
+  .section[data-module="team-time"] .visual {
+    grid-column: 1 / 13;
+    grid-row: 2;
+    margin-inline: 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 1080px) {
+  .section[data-module="chat"] .copy,
+  .section[data-module="team-time"] .copy {
+    grid-row: 1;
+  }
+  .section[data-module="chat"] .visual,
+  .section[data-module="team-time"] .visual {
+    grid-row: 2;
+  }
+}
+
+/* V135 — alternate real product proof with conceptual motion; copy always leads the reading order. */
+@media (min-width:1081px) {
+  .section[data-module="quotes"] { min-height: 830px; }
+  .section[data-module="quotes"] .copy { grid-column: 1 / 5; grid-row: 1; justify-self: start; padding-left: 0; align-self: center; max-width: 560px; }
+  .section[data-module="quotes"] .visual { grid-column: 5 / 13; grid-row: 1; transform: none; width: 100%; margin: 0; }
+
+  .section[data-module="requests"] { min-height: 840px; }
+  .section[data-module="requests"] .copy { grid-column: 1 / 5; grid-row: 1; align-self: center; max-width: 560px; }
+  .section[data-module="requests"] .visual { grid-column: 5 / 13; grid-row: 1; transform: none; width: 100%; }
+
+  .section[data-module="chat"] { min-height: 850px; }
+  .section[data-module="chat"] .copy { grid-column: 1 / 5; grid-row: 1; align-self: center; max-width: 560px; }
+  .section[data-module="chat"] .visual { grid-column: 5 / 13; grid-row: 1; width: 100%; }
+
+  .section[data-module="resources"] { min-height: 880px; }
+  .section[data-module="resources"] .copy { grid-column: 1 / 5; grid-row: 1; align-self: center; padding-top: 0; max-width: 560px; }
+  .section[data-module="resources"] .visual { grid-column: 5 / 13; grid-row: 1; width: 100%; padding-left: 0; }
+}
+
+@media (max-width:1080px) {
+  .section[data-module="quotes"] .copy,
+  .section[data-module="requests"] .copy,
+  .section[data-module="chat"] .copy,
+  .section[data-module="resources"] .copy { grid-row: 1; }
+  .section[data-module="quotes"] .visual,
+  .section[data-module="requests"] .visual,
+  .section[data-module="chat"] .visual,
+  .section[data-module="resources"] .visual { grid-row: 2; }
+}
+
+
+/* V137 — Finance becomes a split narrative instead of another full-width dashboard. */
+@media (min-width: 1081px) {
+  .section[data-module="finance"] { min-height: 900px; padding-top: 126px; padding-bottom: 126px; }
+  .section[data-module="finance"] .inner { align-items: center; row-gap: 0; }
+  .section[data-module="finance"] .copy {
+    grid-column: 1 / 5;
+    grid-row: 1;
+    max-width: 560px;
+    padding-left: 0;
+    padding-right: clamp(18px, 2vw, 34px);
+  }
+  .section[data-module="finance"] .copy h2 {
+    max-width: 540px;
+    font-size: clamp(42px, 3.55vw, 56px);
+    line-height: 1.015;
+  }
+  .section[data-module="finance"] .support { max-width: 510px; }
+  .section[data-module="finance"] .visual {
+    grid-column: 5 / 13;
+    grid-row: 1;
+    width: calc(100% + 18px);
+    margin: 0 -18px 0 0;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1080px) {
+  .section[data-module="finance"] .copy { grid-row: 1; }
+  .section[data-module="finance"] .visual { grid-row: 2; }
+  .section[data-module="finance"] .copy h2 { max-width: 720px; }
+}

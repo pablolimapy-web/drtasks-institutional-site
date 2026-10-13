@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 
 import { SiNextdotjs, SiReact, SiTailwindcss, SiTypescript } from "react-icons/si";

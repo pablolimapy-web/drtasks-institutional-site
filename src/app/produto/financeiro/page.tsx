@@ -31,7 +31,7 @@ export default function FinanceProductPage() {
           <div className={`container ${styles.heroGrid}`}>
             <div className={styles.heroCopy}>
               <span className="eyebrow">Financeiro e compras · contexto da operação</span>
-              <h1>O financeiro acompanha o contexto da operação.</h1>
+              <h1>Da necessidade ao resultado, o financeiro continua ligado à obra.</h1>
               <p>
                 Saiba o que foi previsto, comprometido, realizado e recebido sem separar a leitura financeira do
                 projeto ou da OS que deu origem à movimentação.
@@ -64,7 +64,7 @@ export default function FinanceProductPage() {
           </div>
         </section>
 
-        <section className={styles.modeStrip} aria-label="Quatro formas de trabalhar o financeiro no Dr. Tasks">
+        <section data-site-reveal="scale" className={styles.modeStrip} aria-label="Quatro formas de trabalhar o financeiro no Dr. Tasks">
           <div className={`container ${styles.modeGrid}`}>
             {operatingModes.map(([number, title, description]) => (
               <article key={number}>
@@ -76,7 +76,7 @@ export default function FinanceProductPage() {
           </div>
         </section>
 
-        <section className={`${styles.section} ${styles.sectionSoft}`} id="rotina-financeira">
+        <section data-site-reveal="scale" className={`${styles.section} ${styles.sectionSoft}`} id="rotina-financeira">
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -92,7 +92,7 @@ export default function FinanceProductPage() {
           </div>
         </section>
 
-        <section className={styles.section}>
+        <section data-site-reveal="scale" className={styles.section}>
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -117,7 +117,7 @@ export default function FinanceProductPage() {
           </div>
         </section>
 
-        <section className={`${styles.section} ${styles.sectionSoft}`}>
+        <section data-site-reveal="scale" className={`${styles.section} ${styles.sectionSoft}`}>
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -172,7 +172,7 @@ export default function FinanceProductPage() {
           </div>
         </section>
 
-        <section className={styles.section}>
+        <section data-site-reveal="scale" className={styles.section}>
           <div className="container">
             <div className={styles.consolidatedGrid}>
               <div className={styles.consolidatedCopy}>
@@ -206,7 +206,7 @@ export default function FinanceProductPage() {
           </div>
         </section>
 
-        <section className={styles.finalCta}>
+        <section data-site-reveal="scale" className={styles.finalCta}>
           <div className={`container ${styles.finalCard}`}>
             <div>
               <span className="eyebrow">Financeiro conectado à sua rotina</span>

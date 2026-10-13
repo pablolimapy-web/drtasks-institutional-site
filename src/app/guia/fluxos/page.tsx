@@ -85,7 +85,7 @@ export default function FluxosGuidePage() {
           </aside>
         </div>
 
-        <section className={styles.cta}>
+        <section data-site-reveal="scale" className={styles.cta}>
           <div className={`container ${styles.ctaBox}`}>
             <div>
               <h2>Veja carteira, etapa e OS no mesmo fluxo.</h2>

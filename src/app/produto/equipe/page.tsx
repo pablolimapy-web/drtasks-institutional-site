@@ -28,7 +28,7 @@ export default function TeamProductPage() {
           <div className={`container ${styles.heroGrid}`}>
             <div className={styles.heroCopy}>
               <span className="eyebrow">Equipe e produtividade · execução com contexto</span>
-              <h1>Comunicação, responsabilidade e tempo mais próximos do trabalho.</h1>
+              <h1>Conversa, responsabilidade e tempo continuam ligados ao trabalho.</h1>
               <p>
                 Chat, Usuários e Gestão de Tempo apoiam a rotina da equipe sem substituir a estrutura central de
                 projetos, tarefas e FluxOS que organiza a operação.
@@ -56,7 +56,7 @@ export default function TeamProductPage() {
           </div>
         </section>
 
-        <section className={styles.pillarStrip} aria-label="Áreas de equipe e produtividade">
+        <section data-site-reveal="scale" className={styles.pillarStrip} aria-label="Áreas de equipe e produtividade">
           <div className={`container ${styles.pillarGrid}`}>
             {pillars.map(([label, title, description]) => (
               <article key={label}>
@@ -68,7 +68,7 @@ export default function TeamProductPage() {
           </div>
         </section>
 
-        <section className={`${styles.section} ${styles.sectionSoft}`} id="equipe">
+        <section data-site-reveal="scale" className={`${styles.section} ${styles.sectionSoft}`} id="equipe">
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -84,7 +84,7 @@ export default function TeamProductPage() {
           </div>
         </section>
 
-        <section className={styles.section}>
+        <section data-site-reveal="scale" className={styles.section}>
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -117,7 +117,7 @@ export default function TeamProductPage() {
           </div>
         </section>
 
-        <section className={styles.finalCta}>
+        <section data-site-reveal="scale" className={styles.finalCta}>
           <div className={`container ${styles.finalCard}`}>
             <div>
               <span className="eyebrow">Equipe dentro da operação</span>

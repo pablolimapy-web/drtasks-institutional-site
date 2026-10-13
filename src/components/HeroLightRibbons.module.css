@@ -466,3 +466,45 @@
     transform: translateZ(0);
   }
 }
+
+/* V126 — same ribbon choreography, restrained for the restored dark Dr. Tasks hero. */
+.dark {
+  background:
+    radial-gradient(circle at 73% 22%, rgba(47,124,255,.12), transparent 31%),
+    radial-gradient(circle at 24% 82%, rgba(90,165,255,.055), transparent 34%),
+    linear-gradient(180deg, rgba(4,11,20,.12), rgba(6,17,31,.2));
+}
+.dark .baseWash {
+  background:
+    radial-gradient(ellipse 56% 48% at 60% 46%, rgba(43,104,194,.07) 0%, rgba(18,53,96,.03) 50%, transparent 74%),
+    linear-gradient(90deg, rgba(4,11,20,.42), transparent 40%, rgba(4,11,20,.12) 72%, rgba(4,11,20,.36));
+}
+.dark .ribbonSvg { opacity: .28; mix-blend-mode: screen; }
+.dark .ambientSweep { opacity: .24; filter: blur(26px); }
+.dark .dotField { opacity: .14; }
+.dark .glint { opacity: .34; }
+.dark .microFlash { opacity: .12; }
+.dark .centerWash {
+  opacity: .16;
+  background: radial-gradient(ellipse at center, rgba(79,145,240,.16), rgba(24,63,111,.05) 48%, transparent 76%);
+  filter: blur(22px);
+}
+.dark .edgeWash {
+  background:
+    linear-gradient(180deg, rgba(4,11,20,.08), transparent 22%, transparent 78%, rgba(4,11,20,.2)),
+    linear-gradient(90deg, rgba(4,11,20,.18), transparent 11%, transparent 88%, rgba(4,11,20,.2));
+}
+@media (prefers-reduced-motion: reduce) {
+  .dark .ambientSweep,
+  .dark .topRibbonSoft,
+  .dark .topRibbonFine,
+  .dark .middleRibbon,
+  .dark .middleRibbonFine,
+  .dark .bottomRibbon,
+  .dark .bottomRibbonFine,
+  .dark .shimmerTop path,
+  .dark .shimmerTopAlt path,
+  .dark .shimmerMiddle path,
+  .dark .shimmerBottom path,
+  .dark .shimmerBottomAlt path { animation: none !important; }
+}

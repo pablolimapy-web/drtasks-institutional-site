@@ -37,8 +37,8 @@ test("new commercial journey is the mounted eight-story wrapper", () => {
 
 test("commercial home owns the approved dark palette and avoids viewport-locking every module", () => {
   for (const token of ["#06111F", "#2F7CFF", "#F5F8FF", "#9BAEC9"]) assert.match(heroCss.toUpperCase(), new RegExp(token.toUpperCase()));
-  assert.doesNotMatch(shellCss, /height:\s*100vh|min-height:\s*100vh/);
-  assert.match(shellCss, /min-height:\s*760px/);
+  assert.doesNotMatch(shellCss, /height:\s*100vh/);
+  assert.match(shellCss, /section\[data-module="projects"\] \{ min-height: 980px/);
 });
 
 test("new commercial visual system remains responsive and reduced-motion safe", () => {

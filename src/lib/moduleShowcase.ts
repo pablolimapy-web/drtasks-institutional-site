@@ -1,4 +1,4 @@
-import { productPillars } from "./productArchitecture.ts";
+import { productPillars } from "./productArchitecture";
 
 export type ModuleShowcaseId = "fluxos" | "projects" | "finance" | "team" | "resources";
 

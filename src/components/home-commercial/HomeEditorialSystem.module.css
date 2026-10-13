@@ -1,0 +1,33 @@
+.home {
+  --home-canvas: #06111f;
+  --home-canvas-soft: #071522;
+  --home-canvas-raised: #0a1b2e;
+  --home-ink: #f5f8ff;
+  --home-muted: #9baec9;
+  --home-tertiary: #6f86a2;
+  --home-line: rgba(129, 168, 216, 0.11);
+  --home-line-strong: rgba(129, 168, 216, 0.22);
+  --home-accent: #2f7cff;
+  --home-accent-light: #5aa5ff;
+  --home-accent-soft: rgba(47, 124, 255, 0.12);
+  --home-display-weight: 720;
+  --home-body-weight: 400;
+  --home-section-title: clamp(42px, 4.2vw, 64px);
+  --home-section-title-mobile: clamp(34px, 10vw, 48px);
+  --home-section-body: 16px;
+  --home-section-space: clamp(104px, 8.2vw, 142px);
+
+  background: var(--home-canvas);
+  color: var(--home-ink);
+}
+
+.home :global(section) {
+  scroll-margin-top: 88px;
+}
+
+@media (max-width: 760px) {
+  .home {
+    --home-section-space: 80px;
+    --home-section-body: 15px;
+  }
+}

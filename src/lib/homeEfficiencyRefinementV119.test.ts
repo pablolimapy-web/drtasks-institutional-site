@@ -1,0 +1,6 @@
+import test from "node:test";import assert from "node:assert/strict";import fs from "node:fs";
+const read=(p:string)=>fs.readFileSync(p,"utf8");const story=read("src/components/home-commercial/OperationalEfficiencyStory.tsx");const css=read("src/components/home-commercial/OperationalEfficiencyStory.module.css");
+test("V119 keeps efficiency as an editorial elimination ledger",()=>{for(const cue of ["eliminationStage","ledger","entry","beforePhrase","replacement","effect"])assert.match(story,new RegExp(cue));assert.doesNotMatch(story,/legend|stories|flow/);});
+test("V119 still renders every source-defined efficiency story",()=>{assert.match(story,/operationalEfficiencyStories\.map/);assert.match(story,/story\.before/);assert.match(story,/story\.drTasks/);assert.match(story,/story\.result/);});
+test("V132 evolves the ledger into an operational comparison board",()=>{for(const cue of ["boardHeader","processId","route","proofRail","proofItem"])assert.match(story,new RegExp(cue));assert.match(css,/background:#06111f/);assert.match(css,/grid-template-columns:170px minmax\(0,1fr\) 88px/);});
+test("V132 motion draws the operational route and reveals the effect",()=>{assert.match(css,/data-home-reveal-state="visible"[\s\S]*route span/);assert.match(css,/effect span/);assert.match(css,/transform:scaleX\(1\)/);});

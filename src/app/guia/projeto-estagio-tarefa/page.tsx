@@ -78,7 +78,7 @@ export default function ProjectStageTaskGuidePage() {
           </aside>
         </div>
 
-        <section className={styles.cta}>
+        <section data-site-reveal="scale" className={styles.cta}>
           <div className={`container ${styles.ctaBox}`}>
             <div>
               <h2>Veja essa hierarquia aplicada em telas reais.</h2>

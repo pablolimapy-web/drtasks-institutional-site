@@ -77,7 +77,7 @@ export default function ConstructionPage() {
           <div className={`container ${styles.heroGrid}`}>
             <div className={styles.heroCopy}>
               <span className="eyebrow">Construção civil · obras e contratos</span>
-              <h1>Obras e contratos com o próximo passo visível.</h1>
+              <h1>Da OS à medição, cada obra deixa um próximo passo visível.</h1>
               <p>
                 Organize ordens de serviço, contratos e projetos por estágios e mantenha responsável, prazo,
                 bloqueio, compras, financeiro e documentos próximos da mesma operação.
@@ -110,7 +110,7 @@ export default function ConstructionPage() {
           </div>
         </section>
 
-        <section className={styles.questionStrip} aria-label="Perguntas operacionais em obras e contratos">
+        <section data-site-reveal="scale" className={styles.questionStrip} aria-label="Perguntas operacionais em obras e contratos">
           <div className={`container ${styles.questionGrid}`}>
             {questions.map(([number, title, description]) => (
               <article key={number}>
@@ -122,7 +122,7 @@ export default function ConstructionPage() {
           </div>
         </section>
 
-        <section className={`${styles.section} ${styles.sectionSoft}`} id="fluxo-da-obra">
+        <section data-site-reveal="scale" className={`${styles.section} ${styles.sectionSoft}`} id="fluxo-da-obra">
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -158,7 +158,7 @@ export default function ConstructionPage() {
           </div>
         </section>
 
-        <section className={styles.section}>
+        <section data-site-reveal="scale" className={styles.section}>
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -191,7 +191,7 @@ export default function ConstructionPage() {
           </div>
         </section>
 
-        <section className={`${styles.section} ${styles.sectionSoft}`}>
+        <section data-site-reveal="scale" className={`${styles.section} ${styles.sectionSoft}`}>
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -235,7 +235,7 @@ export default function ConstructionPage() {
           </div>
         </section>
 
-        <section className={styles.section}>
+        <section data-site-reveal="scale" className={styles.section}>
           <div className="container">
             <div className={styles.boundaryGrid}>
               <div className={styles.boundaryIntro}>
@@ -265,7 +265,7 @@ export default function ConstructionPage() {
           </div>
         </section>
 
-        <section className={styles.finalCta}>
+        <section data-site-reveal="scale" className={styles.finalCta}>
           <div className={`container ${styles.finalCard}`}>
             <div>
               <span className="eyebrow">Aplicado à sua obra</span>

@@ -1,0 +1,6 @@
+import test from "node:test";import assert from "node:assert/strict";import fs from "node:fs";
+const read=(p:string)=>fs.readFileSync(p,"utf8");const story=read("src/components/home-commercial/stories/TeamTimeStory.tsx");const css=read("src/components/home-commercial/stories/TeamTimeStory.module.css");
+test("V117 makes time itself the visual composition",()=>{for(const cue of ["dayHeader","clock","hourRuler","lanes","currentBand","workLedger"])assert.match(story,new RegExp(cue));assert.doesNotMatch(story,/allocationSummary|timelineHeader/);});
+test("V117 keeps people and work connected to actual projects",()=>{for(const cue of ["14:32","Ana Ribeiro","Paulo Neves","Reforma da portaria","Adequação elétrica","18h36"])assert.match(story,new RegExp(cue));});
+test("V117 uses a ruler and work blocks rather than person cards",()=>{assert.match(css,/grid-template-columns:220px repeat\(10,1fr\)/);assert.match(css,/workBlock[\s\S]*border-left:2px solid var\(--blue\)/);assert.match(css,/font-family:ui-monospace/);});
+test("V117 animation fills lanes before revealing the ledger",()=>{assert.match(css,/data-phase="1"[\s\S]*lane/);assert.match(css,/data-phase="2"[\s\S]*workBlock/);assert.match(css,/data-phase="3"[\s\S]*currentBand/);assert.match(css,/data-phase="4"[\s\S]*workLedger/);});

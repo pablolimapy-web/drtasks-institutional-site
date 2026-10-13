@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { animated, to, useSpring } from "@react-spring/web";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import CardSwap, { Card, type CardSwapHandle } from "./react-bits/CardSwap";
@@ -137,17 +136,6 @@ export function ModuleShowcase() {
     setActiveIndex(index);
   };
 
-  const productEntrance = useSpring({
-    from: { opacity: 0, y: reducedMotion ? 0 : 34, scale: reducedMotion ? 1 : 0.974 },
-    to: {
-      opacity: stageInView ? 1 : 0,
-      y: stageInView || reducedMotion ? 0 : 34,
-      scale: stageInView || reducedMotion ? 1 : 0.974,
-    },
-    immediate: reducedMotion,
-    config: { mass: 1, tension: 165, friction: 24 },
-  });
-
   return (
     <section className={`${styles.section} product-showcase-section section`} aria-label="Módulos do Dr. Tasks">
       <div className={styles.ambient} aria-hidden="true" />
@@ -202,15 +190,11 @@ export function ModuleShowcase() {
             <span>{String(moduleShowcaseModules.length).padStart(2, "0")}</span>
           </div>
 
-          <animated.div
+          <motion.div
             className={styles.stageProduct}
-            style={{
-              opacity: productEntrance.opacity,
-              transform: to(
-                [productEntrance.y, productEntrance.scale],
-                (y, scale) => `translate3d(0, ${y}px, 0) scale(${scale})`,
-              ),
-            }}
+            initial={reducedMotion ? false : { opacity: 0, y: 34, scale: 0.974 }}
+            animate={{ opacity: stageInView ? 1 : 0, y: stageInView || reducedMotion ? 0 : 34, scale: stageInView || reducedMotion ? 1 : 0.974 }}
+            transition={reducedMotion ? { duration: 0 } : { duration: 0.58, ease: [0.22, 1, 0.36, 1] }}
           >
             <div
               className={styles.swapStage}
@@ -275,7 +259,7 @@ export function ModuleShowcase() {
                 })}
               </CardSwap>
             </div>
-          </animated.div>
+          </motion.div>
         </div>
       </div>
     </section>

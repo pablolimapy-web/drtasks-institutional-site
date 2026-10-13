@@ -19,7 +19,7 @@ export default function ContactPage() {
           <div className={`container ${styles.contactHead}`}>
             <div>
               <span className="eyebrow">Contato</span>
-              <h1>Vamos entender sua operação antes de falar de ferramenta.</h1>
+              <h1>Conte onde a operação perde contexto. A conversa começa daí.</h1>
             </div>
             <p>
               Conte o cenário que você quer organizar. O mesmo formulário é usado para preparar uma conversa comercial
@@ -27,7 +27,7 @@ export default function ContactPage() {
             </p>
           </div>
         </section>
-        <section className={styles.contactForm}>
+        <section data-site-reveal="scale" className={styles.contactForm}>
           <div className="container">
             <DemoForm />
           </div>

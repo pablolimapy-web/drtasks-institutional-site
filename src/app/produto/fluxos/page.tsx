@@ -29,7 +29,7 @@ export default function FluxosProductPage() {
           <div className={`container ${styles.heroGrid}`}>
             <div className={styles.heroCopy}>
               <span className="eyebrow">FluxOS · visão operacional</span>
-              <h1>Cada OS tem um caminho. Veja onde está e o que precisa acontecer agora.</h1>
+              <h1>Veja a carteira inteira. Abra a OS certa. Saia sabendo o próximo passo.</h1>
               <p>
                 O FluxOS organiza a carteira por estágios e mantém o contexto de execução visível: responsável,
                 prazo, situação, aging, bloqueio, próxima ação e última movimentação sem perder a visão do todo.
@@ -62,7 +62,7 @@ export default function FluxosProductPage() {
           </div>
         </section>
 
-        <section className={styles.answerStrip} aria-label="Perguntas que o FluxOS ajuda a responder">
+        <section data-site-reveal="scale" className={styles.answerStrip} aria-label="Perguntas que o FluxOS ajuda a responder">
           <div className={`container ${styles.answerGrid}`}>
             {answers.map(([number, title, description]) => (
               <article className={styles.answerCard} key={number}>
@@ -74,7 +74,7 @@ export default function FluxosProductPage() {
           </div>
         </section>
 
-        <section className={`${styles.section} ${styles.sectionSoft}`} id="demonstracao">
+        <section data-site-reveal="scale" className={`${styles.section} ${styles.sectionSoft}`} id="demonstracao">
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -90,7 +90,7 @@ export default function FluxosProductPage() {
           </div>
         </section>
 
-        <section className={styles.section}>
+        <section data-site-reveal="scale" className={styles.section}>
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -139,7 +139,7 @@ export default function FluxosProductPage() {
           </div>
         </section>
 
-        <section className={`${styles.section} ${styles.sectionSoft}`}>
+        <section data-site-reveal="scale" className={`${styles.section} ${styles.sectionSoft}`}>
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -180,7 +180,7 @@ export default function FluxosProductPage() {
           </div>
         </section>
 
-        <section className={styles.finalCta}>
+        <section data-site-reveal="scale" className={styles.finalCta}>
           <div className={`container ${styles.finalCard}`}>
             <div>
               <span className="eyebrow">Aplicado à sua operação</span>

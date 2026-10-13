@@ -36,7 +36,7 @@ export default function GuidePage() {
           </div>
         </section>
 
-        <section className={`${styles.section} ${styles.soft}`}>
+        <section data-site-reveal="scale" className={`${styles.section} ${styles.soft}`}>
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -76,7 +76,7 @@ export default function GuidePage() {
           </div>
         </section>
 
-        <section className={styles.cta}>
+        <section data-site-reveal="scale" className={styles.cta}>
           <div className={`container ${styles.ctaBox}`}>
             <div>
               <h2>Quer ver os conceitos funcionando no produto?</h2>

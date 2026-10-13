@@ -107,7 +107,9 @@ export function StaggeredMegaMenu() {
       if (backdrop) tl.to(backdrop, { opacity: 0, duration: 0.2, ease: "power2.in" }, 0.06);
     }
 
-    return () => timelineRef.current?.kill();
+    return () => {
+      timelineRef.current?.kill();
+    };
   }, [open, reducedMotion]);
 
   useEffect(() => {

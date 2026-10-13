@@ -1,0 +1,69 @@
+/* V110 — semantic motion for the new static commercial sections. */
+html[data-home-motion-ready="true"] [data-home-motion][data-home-reveal-state="hidden"] {
+  --home-motion-opacity: 0;
+}
+
+html[data-home-motion-ready="true"] [data-home-motion] {
+  --home-motion-opacity: 1;
+}
+
+html[data-home-motion-ready="true"] [data-home-motion="evidence"] > div > div:first-child,
+html[data-home-motion-ready="true"] [data-home-motion="comparison"] > div > header,
+html[data-home-motion-ready="true"] [data-home-motion="intelligence"] > div > div:first-child,
+html[data-home-motion-ready="true"] [data-home-motion="origin"] h2,
+html[data-home-motion-ready="true"] [data-home-motion="close"] h2 {
+  opacity: var(--home-motion-opacity);
+  clip-path: inset(0 0 calc((1 - var(--home-motion-opacity)) * 100%) 0);
+  filter: blur(calc((1 - var(--home-motion-opacity)) * 8px));
+  transition: opacity .55s ease, clip-path .8s cubic-bezier(.22,1,.36,1), filter .65s ease;
+}
+
+html[data-home-motion-ready="true"] [data-home-motion="evidence"] dl > div,
+html[data-home-motion-ready="true"] [data-home-motion="comparison"] tbody tr,
+html[data-home-motion-ready="true"] [data-home-motion="intelligence"] > div > div:last-child,
+html[data-home-motion-ready="true"] [data-home-motion="origin"] p,
+html[data-home-motion-ready="true"] [data-home-motion="origin"] a,
+html[data-home-motion-ready="true"] [data-home-motion="close"] p,
+html[data-home-motion-ready="true"] [data-home-motion="close"] a {
+  opacity: var(--home-motion-opacity);
+  filter: blur(calc((1 - var(--home-motion-opacity)) * 5px));
+  transition: opacity .55s ease, filter .7s ease;
+}
+
+html[data-home-motion-ready="true"] [data-home-motion="evidence"] dl > div:nth-child(2),
+html[data-home-motion-ready="true"] [data-home-motion="comparison"] tbody tr:nth-child(2) { transition-delay: .07s; }
+html[data-home-motion-ready="true"] [data-home-motion="evidence"] dl > div:nth-child(3),
+html[data-home-motion-ready="true"] [data-home-motion="comparison"] tbody tr:nth-child(3) { transition-delay: .14s; }
+html[data-home-motion-ready="true"] [data-home-motion="evidence"] dl > div:nth-child(4),
+html[data-home-motion-ready="true"] [data-home-motion="comparison"] tbody tr:nth-child(4) { transition-delay: .21s; }
+
+html[data-home-motion-ready="true"] [data-home-motion="intelligence"] [aria-label] > i {
+  transform: scaleX(var(--home-motion-opacity));
+  transform-origin: left center;
+  transition: transform .82s cubic-bezier(.22,1,.36,1);
+}
+
+html[data-home-motion-ready="true"] [data-home-motion="evidence"] aside strong {
+  opacity: var(--home-motion-opacity);
+  transform: scale(calc(.94 + (var(--home-motion-opacity) * .06)));
+  transform-origin: left center;
+  transition: opacity .45s ease, transform .8s cubic-bezier(.22,1,.36,1);
+}
+
+html[data-home-motion-ready="true"] [data-home-motion="comparison"] table,
+html[data-home-motion-ready="true"] [data-home-motion="intelligence"] [aria-label] {
+  opacity: var(--home-motion-opacity);
+  clip-path: inset(0 calc((1 - var(--home-motion-opacity)) * 18%) 0 0);
+  transition: opacity .5s ease .08s, clip-path .9s cubic-bezier(.22,1,.36,1) .08s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-home-motion],
+  [data-home-motion] * {
+    opacity: 1 !important;
+    clip-path: none !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

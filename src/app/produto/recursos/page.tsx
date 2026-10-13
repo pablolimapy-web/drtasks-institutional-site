@@ -28,7 +28,7 @@ export default function ResourcesProductPage() {
           <div className={`container ${styles.heroGrid}`}>
             <div className={styles.heroCopy}>
               <span className="eyebrow">Recursos operacionais · contexto próximo do trabalho</span>
-              <h1>Arquivos e localização sem tirar a equipe do contexto da operação.</h1>
+              <h1>Arquivo e localização só valem quando continuam ligados à tarefa.</h1>
               <p>
                 O Dr. Tasks reúne recursos de apoio para que documento, pasta e localização possam acompanhar a
                 estrutura em que projetos e tarefas já são gerenciados.
@@ -56,7 +56,7 @@ export default function ResourcesProductPage() {
           </div>
         </section>
 
-        <section className={styles.principles} aria-label="Princípios dos recursos operacionais">
+        <section data-site-reveal="scale" className={styles.principles} aria-label="Princípios dos recursos operacionais">
           <div className={`container ${styles.principlesGrid}`}>
             {principles.map(([number, title, description]) => (
               <article key={number}>
@@ -68,7 +68,7 @@ export default function ResourcesProductPage() {
           </div>
         </section>
 
-        <section className={`${styles.section} ${styles.sectionSoft}`} id="recursos">
+        <section data-site-reveal="scale" className={`${styles.section} ${styles.sectionSoft}`} id="recursos">
           <div className="container">
             <header className={styles.sectionHead}>
               <div>
@@ -84,7 +84,7 @@ export default function ResourcesProductPage() {
           </div>
         </section>
 
-        <section className={styles.section}>
+        <section data-site-reveal="scale" className={styles.section}>
           <div className="container">
             <div className={styles.splitGrid}>
               <article className={styles.splitCard}>
@@ -118,7 +118,7 @@ export default function ResourcesProductPage() {
           </div>
         </section>
 
-        <section className={styles.finalCta}>
+        <section data-site-reveal="scale" className={styles.finalCta}>
           <div className={`container ${styles.finalCard}`}>
             <div>
               <span className="eyebrow">Recursos no contexto certo</span>
